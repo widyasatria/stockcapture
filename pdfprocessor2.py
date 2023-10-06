@@ -1,3 +1,7 @@
+#PDF processor :
+# references using pdf plumber: https://www.youtube.com/watch?v=eTz3VZmNPSE&t=186s
+# check all required libraries there
+
 import requests
 import pdfplumber
 import pandas as pd
