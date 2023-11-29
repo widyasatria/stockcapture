@@ -107,6 +107,7 @@ def get_column_value(headers,driver,txt_label,row,col,k):
 
 
 def main():
+    
     #requirement selenium versi 4.13.0
     #ms edge webdriver : https://msedgedriver.azureedge.net/119.0.2151.72/edgedriver_win64.zip
     
@@ -121,7 +122,7 @@ def main():
     options.add_argument("headless")
     options
     service = Service(verbose = False)
-    
+    debug = True
 
     
     
@@ -132,24 +133,28 @@ def main():
 
     link_stock_header = driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[2]/div[1]/div[1]/h1')
     if link_stock_header is not None:
-        print("Stock Name :", link_stock_header.text)
+        if debug == True :
+            print("Stock Name :", link_stock_header.text)
         
     txt_income_statement = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/h3/span')
-    print("asdada : ", txt_income_statement.text)
+    if debug == True :
+        print("txt_income : ", txt_income_statement.text)
     
     txt_price=driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[3]/div[1]/div')
     
     txt_prices= txt_price.text.split("\n")
-    print("pandjang text ", len(txt_prices))
+    if debug == True :    
+        print("pandjang text ", len(txt_prices))
     txtpricenchange = txt_prices[0].split(" ")
     
     txt_price = txtpricenchange[0]
-    print("txt price  : ", txtpricenchange[0])
+    if debug == True :
+        print("txt price  : ", txtpricenchange[0])
     
     txt_price_change=txtpricenchange[1].replace("(","").replace(")","")
-    print("txt price Change : ", txt_price_change)
-    
-    print("txt price line 2 : ", txt_prices[1])
+    if debug == True :
+        print("txt price Change : ", txt_price_change)
+        print("txt price line 2 : ", txt_prices[1])
     
     # //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[1]/span
     # //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[2]/span
@@ -246,14 +251,16 @@ def main():
     col_elements = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, col_elements_xpath))) 
     if col_elements is not None:
         colnum=driver.find_elements(By.XPATH,col_elements_xpath)
-        print("Jumlah Kolom ",len(colnum))
+        if debug == True :
+            print("Jumlah Kolom ",len(colnum))
         col=len(colnum)
    
-    t=0 
+    #t=0 
     actual_row=1
     k=11            
     for txt_lbl in txt_label :
-        print("key :"+ str(actual_row) +' - '+ txt_lbl +' '+ str(k) )
+        if debug == True :
+            print("key :"+ str(actual_row) +' - '+ txt_lbl +' tabel row '+ str(k) )
         fin_data=[]
         headers, fin_data = get_column_value(headers,driver,txt_lbl,actual_row,col,k)
         
@@ -263,18 +270,10 @@ def main():
         cnt_fin_data = len(fin_data)
         if cnt_fin_data > 0 :
             for x in range(cnt_fin_data) :
-                print("" + headers[x] +" - "+fin_data[x] )
-                t=t+1
+                if debug == True :
+                    print("" + headers[x] +" - "+fin_data[x] )
+                #t=t+1
         actual_row=actual_row+1
-                
-    
-    
-    # row_after_head=driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/section/div[3]/div[1]/div/div[2]/div[1]/div[1]')
-    # print("row after_head",len(row_after_head))
-    
-    # txt_breakdown = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[1]/span')
-    # txt_ttm = driver.find_element(By.XPATH, '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[2]/span')
-    
     driver.quit()
 
 if __name__ == "__main__":
