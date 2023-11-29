@@ -19,8 +19,8 @@ from selenium.webdriver.support import expected_conditions
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-def get_column_value(headers,driver,txt_label,row,col):
-        
+def get_column_value(headers,driver,txt_label,row,col,k):
+     
     fin_data=[]
     for i in range (2,col+1):
         if row == 1: # Total Revenue
@@ -58,7 +58,50 @@ def get_column_value(headers,driver,txt_label,row,col):
         if row == 11: #Operating Income
             txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[5]/div[1]/div['+ str(i) +']/span' 
             fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text) 
+        if row == 12: #Net Non Operating Interest Income Expense
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text) 
+        if row == 13: #Interest Income Non Operating
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'  
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)                  
+        if row == 14:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row == 15:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[3]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row == 16:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[7]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==17:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[8]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==18:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[8]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==19:  
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==20:  
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==21:  
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==22:  
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==23:  
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row==24:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[10]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
 
+        if row>=25 and row <=46:
+             txt_col_xpath= '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div['+ str(row-14) +']/div[1]/div['+ str(i) +']'
+             fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+             
     return headers,fin_data
    
 
@@ -191,7 +234,7 @@ def main():
     driver.implicitly_wait(2)
     #get the table headers
     headers=[]
-    headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[1]/span').text)
+    headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[2]/span').text)
     headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[3]/span').text)
     headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[4]/span').text)
     headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[5]/span').text)
@@ -207,16 +250,20 @@ def main():
         col=len(colnum)
    
     t=0 
-    actual_row=1            
+    actual_row=1
+    k=11            
     for txt_lbl in txt_label :
-        print("key :"+ str(actual_row) +' - '+ txt_lbl)
+        print("key :"+ str(actual_row) +' - '+ txt_lbl +' '+ str(k) )
         fin_data=[]
-        headers, fin_data = get_column_value(headers,driver,txt_lbl,actual_row,col)
+        headers, fin_data = get_column_value(headers,driver,txt_lbl,actual_row,col,k)
+        
+        if actual_row>25:
+            k=k+1
         
         cnt_fin_data = len(fin_data)
         if cnt_fin_data > 0 :
             for x in range(cnt_fin_data) :
-                print("txt headers " + headers[x] +" - "+fin_data[x] )
+                print("" + headers[x] +" - "+fin_data[x] )
                 t=t+1
         actual_row=actual_row+1
                 
