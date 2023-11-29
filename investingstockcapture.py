@@ -30,16 +30,34 @@ def get_column_value(headers,driver,txt_label,row,col):
                              
         if row == 2: # Operating Revenue
             txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div['+ str(row) +']/div/div[1]/div['+ str(i) +']/span'
+                            
             #print('row '+ str(row) + ' ' + driver.find_element(By.XPATH,txt_col_xpath).text)                    
             fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if row >= 3 and row <= 5: # Cost Of Revenue
+        if row >= 3 and row <= 5 :# Cost Of Revenue 10 Operating Income
             txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
-            # txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[3]/div[1]/div[2]/span' 4
-            # txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[1]/div[2]/span' #5 Operating Expense
-            # txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[1]/div[2]/span'  #6 - Selling General and administrative
-            #print('row '+ str(row) + ' ' + driver.find_element(By.XPATH,txt_col_xpath).text)                    
+                          
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row == 6:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'  #6 - Selling General and administrative
             fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
         
+        if row == 7:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        
+        if row==8:    
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text) 
+            
+        if row == 9:
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
+        if row == 10: #Other Operating Expenses
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[2]/div[1]/div['+ str(i) +']'
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)   
+        if row == 11: #Operating Income
+            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[5]/div[1]/div['+ str(i) +']/span' 
+            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text) 
 
     return headers,fin_data
    
@@ -100,6 +118,7 @@ def main():
     driver.implicitly_wait(4)
     #click quarterly
     driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
+    
     #click expandall 
     driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()
 
