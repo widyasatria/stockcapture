@@ -106,7 +106,7 @@ def get_column_value(headers,driver,txt_label,row,col,k):
    
 
 
-def main():
+def inc_stat_annual():
     
     #requirement selenium versi 4.13.0
     #ms edge webdriver : https://msedgedriver.azureedge.net/119.0.2151.72/edgedriver_win64.zip
@@ -131,36 +131,9 @@ def main():
     driver.get(url)
     
 
-    link_stock_header = driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[2]/div[1]/div[1]/h1')
-    if link_stock_header is not None:
-        if debug == True :
-            print("Stock Name :", link_stock_header.text)
-        
-    txt_income_statement = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/h3/span')
-    if debug == True :
-        print("txt_income : ", txt_income_statement.text)
-    
-    txt_price=driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[3]/div[1]/div')
-    
-    txt_prices= txt_price.text.split("\n")
-    if debug == True :    
-        print("pandjang text ", len(txt_prices))
-    txtpricenchange = txt_prices[0].split(" ")
-    
-    txt_price = txtpricenchange[0]
-    if debug == True :
-        print("txt price  : ", txtpricenchange[0])
-    
-    txt_price_change=txtpricenchange[1].replace("(","").replace(")","")
-    if debug == True :
-        print("txt price Change : ", txt_price_change)
-        print("txt price line 2 : ", txt_prices[1])
-    
-    # //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[1]/span
-    # //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[2]/span
     
     
-    #Quarterly clickable, Expandall clickable
+    #Quarterly click, Expandall click
     driver.refresh()
     
     driver.implicitly_wait(4)
@@ -278,6 +251,6 @@ def main():
         actual_row=actual_row+1
     driver.quit()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 

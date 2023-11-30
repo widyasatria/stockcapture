@@ -106,7 +106,7 @@ def get_column_value(headers,driver,txt_label,row,col,k):
    
 
 
-def main():
+def inc_stat_quarter():
     
     #requirement selenium versi 4.13.0
     #ms edge webdriver : https://msedgedriver.azureedge.net/119.0.2151.72/edgedriver_win64.zip
@@ -276,6 +276,6 @@ def main():
         actual_row=actual_row+1
     driver.quit()
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
