@@ -11,6 +11,11 @@ import time
 # file ini akan memanggil  yang ada didalam folder yahooscrap, file yahoo_get_latest_price  dan meng import function get_latest_price
 # hal ini dimungkinkan karena didalam folder yahooscrap ada file baru __init__.py
 from yahooscrap.yahoo_get_latest_price import get_latest_price
+from yahooscrap.yahoo_inc_stat_quarter_v2 import inc_stat_quarter
+from yahooscrap.yahoo_inc_stat_annual_v2 import inc_stat_annual
+from yahooscrap.yahoo_balance_sheet_annual import balance_sheet_annual 
+from yahooscrap.yahoo_balance_sheet_quarter import balance_sheet_quarter 
+
 
 # def job():
 #     print("I'm working...")
@@ -35,9 +40,15 @@ from yahooscrap.yahoo_get_latest_price import get_latest_price
 #     time.sleep(1)
 
 def main():
-    get_latest_price()
+    # latest price
+    # get_latest_price()
+    # income statement annual 
+    #inc_stat_annual()
+    # income statemetn Quarter
+    #inc_stat_quarter() 
     
-
+    #balance_sheet_annual()
+    balance_sheet_quarter()
 
 if __name__ == "__main__":
     main()
