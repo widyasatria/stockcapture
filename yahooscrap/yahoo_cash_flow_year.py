@@ -156,7 +156,7 @@ def cash_flow_annual():
                                     lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
                                     print("insert into tables cas values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
                                     
-                          
+                                    #pakai stored procedure untuk upsert
                                     arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
                                     result_args = cursor.callproc('stock_fin_cash_flow_year_upsert',arg2)
                                     print("restult args : ", result_args[1])
