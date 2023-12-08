@@ -16,6 +16,9 @@ from yahooscrap.yahoo_inc_stat_annual_v2 import inc_stat_annual
 from yahooscrap.yahoo_balance_sheet_annual import balance_sheet_annual 
 from yahooscrap.yahoo_balance_sheet_quarter import balance_sheet_quarter 
 
+from yahooscrap.yahoo_cash_flow_annual import cash_flow_annual 
+from yahooscrap.yahoo_cash_flow_quarter import cash_flow_quarter
+
 
 # def job():
 #     print("I'm working...")
@@ -48,7 +51,9 @@ def main():
     #inc_stat_quarter() 
     
     #balance_sheet_annual()
-    balance_sheet_quarter()
+    #balance_sheet_quarter()
+    #cash_flow_quarter()
+    cash_flow_annual()
 
 if __name__ == "__main__":
     main()
