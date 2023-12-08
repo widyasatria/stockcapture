@@ -13,6 +13,9 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
 import MySQLdb
+import mysql.connector
+from mysql.connector import Error
+
 from decimal import Decimal
 
 # for wait
@@ -26,9 +29,9 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 debug = True
+    
 
-
-def inc_stat_quarter():
+def cash_flow_annual():
     
     
     #requirement selenium versi 4.13.0
@@ -47,7 +50,7 @@ def inc_stat_quarter():
     service = Service(verbose = False)
     
     
-    conn = MySQLdb.connect(
+    conn = mysql.connector.connect(
     host="localhost",
     user="root",
     password="password",
@@ -64,9 +67,9 @@ def inc_stat_quarter():
         if result is not None:      
             for x in result:
                 if debug == True :
-                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
+                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/cash-flow?p='+x[0]+'.JK')
             
-                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
+                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/cash-flow?p='+x[0]+'.JK'
             
                 txt_ticker = x[0]
                 driver = webdriver.Edge(service = service, options = options)
@@ -77,13 +80,11 @@ def inc_stat_quarter():
                 #Quarterly clickable, Expandall clickable
               
                 driver.implicitly_wait(4)
-                #click quarterly
-                driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
-                
+
                 driver.implicitly_wait(4)
                 #click expandall 
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()
-
+                
                 ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
               
                 driver.implicitly_wait(4)
@@ -146,8 +147,25 @@ def inc_stat_quarter():
                                         
                             
                             if cnt>1:
-                                print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
-                            
+                                txt_value = txt_data.text.replace(",","")
+                                txt_value = txt_value.replace(".","")
+                                arr_header =  txt_tblheaders[cnt-1].text.split("/")
+                                
+                               
+                                if len(arr_header)>2 :
+                                    lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                    print("insert into tables cas values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                    
+                          
+                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
+                                    result_args = cursor.callproc('stock_fin_cash_flow_year_upsert',arg2)
+                                    print("restult args : ", result_args[1])
+                                    
+                                else:
+                                    print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
+                                    #cursor.callproc('stock_fin_cash_flow_year_upsert',[txt_ticker,txt_breakdown,txt_value,txt_tblheaders[cnt-1].text]) tanpa ttm
+                                
+                                                          
                             if cnt==col_length:
                                 break
                             else:
@@ -155,22 +173,13 @@ def inc_stat_quarter():
                                 time.sleep(0.3)    
                         print(strtxt) 
                         k=k+1
-
-      
-                
-       
-      
-    
-    except MySQLdb.Error as ex:
+    except mysql.connector.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
             print (f"MySQL Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
-        return None
     except TypeError as ex:
         print(ex)
         return None

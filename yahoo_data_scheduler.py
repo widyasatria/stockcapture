@@ -11,12 +11,12 @@ import time
 # file ini akan memanggil  yang ada didalam folder yahooscrap, file yahoo_get_latest_price  dan meng import function get_latest_price
 # hal ini dimungkinkan karena didalam folder yahooscrap ada file baru __init__.py
 from yahooscrap.yahoo_get_latest_price import get_latest_price
-from yahooscrap.yahoo_inc_stat_quarter_v2 import inc_stat_quarter
-from yahooscrap.yahoo_inc_stat_annual_v2 import inc_stat_annual
-from yahooscrap.yahoo_balance_sheet_annual import balance_sheet_annual 
+from yahooscrap.yahoo_inc_stat_quarter import inc_stat_quarter
+from yahooscrap.yahoo_inc_stat_year import inc_stat_annual
+from yahooscrap.yahoo_balance_sheet_year import balance_sheet_annual 
 from yahooscrap.yahoo_balance_sheet_quarter import balance_sheet_quarter 
 
-from yahooscrap.yahoo_cash_flow_annual import cash_flow_annual 
+from yahooscrap.yahoo_cash_flow_year import cash_flow_annual 
 from yahooscrap.yahoo_cash_flow_quarter import cash_flow_quarter
 
 
@@ -53,7 +53,7 @@ def main():
     #balance_sheet_annual()
     #balance_sheet_quarter()
     #cash_flow_quarter()
-    cash_flow_annual()
+    cash_flow_annual() # modify ini in progress supaya bisa masuk ke database
 
 if __name__ == "__main__":
     main()

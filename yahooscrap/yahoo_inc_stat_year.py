@@ -28,7 +28,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 debug = True
 
 
-def inc_stat_quarter():
+def inc_stat_annual():
     
     
     #requirement selenium versi 4.13.0
@@ -77,9 +77,7 @@ def inc_stat_quarter():
                 #Quarterly clickable, Expandall clickable
               
                 driver.implicitly_wait(4)
-                #click quarterly
-                driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
-                
+
                 driver.implicitly_wait(4)
                 #click expandall 
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()

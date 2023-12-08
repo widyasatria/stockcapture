@@ -28,7 +28,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 debug = True
 
 
-def inc_stat_quarter():
+def balance_sheet_annual():
     
     
     #requirement selenium versi 4.13.0
@@ -64,22 +64,19 @@ def inc_stat_quarter():
         if result is not None:      
             for x in result:
                 if debug == True :
-                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
+                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
-                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
+                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK'
             
                 txt_ticker = x[0]
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
-                time.sleep(3)
+                time.sleep(1)
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
-              
-                driver.implicitly_wait(4)
-                #click quarterly
-                driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
-                
+
+
                 driver.implicitly_wait(4)
                 #click expandall 
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()
@@ -103,7 +100,8 @@ def inc_stat_quarter():
                     col_length = len(txt_tblheaders)
                     
                     for txt_header in txt_tblheaders:
-                        print(txt_header.text)
+                        if debug == True:
+                            print(txt_header.text)
                 
                 driver.implicitly_wait(4)
                 
