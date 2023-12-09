@@ -52,8 +52,8 @@ def main():
     
     #balance_sheet_annual()
     #balance_sheet_quarter()
-    #cash_flow_quarter()
-    cash_flow_annual() # modify ini in progress supaya bisa masuk ke database
+    cash_flow_quarter()
+    #cash_flow_annual() # modify ini in progress supaya bisa masuk ke database
 
 if __name__ == "__main__":
     main()

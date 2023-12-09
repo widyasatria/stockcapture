@@ -3,7 +3,7 @@
 
 # FILE INI SUDAH TIDAK BISA DI RUN LANGSUNG HARUS DIPANGGIL OLEH ../yahoo_data_scheduler.py
 
-import os
+import os, time
 from selenium import webdriver
 #pip install msedge-selenium-tools
 
@@ -26,158 +26,6 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 debug = True
-
-def get_column_value(headers,driver,txt_label,row,col,k):
-     
-    fin_data=[]
-    for i in range (2,col+1):
-        
-            # get the parent row
-        # txt_parent_row_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div['+str(k)+']/div[1]/div[1]/div[1]/span' 
-        # txt_parent_res = driver.find_element(By.XPATH,txt_parent_row_xpath).text.strip()
-        # print("txt_parent_res "+txt_parent_res +"vs"+ txt_label)
-        # if txt_parent_res == txt_label:
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        #     if debug == True :
-        #         print('masuk ke autotxt parent row ' + txt_label + " - " + driver.find_element(By.XPATH,txt_col_xpath).text) 
-        
-        
-        if txt_label == 'Total Revenue':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div['+ str(row) +']/div['+ str(i) +']/span'
-            if debug == True :
-                print('row '+ str(row) + ' ' + driver.find_element(By.XPATH,txt_col_xpath).text)                    
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-                             
-        if txt_label == 'Operating Revenue': # Operating Revenue
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div['+ str(row) +']/div/div[1]/div['+ str(i) +']/span'
-            if debug == True :
-                print('row '+ str(row) + ' ' + driver.find_element(By.XPATH,txt_col_xpath).text)                    
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        
-        if txt_label == 'Cost of Revenue':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        if txt_label == 'Gross Profit':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[3]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        if txt_label == 'Operating Expense':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-                 
-        if txt_label == 'Selling General and Administrative':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'  #6 - Selling General and administrative
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        if txt_label == 'General & Administrative Expense': #row == 7:
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        if txt_label == 'Rental & Landing Fees':  
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text) 
-            
-        #if row == 9: 
-        if txt_label == 'Other Operating Expenses':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[2]/div[1]/div['+ str(i) +']'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-            
-        if txt_label == 'Selling & Marketing Expense':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-                        
-        if txt_label == 'Operating Income':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[5]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-            
-           
-
-        if txt_label == 'Net Non Operating Interest Income Expense': #Net Non Operating Interest Income Expense
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text) 
-        if txt_label == 'Interest Income Non Operating': #Interest Income Non Operating
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'  
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)                  
-        if txt_label == 'Interest Expense Non Operating':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Total Other Finance Cost':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[3]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Pretax Income':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[7]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Tax Provision':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[8]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Net Income Common Stockholders':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[8]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Net Income':  
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Net Income Including Non-Controlling Interests':  
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[1]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Net Income Continuous Operations':  
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Minority Interests':  
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Otherunder Preferred Stock Dividend':  
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[2]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        if txt_label == 'Diluted NI Available to Com Stockholders':
-            txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[10]/div[1]/div['+ str(i) +']/span'
-            fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        
-        
-        if row>=24 and row <=46:
-             txt_col_xpath= '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div['+ str(k) +']/div[1]/div['+ str(i) +']'
-             fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        
-        
-        
-        # if txt_label == 'Basic EPS':
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[11]/div[1]/div['+ str(i) +']'
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-   
-        # if txt_label == 'Diluted EPS': 
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[12]/div[1]/div['+ str(i) +']'
-                            
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        # if txt_label == 'Basic Average Shares': 
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[13]/div[1]/div['+ str(i) +']/span'
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        # if txt_label == 'Diluted Average Shares': 
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[14]/div[1]/div['+ str(i) +']/span'
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)
-        
-        # if txt_label == 'Total Operating Income as Reported': 
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[15]/div[1]/div['+ str(i) +']/span'
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)    
-        
-        # if txt_label == 'Rent Expense Supplemental': 
-        #     txt_col_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[16]/div[1]/div['+ str(i) +']/span'
-        #     fin_data.append(driver.find_element(By.XPATH,txt_col_xpath).text)   
-        
-    
-            
-
-        
-        
-             
-    return headers,fin_data
-   
 
 
 def inc_stat_quarter():
@@ -224,155 +72,111 @@ def inc_stat_quarter():
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
-                
+                time.sleep(3)
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
-                driver.refresh()
-                
+              
                 driver.implicitly_wait(4)
                 #click quarterly
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
                 
+                driver.implicitly_wait(4)
                 #click expandall 
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()
 
-                
-                driver.implicitly_wait(4)
-                
-                
-                # To get the number of rows
                 ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
-                row_element_xpath ='//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div'
-                                    
-                row_element = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, row_element_xpath))) 
-                if row_element is not None:
-                    row=driver.find_elements(By.XPATH,row_element_xpath)
-                    if debug == True :
-                        print("jumlah row ", len(row))
-                        
-                row_element_css_noparent = '#Col1-1-Financials-Proxy > section > div.Pos\(r\) > div.W\(100\%\).Whs\(nw\).Ovx\(a\).BdT.Bdtc\(\$seperatorColor\) > div > div.D\(tbrg\) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > div.D\(tbr\).fi-row.Bgc\(\$hoverBgColor\)\:h'
-                # row_element_xpath_noparent ='/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]' 
-                                              # //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div/div[2]/div
-                                               
-                                               #/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div[1]
-                #                             #  //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div
-                #                             # /html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]/div[1]/div[1]/div[1]
-                #                             # /html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]
-                #                             #/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]
-                #                             #/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]/div[1]/div[1]
-                #                             #/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[3]/div[1]/div/div[2]/div[2]/div[1]
-                # row_element_noparent = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, row_element_xpath_noparent))) 
-                # if row_element_noparent is not None:
-                #     row_noparent=driver.find_elements(By.XPATH,row_element_xpath_noparent)
-                #     if debug == True :
-                #         print("jumlah row ", len(row_noparent))
-                
-                txt_label=[]
-                for i in range (1, len(row)+1):
-                    row_element_xpath ='//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div['+ str(i) +']/div[1]/div[1]/div[1]/span'
-                    row_element = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, row_element_xpath))) 
-                    if row_element is not None:
-                        print("isi " + str(i) + " "+ driver.find_element(By.XPATH,row_element_xpath).text)
-                        txt_label.append(driver.find_element(By.XPATH,row_element_xpath).text)
-                        
-                        if i == 1: # Total Revenue
-                            row_element_xpath='//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/div[1]/span'
-                                              
-                            #print("isi " + str(i) + " Child - "+ driver.find_element(By.XPATH,row_element_xpath).text)
-                            txt_label.append(driver.find_element(By.XPATH,row_element_xpath).text)
-                            
-                        if i == 4: #Operating Expense, it has child so needs to define here
-                            
-                            
-                            row_elements_xpath=[]
-                            
-                            # seling general and administrative 
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/span')
-                            # General & Administrative Expense
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/span')
-                            # Rental & Landing Fees                           
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/div[1]/span')
-                                                      
-                            
-                            #Selling & Marketing Expense Kadang tidak ada di beberapa lap keu, jika ada di tambah otherwise di skipp
-                            if len(driver.find_elements(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/span')) > 0:
-                                row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/span')
-                            
-                            
-                            #Other Operating Expenses                                                     
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[4]/div[2]/div[2]/div[1]/div[1]/div[1]/span') 
-                                                      
-                            
-                            for txt_xpath in row_elements_xpath :
-                                #print("isi " + str(i) + " Child - "+ driver.find_element(By.XPATH,txt_xpath).text)
-                                txt_label.append(driver.find_element(By.XPATH,txt_xpath).text)
-                            
-                            row_elements_xpath.clear
-                        
-                        if i == 6: #Net Non Operating Interest Income Expense
-                            row_elements_xpath=[]
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[1]/div[1]/div[1]/div[1]/span')
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[2]/div[1]/div[1]/div[1]/span')
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[6]/div[2]/div[3]/div[1]/div[1]/div[1]/span')
-                            
-                            for txt_xpath in row_elements_xpath :
-                                #print("isi " + str(i) + " Child - "+ driver.find_element(By.XPATH,txt_xpath).text)
-                                txt_label.append(driver.find_element(By.XPATH,txt_xpath).text)
-                            
-                            row_elements_xpath.clear
-
-                        if i == 9: #Net Income Common Stockholders
-                            row_elements_xpath=[]
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[1]/div[1]/div[1]/span')
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/span')
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div[1]/div[1]/div[1]/span')
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/span')
-                            row_elements_xpath.append('//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[9]/div[2]/div[2]/div[1]/div[1]/div[1]/span') 
-                            for txt_xpath in row_elements_xpath :
-                                #print("isi " + str(i) + " Child - "+ driver.find_element(By.XPATH,txt_xpath).text)
-                                txt_label.append(driver.find_element(By.XPATH,txt_xpath).text)
-                                
-                            row_elements_xpath.clear
-                
-                
-                # fill column nya
-                
+              
                 driver.implicitly_wait(4)
-                #get the table headers
-                headers=[]
-                headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[2]/span').text)
-                headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[3]/span').text)
-                headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[4]/span').text)
-                headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[5]/span').text)
-                headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[6]/span').text)
-                headers.append(driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div[7]/span').text)
+                # to get the headers
+                           
+                txt_headers_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[1]/div/div'
+                col_headers = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, txt_headers_xpath))) 
                 
-                ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
-                col_elements_xpath = '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/div[1]/div/div[2]/div[1]/div[1]/div'
-                col_elements = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, col_elements_xpath))) 
-                if col_elements is not None:
-                    colnum=driver.find_elements(By.XPATH,col_elements_xpath)
-                    if debug == True :
-                        print("Jumlah Kolom ",len(colnum))
-                    col=len(colnum)
-            
-                #t=0 
-                actual_row=1
-                k=11  #parent_row_num          
-                for txt_lbl in txt_label :
-                    if debug == True :
-                        print("key :"+ str(actual_row) +' - '+ txt_lbl +' tabel row '+ str(k) )
-                    fin_data=[]
-                    headers, fin_data = get_column_value(headers,driver,txt_lbl,actual_row,col,k)
-                    if actual_row>=24:
-                     k=k+1
+                if col_headers is not None:
+                    time.sleep(1)
+                    driver.implicitly_wait(4)
+                    txt_tblheaders = driver.find_elements(By.XPATH,txt_headers_xpath)
+                   
+                    if debug == True:
+                        print('panjang headers ', len(txt_tblheaders))
                     
-                    cnt_fin_data = len(fin_data)
-                    if cnt_fin_data > 0 :
-                        for x in range(cnt_fin_data) :
-                            if debug == True :
-                                print("" + headers[x] +" - "+fin_data[x] )
-                    actual_row=actual_row+1
+                    col_length = len(txt_tblheaders)
+                    
+                    for txt_header in txt_tblheaders:
+                        print(txt_header.text)
+                
+                driver.implicitly_wait(4)
+                
+          
+               
+                txt_all_data_css = 'rw-expnded'
+                all_datas = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, txt_all_data_css))) 
+                
+                print("getting financial data from ... "+ url)
+                
+                if all_datas is not None:
+                    driver.implicitly_wait(4)
+                    txt_tbody = driver.find_elements(By.CLASS_NAME,txt_all_data_css)
+                    driver.implicitly_wait(4)
+                             
+                    if debug==True:
+                        print(" Panjang rw-expanded ", len(txt_tbody))
+                    k=1
+                    for txt_labels in txt_tbody:
+                        time.sleep(1)
+                        row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
+                        
+                        
+                        driver.implicitly_wait(4)
+                        if debug==True:
+                            print("row ke "+ str(k) + " Panjang span row data "+ str(len(row_datas)) )
+                        
+                        strtxt=""
+                        cnt = 1 #untuk set iterasi mengambil 7 value pertama
+                       
+                        for txt_data in row_datas:
+                            strtxt=strtxt +" " + txt_data.text 
+                            if cnt==1:
+                                strtxt=strtxt+" : "
+                                txt_breakdown=txt_data.text 
+                                if len(row_datas)==1: #untuk mengantisipasi jika ada yang 0 atau tidak ada isinya
+                                    strtxt = strtxt + "0 0 0 0 0 0"
+                                    for l in range (1,col_length) :
+                                        print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
+                                        
+                            
+                            if cnt>1:
+                                print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
+                                txt_value = txt_data.text.replace(",","")
+                                txt_value = txt_value.replace(".","")
+                                arr_header =  txt_tblheaders[cnt-1].text.split("/")
+                                
+                               
+                                if len(arr_header)>2 :
+                                    lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                    print("stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                    
+                                    #pakai stored procedure untuk upsert
+                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
+                                    result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
+                                    print("restult args : ", result_args[1])
+                                    
+                                else:
+                                    print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
+                                    #cursor.callproc('stock_fin_cash_flow_year_upsert',[txt_ticker,txt_breakdown,txt_value,txt_tblheaders[cnt-1].text]) tanpa ttm
+                                
+                            
+                            if cnt==col_length:
+                                break
+                            else:
+                                cnt=cnt+1
+                                time.sleep(0.3)    
+                        print(strtxt) 
+                        k=k+1
+
+      
+                
+       
       
     
     except MySQLdb.Error as ex:

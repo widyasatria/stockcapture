@@ -144,10 +144,27 @@ def cash_flow_quarter():
                                     for l in range (1,col_length) :
                                         print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
                                         
+                                        
                             
                             if cnt>1:
-                                print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
-                            
+                                txt_value = txt_data.text.replace(",","")
+                                txt_value = txt_value.replace(".","")
+                                arr_header =  txt_tblheaders[cnt-1].text.split("/")
+                                
+                               
+                                if len(arr_header)>2 :
+                                    lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                    print("insert into tables cas values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                    
+                                    #pakai stored procedure untuk upsert
+                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
+                                    result_args = cursor.callproc('stock_fin_cash_flow_quarter_upsert',arg2)
+                                    print("restult args : ", result_args[1])
+                                    
+                                else:
+                                    print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
+                                    #cursor.callproc('stock_fin_cash_flow_year_upsert',[txt_ticker,txt_breakdown,txt_value,txt_tblheaders[cnt-1].text]) tanpa ttm
+                                
                             if cnt==col_length:
                                 break
                             else:
