@@ -45,15 +45,21 @@ from yahooscrap.yahoo_cash_flow_quarter import cash_flow_quarter
 def main():
     # latest price
     # get_latest_price()
-    # income statement annual 
-    #inc_stat_annual()
-    # income statemetn Quarter
-    #inc_stat_quarter() 
     
     #balance_sheet_annual()
     #balance_sheet_quarter()
-    cash_flow_quarter()
-    #cash_flow_annual() # modify ini in progress supaya bisa masuk ke database
+    
 
+    # Cash flow
+    #cash_flow_quarter()
+    #cash_flow_annual() 
+   
+   
+    
+    #done tested
+    # income statement 
+    inc_stat_annual()
+    #inc_stat_quarter() 
+   
 if __name__ == "__main__":
     main()

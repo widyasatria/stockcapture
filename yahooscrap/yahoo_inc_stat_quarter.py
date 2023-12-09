@@ -13,7 +13,7 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
 import MySQLdb
-from decimal import Decimal
+from datetime import datetime
 
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -136,17 +136,27 @@ def inc_stat_quarter():
                        
                         for txt_data in row_datas:
                             strtxt=strtxt +" " + txt_data.text 
-                            if cnt==1:
+                            if cnt==1: #jika value kolom hanya 1 
                                 strtxt=strtxt+" : "
                                 txt_breakdown=txt_data.text 
                                 if len(row_datas)==1: #untuk mengantisipasi jika ada yang 0 atau tidak ada isinya
                                     strtxt = strtxt + "0 0 0 0 0 0"
                                     for l in range (1,col_length) :
-                                        print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
+                                        if debug==True:
+                                            print("ISI data O semua stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
+                                        if l==1:
+                                            date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                            arg2 = [txt_ticker, txt_breakdown, 0,date_ttm]
+                                        else: 
+                                            arr_header =  txt_tblheaders[l].text.split("/")
+                                            lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header]
+                                      
+                                        result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
                                         
                             
                             if cnt>1:
-                                print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
+                                #print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
                                 txt_value = txt_data.text.replace(",","")
                                 txt_value = txt_value.replace(".","")
                                 arr_header =  txt_tblheaders[cnt-1].text.split("/")
@@ -154,16 +164,19 @@ def inc_stat_quarter():
                                
                                 if len(arr_header)>2 :
                                     lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                    print("stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                    if debug==True:
+                                        print("stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
                                     
                                     #pakai stored procedure untuk upsert
                                     arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
                                     result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
-                                    print("restult args : ", result_args[1])
+                                    #print("restult args : ", result_args[1])
                                     
                                 else:
-                                    print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
-                                    #cursor.callproc('stock_fin_cash_flow_year_upsert',[txt_ticker,txt_breakdown,txt_value,txt_tblheaders[cnt-1].text]) tanpa ttm
+                                    print("TTM stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
+                                    date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                    arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm]
+                                    result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
                                 
                             
                             if cnt==col_length:
