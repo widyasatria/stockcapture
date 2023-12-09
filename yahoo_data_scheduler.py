@@ -58,8 +58,8 @@ def main():
     
     #done tested
     # income statement 
-    inc_stat_annual()
-    #inc_stat_quarter() 
+    #inc_stat_annual()
+    inc_stat_quarter() 
    
 if __name__ == "__main__":
     main()

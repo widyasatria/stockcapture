@@ -28,6 +28,56 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 debug = True
 
 
+def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
+    strtxt = v_ticker + "-" + v_finance_key 
+    recalculate_result = "recalculating ttm for : "+ strtxt
+    
+    strquery = "select max(DATE_FORMAT(finance_date,'%%Y')) as max_finance_year from stock_fin_inc_stat_quarter "
+    strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM'"
+    v_cursor.execute(strquery,(v_ticker,v_finance_key))
+    
+    rows = v_cursor.fetchone()  
+    
+    if rows is not None:
+        if debug is True:
+            print(" isi row : "+rows[0])
+        
+        txtyear = rows[0]
+        
+        strquery= "select count(ticker), sum(finance_value) from stock_fin_inc_stat_quarter " 
+        strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM' "
+        strquery = strquery + "and DATE_FORMAT(finance_date,'%%Y')= %s "
+   
+        v_cursor.execute(strquery,(v_ticker,v_finance_key,txtyear))
+        rowquartervalues = v_cursor.fetchone()  
+        
+        if rowquartervalues is not None:
+            if debug is True:
+                print("  jumlah lap keuangan yang sudah keluar "+ str(rowquartervalues[0]))
+                print("  Value "+ v_finance_key +" di lap keuangan terakhir "+ str(rowquartervalues[1]))
+            
+            numberofreleases = rowquartervalues[0]
+            valueinlastreport = rowquartervalues[1]
+            
+            #if number of releases =3 then TTM = (valueinlastreport/3)*4
+            
+            if numberofreleases == 1:
+                ttm_val = valueinlastreport*4
+            if numberofreleases == 2:
+                ttm_val = valueinlastreport*2
+            if numberofreleases == 3:
+                ttm_val = (valueinlastreport/3)*4
+            if numberofreleases == 4:
+                ttm_val = valueinlastreport
+ 
+            ttm_val = round(ttm_val,0)
+            if debug is True:
+                print("  TTM value yang seharusnya "+ str(ttm_val))
+             
+            
+    return  v_ticker, v_finance_key, ttm_val
+    
+
 def inc_stat_quarter():
     
     
@@ -146,16 +196,16 @@ def inc_stat_quarter():
                                             print("ISI data O semua stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
                                         if l==1:
                                             date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
-                                            arg2 = [txt_ticker, txt_breakdown, 0,date_ttm]
+                                            arg2 = [txt_ticker, txt_breakdown, 0,date_ttm, txt_tblheaders[l].text, l+1]
                                         else: 
                                             arr_header =  txt_tblheaders[l].text.split("/")
                                             lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header]
+                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header, txt_tblheaders[l].text, l+1]
                                       
                                         result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
                                         
                             
-                            if cnt>1:
+                            if cnt>1: # skip kolom breakdown
                                 #print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
                                 txt_value = txt_data.text.replace(",","")
                                 txt_value = txt_value.replace(".","")
@@ -165,22 +215,37 @@ def inc_stat_quarter():
                                 if len(arr_header)>2 :
                                     lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
                                     if debug==True:
-                                        print("stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                        print("stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +","+txt_tblheaders[cnt-1].text +","+str(cnt) +")")
                                     
                                     #pakai stored procedure untuk upsert
-                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
+                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header,txt_tblheaders[cnt-1].text, cnt]
                                     result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
                                     #print("restult args : ", result_args[1])
                                     
                                 else:
-                                    print("TTM stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
-                                    date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
-                                    arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm]
+                                    # untuk mengakomodasi ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                    date_ttm= "1999-12-1" 
+                                    if debug==True:
+                                        print("TTM stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ date_ttm +","+txt_tblheaders[cnt-1].text +","+ str(cnt) +")")
+                                    
+                                    arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm,txt_tblheaders[cnt-1].text, cnt]
                                     result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg2)
                                 
-                            
+                            # at the end of column
                             if cnt==col_length:
-                                break
+                                # if column length more than 1 ; to exclude the one having 1 row having 0 value
+                                if cnt>1:
+                                    arr_header =  txt_tblheaders[cnt-1].text.split("/")
+                                    if len(arr_header)>2 :
+                                        lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                     
+                                        # Recalculate TTM and update Yahoo Calculations based on Teguh hidayat beat the market book
+                                        r_ticker, r_finance_key, r_ttm_val = recalculate_ttm(cursor, txt_ticker, txt_breakdown)
+                                        arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-1','TTM',2]
+                                        result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg_recalc_ttm)
+                                    
+                                # Break The Loop
+                                break 
                             else:
                                 cnt=cnt+1
                                 time.sleep(0.3)    
