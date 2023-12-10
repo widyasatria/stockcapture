@@ -66,11 +66,7 @@ def main():
    
     balance_sheet_quarter()
     
-    #row ke 1 Panjang span row data 142
-    #row ke 2 Panjang span row data 64
-    #row ke 4 Panjang span row data 18
-    #row ke 12 Panjang span row data 2 Restricted cash
-    #row ke 13 Panjang span row data 2 Other Current Assets
+
 
 if __name__ == "__main__":
     main()
