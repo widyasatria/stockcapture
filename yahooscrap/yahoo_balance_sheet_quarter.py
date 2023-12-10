@@ -179,7 +179,7 @@ def balance_sheet_quarter():
                     for txt_labels in txt_tbody:
                         time.sleep(1)
                         row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
-                        # search data using DIV Version not using span
+                        # search data using DIV  not using span -- NEW Version
                         row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
                         
                         driver.implicitly_wait(4)

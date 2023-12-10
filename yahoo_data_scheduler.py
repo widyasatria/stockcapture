@@ -51,7 +51,7 @@ def main():
     
 
   
-    #cash_flow_annual() 
+ 
    
    
     
@@ -64,8 +64,8 @@ def main():
     #cash_flow_quarter()
     #cash_flow_annual()
    
-    balance_sheet_quarter()
-    
+    #balance_sheet_quarter()
+    balance_sheet_annual() 
 
 
 if __name__ == "__main__":

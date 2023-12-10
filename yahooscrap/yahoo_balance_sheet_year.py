@@ -13,7 +13,7 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
 import MySQLdb
-from decimal import Decimal
+from datetime import datetime
 
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -27,6 +27,58 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 debug = True
 
+
+def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
+    strtxt = v_ticker + "-" + v_finance_key 
+    recalculate_result = "=== RECALCULATING TTM for : "+ strtxt
+    if debug==True:
+        print(recalculate_result)
+    
+    strquery = "select max(DATE_FORMAT(finance_date,'%%Y')) as max_finance_year from stock_fin_bal_sheet_quarter "
+    strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM'"
+    v_cursor.execute(strquery,(v_ticker,v_finance_key))
+    
+    rows = v_cursor.fetchone()  
+    
+    if rows is not None:
+        if debug is True:
+            print("=== Year of TTM to be calculated: "+ str(rows[0]))
+        
+        txtyear = rows[0]
+        
+        strquery= "select count(ticker), sum(finance_value) from stock_fin_bal_sheet_quarter " 
+        strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM' "
+        strquery = strquery + "and DATE_FORMAT(finance_date,'%%Y')= %s "
+   
+        v_cursor.execute(strquery,(v_ticker,v_finance_key,txtyear))
+        rowquartervalues = v_cursor.fetchone()  
+        
+        if rowquartervalues is not None:
+            if debug is True:
+                print("=== Jumlah lap keuangan yang sudah keluar "+ str(rowquartervalues[0]))
+                print("=== Total value "+ v_finance_key +" dari awal Tahun  "+ txtyear + " - " + str(rowquartervalues[1]))
+            
+            numberofreleases = rowquartervalues[0]
+            valueinlastreport = rowquartervalues[1]
+            
+            #if number of releases =3 then TTM = (valueinlastreport/3)*4
+            
+            if numberofreleases == 1:
+                ttm_val = valueinlastreport*4
+            if numberofreleases == 2:
+                ttm_val = valueinlastreport*2
+            if numberofreleases == 3:
+                ttm_val = (valueinlastreport/3)*4
+            if numberofreleases == 4:
+                ttm_val = valueinlastreport
+ 
+            ttm_val = round(ttm_val,0)
+            if debug is True:
+                print("=== TTM value yang seharusnya "+ str(ttm_val))
+             
+            
+    return  v_ticker, v_finance_key, ttm_val
+    
 
 def balance_sheet_annual():
     
@@ -43,7 +95,6 @@ def balance_sheet_annual():
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
-    options
     service = Service(verbose = False)
     
     
@@ -67,16 +118,23 @@ def balance_sheet_annual():
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK'
-            
+              
+                
                 txt_ticker = x[0]
+          
+                
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
-                time.sleep(1)
+                time.sleep(3)
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
-
-
+              
+                driver.implicitly_wait(4)
+                
+                # do not click quarterly so disable this line below
+                #driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
+                
                 driver.implicitly_wait(4)
                 #click expandall 
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()
@@ -100,8 +158,7 @@ def balance_sheet_annual():
                     col_length = len(txt_tblheaders)
                     
                     for txt_header in txt_tblheaders:
-                        if debug == True:
-                            print(txt_header.text)
+                        print(txt_header.text)
                 
                 driver.implicitly_wait(4)
                 
@@ -123,42 +180,62 @@ def balance_sheet_annual():
                     for txt_labels in txt_tbody:
                         time.sleep(1)
                         row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
-                        
+                        # search data using DIV  not using span -- new version
+                        row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
                         
                         driver.implicitly_wait(4)
                         if debug==True:
-                            print("row ke "+ str(k) + " Panjang span row data "+ str(len(row_datas)) )
+                            print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                         
-                        strtxt=""
-                        cnt = 1 #untuk set iterasi mengambil 7 value pertama
+                        time.sleep(0.5)
                        
+                        cnt=1
+                        col_header=1 # col_header 0= breakdown, col_header 1 dst isi tanggal
                         for txt_data in row_datas:
-                            strtxt=strtxt +" " + txt_data.text 
-                            if cnt==1:
-                                strtxt=strtxt+" : "
-                                txt_breakdown=txt_data.text 
-                                if len(row_datas)==1: #untuk mengantisipasi jika ada yang 0 atau tidak ada isinya
-                                    strtxt = strtxt + "0 0 0 0 0 0"
-                                    for l in range (1,col_length) :
-                                        print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
-                                        
+                            #Hanya array 1 yang punya data lengkap
+                            # if cnt == 1:
+                            #     if debug == True:
+                            #         print ("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
+                           
+                            if cnt == 2:
+                                txt_breakdown = txt_data.text
                             
-                            if cnt>1:
-                                print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
+                            # array data disimpan di array no 5-8 hardcoded
+                            # data disimpan mulai di array no 5, kemudian iterate terus sampai 5+ (panjang kolom-1) karena panjang kolom array (mulai dari 0-)
+                            if cnt >=5 and cnt <(5+col_length-1):
+                                if debug == True:
+                                    print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
                             
-                            if cnt==col_length:
+                                #cleansing data
+                                txt_value = txt_data.text.replace(",","")
+                                txt_value = txt_value.replace(".","")
+                                if txt_value == '-' :
+                                    txt_value = 0
+                                
+                                # if debug == True:
+                                #     print("=== print text header before: "+ txt_tblheaders[col_header].text)
+                                
+                                arr_header =  txt_tblheaders[col_header].text.split("/")
+                                if len(arr_header)>2 :
+                                    lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                
+                                # if debug == True:
+                                #     print("=== print text header after : "+ lbl_header)
+                                
+                                arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
+                                cursor.callproc('stock_fin_bal_sheet_year_upsert',arg1)
+                                
+                               
+                                
+                                col_header=col_header+1 
+                                time.sleep(0.5)
+                            if cnt > (5+col_length-1): # break loop jika data yang ada didalamnya sudah habis 
                                 break
-                            else:
-                                cnt=cnt+1
-                                time.sleep(0.3)    
-                        print(strtxt) 
+                            
+                            cnt=cnt+1
+                      
                         k=k+1
 
-      
-                
-       
-      
-    
     except MySQLdb.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
