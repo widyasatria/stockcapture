@@ -47,11 +47,10 @@ def main():
     # get_latest_price()
     
     #balance_sheet_annual()
-    #balance_sheet_quarter()
+
     
 
-    # Cash flow
-    #cash_flow_quarter()
+  
     #cash_flow_annual() 
    
    
@@ -59,7 +58,19 @@ def main():
     #done tested
     # income statement 
     #inc_stat_annual()
-    inc_stat_quarter() 
+    #inc_stat_quarter() 
+    
+    # Cash flow
+    #cash_flow_quarter()
+    #cash_flow_annual()
    
+    balance_sheet_quarter()
+    
+    #row ke 1 Panjang span row data 142
+    #row ke 2 Panjang span row data 64
+    #row ke 4 Panjang span row data 18
+    #row ke 12 Panjang span row data 2 Restricted cash
+    #row ke 13 Panjang span row data 2 Other Current Assets
+
 if __name__ == "__main__":
     main()

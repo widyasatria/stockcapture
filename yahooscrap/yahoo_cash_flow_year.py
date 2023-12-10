@@ -13,10 +13,7 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
 import MySQLdb
-import mysql.connector
-from mysql.connector import Error
-
-from decimal import Decimal
+from datetime import datetime
 
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -29,7 +26,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 debug = True
-    
+
 
 def cash_flow_annual():
     
@@ -50,7 +47,7 @@ def cash_flow_annual():
     service = Service(verbose = False)
     
     
-    conn = mysql.connector.connect(
+    conn = MySQLdb.connect(
     host="localhost",
     user="root",
     password="password",
@@ -79,12 +76,12 @@ def cash_flow_annual():
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
               
-                driver.implicitly_wait(4)
-
+               
+                
                 driver.implicitly_wait(4)
                 #click expandall 
                 driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/button/div').click()
-                
+
                 ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
               
                 driver.implicitly_wait(4)
@@ -137,16 +134,23 @@ def cash_flow_annual():
                        
                         for txt_data in row_datas:
                             strtxt=strtxt +" " + txt_data.text 
-                            if cnt==1:
+                            if cnt==1: #jika value kolom hanya 1 
                                 strtxt=strtxt+" : "
                                 txt_breakdown=txt_data.text 
                                 if len(row_datas)==1: #untuk mengantisipasi jika ada yang 0 atau tidak ada isinya
                                     strtxt = strtxt + "0 0 0 0 0 0"
                                     for l in range (1,col_length) :
-                                        print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
+                                        if debug==True:
+                                            print("ISI data O semua stock_fin_cash_flow_year_upsert (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
+                                        if l>1:
+                                            arr_header =  txt_tblheaders[l].text.split("/")
+                                            lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header,txt_tblheaders[l].text,l]
+                                            result_args = cursor.callproc('stock_fin_cash_flow_year_upsert',arg2)
                                         
                             
                             if cnt>1:
+                                #print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
                                 txt_value = txt_data.text.replace(",","")
                                 txt_value = txt_value.replace(".","")
                                 arr_header =  txt_tblheaders[cnt-1].text.split("/")
@@ -154,18 +158,22 @@ def cash_flow_annual():
                                
                                 if len(arr_header)>2 :
                                     lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                    print("insert into tables cas values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                    if debug==True:
+                                        print("stock_fin_cash_flow_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
                                     
                                     #pakai stored procedure untuk upsert
-                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
+                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header,txt_tblheaders[cnt-1].text, cnt-1]
                                     result_args = cursor.callproc('stock_fin_cash_flow_year_upsert',arg2)
-                                    print("restult args : ", result_args[1])
-                                    
-                                else:
-                                    print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
-                                    #cursor.callproc('stock_fin_cash_flow_year_upsert',[txt_ticker,txt_breakdown,txt_value,txt_tblheaders[cnt-1].text]) tanpa ttm
+                                    #print("restult args : ", result_args[1])
                                 
-                                                          
+                                # Kolom TTM tidak dikeluarkan   
+                                # else:
+                                #     print("TTM stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
+                                #     date_ttm= "1999-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                #     arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm,txt_tblheaders[cnt-1].text, cnt]
+                                #     result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
+                                
+                            
                             if cnt==col_length:
                                 break
                             else:
@@ -173,13 +181,22 @@ def cash_flow_annual():
                                 time.sleep(0.3)    
                         print(strtxt) 
                         k=k+1
-    except mysql.connector.Error as ex:
+
+      
+                
+       
+      
+    
+    except MySQLdb.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
             print (f"MySQL Error: %s",str(ex))
             return None
+    except MySQLdb.OperationalError as ex:
+        print(ex)
+        return None
     except TypeError as ex:
         print(ex)
         return None

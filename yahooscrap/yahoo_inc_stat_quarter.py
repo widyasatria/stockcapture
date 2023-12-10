@@ -30,7 +30,7 @@ debug = True
 
 def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     strtxt = v_ticker + "-" + v_finance_key 
-    recalculate_result = "recalculating ttm for : "+ strtxt
+    recalculate_result = "=== RECALCULATING TTM for : "+ strtxt
     
     strquery = "select max(DATE_FORMAT(finance_date,'%%Y')) as max_finance_year from stock_fin_inc_stat_quarter "
     strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM'"
@@ -40,7 +40,7 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     
     if rows is not None:
         if debug is True:
-            print(" isi row : "+rows[0])
+            print("=== Year of TTM to be calculated:  "+rows[0])
         
         txtyear = rows[0]
         
@@ -53,8 +53,8 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
         
         if rowquartervalues is not None:
             if debug is True:
-                print("  jumlah lap keuangan yang sudah keluar "+ str(rowquartervalues[0]))
-                print("  Value "+ v_finance_key +" di lap keuangan terakhir "+ str(rowquartervalues[1]))
+                print("=== Jumlah lap keuangan yang sudah keluar  "+ str(rowquartervalues[0]))
+                print("=== Total value "+ v_finance_key +" dari awal Tahun "+ txtyear +" - " + str(rowquartervalues[1]))
             
             numberofreleases = rowquartervalues[0]
             valueinlastreport = rowquartervalues[1]
@@ -72,7 +72,7 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
  
             ttm_val = round(ttm_val,0)
             if debug is True:
-                print("  TTM value yang seharusnya "+ str(ttm_val))
+                print("=== TTM value yang seharusnya "+ str(ttm_val))
              
             
     return  v_ticker, v_finance_key, ttm_val
@@ -195,7 +195,7 @@ def inc_stat_quarter():
                                         if debug==True:
                                             print("ISI data O semua stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
                                         if l==1:
-                                            date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                            date_ttm= "1999-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
                                             arg2 = [txt_ticker, txt_breakdown, 0,date_ttm, txt_tblheaders[l].text, l+1]
                                         else: 
                                             arr_header =  txt_tblheaders[l].text.split("/")
@@ -223,7 +223,7 @@ def inc_stat_quarter():
                                     #print("restult args : ", result_args[1])
                                     
                                 else:
-                                    # untuk mengakomodasi ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                    # untuk mengakomodasi ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan 1999-12-1
                                     date_ttm= "1999-12-1" 
                                     if debug==True:
                                         print("TTM stock_fin_inc_stat_quarter_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ date_ttm +","+txt_tblheaders[cnt-1].text +","+ str(cnt) +")")
@@ -248,7 +248,7 @@ def inc_stat_quarter():
                                 break 
                             else:
                                 cnt=cnt+1
-                                time.sleep(0.3)    
+                                time.sleep(0.2)    
                         print(strtxt) 
                         k=k+1
 

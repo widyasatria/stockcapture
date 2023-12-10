@@ -142,15 +142,11 @@ def inc_stat_annual():
                                     for l in range (1,col_length) :
                                         if debug==True:
                                             print("ISI data O semua stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
-                                        if l==1:
-                                            date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
-                                            arg2 = [txt_ticker, txt_breakdown, 0,date_ttm]
-                                        else: 
+                                        if l>1:
                                             arr_header =  txt_tblheaders[l].text.split("/")
                                             lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header]
-                                      
-                                        result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
+                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header,txt_tblheaders[l].text,l]
+                                            result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
                                         
                             
                             if cnt>1:
@@ -166,15 +162,16 @@ def inc_stat_annual():
                                         print("stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
                                     
                                     #pakai stored procedure untuk upsert
-                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header]
+                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header,txt_tblheaders[cnt-1].text, cnt-1]
                                     result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
                                     #print("restult args : ", result_args[1])
-                                    
-                                else:
-                                    print("TTM stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
-                                    date_ttm= datetime.today().strftime('%Y')+"-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
-                                    arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm]
-                                    result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
+                                
+                                # Kolom TTM tidak dikeluarkan   
+                                # else:
+                                #     print("TTM stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
+                                #     date_ttm= "1999-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
+                                #     arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm,txt_tblheaders[cnt-1].text, cnt]
+                                #     result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
                                 
                             
                             if cnt==col_length:
