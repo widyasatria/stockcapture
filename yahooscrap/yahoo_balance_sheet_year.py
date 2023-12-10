@@ -229,7 +229,7 @@ def balance_sheet_annual():
                                 
                                 col_header=col_header+1 
                                 time.sleep(0.5)
-                            if cnt > (5+col_length-1): # break loop jika data yang ada didalamnya sudah habis 
+                            if cnt > (5+col_length-1): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column 
                                 break
                             
                             cnt=cnt+1
