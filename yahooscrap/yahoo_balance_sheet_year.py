@@ -179,7 +179,7 @@ def balance_sheet_annual():
                     k=1
                     for txt_labels in txt_tbody:
                         time.sleep(1)
-                        row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
+                        #row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
                         # search data using DIV  not using span -- new version
                         row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
                         

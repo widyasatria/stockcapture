@@ -14,7 +14,7 @@ from selenium.webdriver.edge.options import Options
 
 import MySQLdb
 from datetime import datetime
-
+from decimal import Decimal
 # for wait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
@@ -26,6 +26,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 debug = True
+
 
 
 def inc_stat_annual():
@@ -43,7 +44,6 @@ def inc_stat_annual():
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
-    options
     service = Service(verbose = False)
     
     
@@ -67,8 +67,9 @@ def inc_stat_annual():
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
-            
                 txt_ticker = x[0]
+                
+                
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
@@ -76,7 +77,10 @@ def inc_stat_annual():
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
               
-               
+                driver.implicitly_wait(4)
+                
+                # do not click quarterly so disable this line below
+                #driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[1]/div[2]/button/div').click()
                 
                 driver.implicitly_wait(4)
                 #click expandall 
@@ -122,71 +126,72 @@ def inc_stat_annual():
                     k=1
                     for txt_labels in txt_tbody:
                         time.sleep(1)
-                        row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
-                        
+                        #row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
+                        # search data using DIV  not using span -- new version
+                        row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
                         
                         driver.implicitly_wait(4)
                         if debug==True:
-                            print("row ke "+ str(k) + " Panjang span row data "+ str(len(row_datas)) )
+                            print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                         
-                        strtxt=""
-                        cnt = 1 #untuk set iterasi mengambil 7 value pertama
+                        time.sleep(0.5)
                        
+                        cnt=1
+                        col_header=1 # col_header 0= breakdown, col_header 1 dst isi tanggal
                         for txt_data in row_datas:
-                            strtxt=strtxt +" " + txt_data.text 
-                            if cnt==1: #jika value kolom hanya 1 
-                                strtxt=strtxt+" : "
-                                txt_breakdown=txt_data.text 
-                                if len(row_datas)==1: #untuk mengantisipasi jika ada yang 0 atau tidak ada isinya
-                                    strtxt = strtxt + "0 0 0 0 0 0"
-                                    for l in range (1,col_length) :
-                                        if debug==True:
-                                            print("ISI data O semua stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +",0, "+ txt_tblheaders[l].text + ")")
-                                        if l>1:
-                                            arr_header =  txt_tblheaders[l].text.split("/")
-                                            lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                            arg2 = [txt_ticker, txt_breakdown, 0,lbl_header,txt_tblheaders[l].text,l]
-                                            result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
-                                        
+                            #Hanya array 1 yang punya data lengkap
+                            # if cnt == 1:
+                            #     if debug == True:
+                            #         print ("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
+                           
+                            if cnt == 2:
+                                txt_breakdown = txt_data.text
                             
-                            if cnt>1:
-                                #print("insert into tables xxx values (" + txt_ticker +" "+ txt_breakdown +","+ txt_data.text+ ", "+ txt_tblheaders[cnt-1].text +")")
-                                txt_value = txt_data.text.replace(",","")
-                                txt_value = txt_value.replace(".","")
-                                arr_header =  txt_tblheaders[cnt-1].text.split("/")
+                            # array data disimpan di array no 5-8 hardcoded
+                            # data disimpan mulai di array no 5, kemudian iterate terus sampai 5+ (panjang kolom-1) karena panjang kolom array (mulai dari 0-)
+                            # untuk inc_stat_year
+                            if cnt >=5 and cnt<=(5+(col_length-2)):
+                                if debug == True:
+                                    print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
+                                    print("Ada karakter k? : ", txt_data.text.find("k"))
+                                #cleansing data
                                 
-                               
-                                if len(arr_header)>2 :
-                                    lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                    if debug==True:
-                                        print("stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ lbl_header +")")
+                                if txt_data.text.find("k")>0:
+                                    txt_value = txt_data.text
+                                    txt_value = txt_value.replace("k","")
+                                    txt_value = Decimal(txt_value) * 1000 
+                                else:
+                                    txt_value = txt_data.text.replace(",","")
+                                    txt_value = txt_value.replace(".","")
+                                    if txt_value == '-' :
+                                        txt_value = 0
                                     
-                                    #pakai stored procedure untuk upsert
-                                    arg2 = [txt_ticker, txt_breakdown, txt_value,lbl_header,txt_tblheaders[cnt-1].text, cnt-1]
-                                    result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
-                                    #print("restult args : ", result_args[1])
+                       
+                                    
+                                # if debug == True:
+                                #     print("=== print text header before: "+ txt_tblheaders[col_header].text)
                                 
-                                # Kolom TTM tidak dikeluarkan   
-                                # else:
-                                #     print("TTM stock_fin_inc_stat_year_upsert (" + txt_ticker +" "+ txt_breakdown +","+ txt_value + ", "+ txt_tblheaders[cnt-1].text +")")
-                                #     date_ttm= "1999-12-1" # pengganti_ttm supaya bisa masuk kolom dengan tipe date, akan diganti dengan currentyear-12-1
-                                #     arg2 = [txt_ticker, txt_breakdown,txt_value,date_ttm,txt_tblheaders[cnt-1].text, cnt]
-                                #     result_args = cursor.callproc('stock_fin_inc_stat_year_upsert',arg2)
+                                # Hanya diinsert jika bukan TTM
+                                if txt_tblheaders[col_header].text != 'TTM':
+                                    arr_header =  txt_tblheaders[col_header].text.split("/")
+                                    if len(arr_header)>2 :
+                                        lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                    arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
+                                    cursor.callproc('stock_fin_inc_stat_year_upsert',arg1)
                                 
-                            
-                            if cnt==col_length:
+                                
+                                # if debug == True:
+                                #     print("=== print text header after : "+ lbl_header)
+                                
+                                col_header=col_header+1 
+                                time.sleep(0.5)
+                            if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
                                 break
-                            else:
-                                cnt=cnt+1
-                                time.sleep(0.3)    
-                        print(strtxt) 
+                            
+                            cnt=cnt+1
+                      
                         k=k+1
 
-      
-                
-       
-      
-    
     except MySQLdb.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))

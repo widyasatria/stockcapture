@@ -118,11 +118,8 @@ def balance_sheet_quarter():
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK'
-              
-                
                 txt_ticker = x[0]
           
-                
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
@@ -178,7 +175,7 @@ def balance_sheet_quarter():
                     k=1
                     for txt_labels in txt_tbody:
                         time.sleep(1)
-                        row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
+                        # row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
                         # search data using DIV  not using span -- NEW Version
                         row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
                         
@@ -197,7 +194,7 @@ def balance_sheet_quarter():
                                 txt_breakdown = txt_data.text
                             
                             # array data disimpan di array no 5-9 hardcoded
-                            if cnt >=5 and cnt <=9:
+                            if cnt >=5 and cnt<=(5+(col_length-2)):
                                 print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
                                    
                                 
@@ -219,7 +216,11 @@ def balance_sheet_quarter():
                                 
                                 col_header=col_header+1 
                                 time.sleep(0.5)
-                            if cnt > 10: # break loop jika data yang ada didalamnya sudah habis
+                            if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
+                                r_ticker, r_finance_key, r_ttm_val = recalculate_ttm(cursor, txt_ticker, txt_breakdown)
+                                arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-1','TTM',1]
+                                result_args = cursor.callproc('stock_fin_bal_sheet_quarter_upsert',arg_recalc_ttm)
+                                
                                 break
                             
                             cnt=cnt+1
