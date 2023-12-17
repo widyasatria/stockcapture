@@ -14,6 +14,7 @@ from selenium.webdriver.edge.options import Options
 
 import MySQLdb
 from datetime import datetime
+from decimal import Decimal
 
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -33,9 +34,11 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     recalculate_result = "=== RECALCULATING TTM for : "+ strtxt
     if debug==True:
         print(recalculate_result)
-    
-    strquery = "select max(DATE_FORMAT(finance_date,'%%Y')) as max_finance_year from stock_fin_bal_sheet_quarter "
-    strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM'"
+
+ 
+    strquery = "select date_format(finance_date,'%%Y'), finance_date, finance_value, date_format(finance_date,'%%m') from stock_fin_bal_sheet_quarter "
+    strquery = strquery +  " where ticker = %s and finance_key = %s and txt_header <> 'TTM' "
+    strquery = strquery +  " order by finance_date desc limit 1 "
     v_cursor.execute(strquery,(v_ticker,v_finance_key))
     
     rows = v_cursor.fetchone()  
@@ -44,44 +47,43 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
         if debug is True:
             print("=== Year of TTM to be calculated: "+ str(rows[0]))
         
-        txtyear = rows[0]
+        txt_year = rows[0]
+        txt_finance_date = rows[1]
+        txt_finance_value = rows[2]
+        txt_last_finance_month = int(rows[3])
         
-        strquery= "select count(ticker), sum(finance_value) from stock_fin_bal_sheet_quarter " 
-        strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM' "
-        strquery = strquery + "and DATE_FORMAT(finance_date,'%%Y')= %s "
-   
-        v_cursor.execute(strquery,(v_ticker,v_finance_key,txtyear))
-        rowquartervalues = v_cursor.fetchone()  
+        if txt_last_finance_month == 3:
+            numberofreleases = 1
+        if txt_last_finance_month == 6:
+            numberofreleases = 2
+        if txt_last_finance_month == 9:
+            numberofreleases = 3
+        if txt_last_finance_month == 12:
+            numberofreleases = 4
         
-        if rowquartervalues is not None:
-            if debug is True:
-                print("=== Jumlah lap keuangan yang sudah keluar "+ str(rowquartervalues[0]))
-                print("=== Total value "+ v_finance_key +" dari awal Tahun  "+ txtyear + " - " + str(rowquartervalues[1]))
-            
-            numberofreleases = rowquartervalues[0]
-            valueinlastreport = rowquartervalues[1]
-            
-            #if number of releases =3 then TTM = (valueinlastreport/3)*4
-            
-            if numberofreleases == 1:
-                ttm_val = valueinlastreport*4
-            if numberofreleases == 2:
-                ttm_val = valueinlastreport*2
-            if numberofreleases == 3:
-                ttm_val = (valueinlastreport/3)*4
-            if numberofreleases == 4:
-                ttm_val = valueinlastreport
- 
-            ttm_val = round(ttm_val,0)
-            if debug is True:
-                print("=== TTM value yang seharusnya "+ str(ttm_val))
+        if debug is True:
+            print("=== Jumlah lap keuangan yang sudah keluar "+ str(numberofreleases))
+            print("=== Total value "+ v_finance_key +" dari awal Tahun  "+ txt_year + " - " + str(txt_finance_value))
+        
+        if numberofreleases == 1:
+            ttm_val = txt_finance_value*4
+        if numberofreleases == 2:
+            ttm_val = txt_finance_value*2
+        if numberofreleases == 3:
+            ttm_val = (txt_finance_value/3)*4
+        if numberofreleases == 4:
+            ttm_val = txt_finance_value
+
+        ttm_val = round(ttm_val,0)
+        if debug is True:
+            print("=== TTM value yang seharusnya "+ str(ttm_val))
              
             
     return  v_ticker, v_finance_key, ttm_val
     
 
 def balance_sheet_quarter():
-    
+    start_time = datetime.now()
     
     #requirement selenium versi 4.13.0
     #ms edge webdriver : https://msedgedriver.azureedge.net/119.0.2151.72/edgedriver_win64.zip
@@ -123,7 +125,7 @@ def balance_sheet_quarter():
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
-                time.sleep(3)
+                time.sleep(1)
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
               
@@ -195,21 +197,26 @@ def balance_sheet_quarter():
                             
                             # array data disimpan di array no 5-9 hardcoded
                             if cnt >=5 and cnt<=(5+(col_length-2)):
+                                
                                 print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
                                    
                                 
                                 #cleansing data
-                                txt_value = txt_data.text.replace(",","")
-                                txt_value = txt_value.replace(".","")
-                                if txt_value == '-' :
-                                    txt_value = 0
-                                print("=== print text header before: "+ txt_tblheaders[col_header].text)
+                                if txt_data.text.find("k")>0:
+                                    txt_value = txt_data.text
+                                    txt_value = txt_value.replace("k","")
+                                    txt_value = Decimal(txt_value) * 1000 
+                                else:
+                                    txt_value = txt_data.text.replace(",","")
+                                    txt_value = txt_value.replace(".","")
+                                    if txt_value == '-' :
+                                        txt_value = 0
+                                
                                 
                                 arr_header =  txt_tblheaders[col_header].text.split("/")
                                 if len(arr_header)>2 :
                                     lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
                                 
-                                print("=== print text header after : "+ lbl_header)
                                 
                                 arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
                                 cursor.callproc('stock_fin_bal_sheet_quarter_upsert',arg1)
@@ -226,6 +233,8 @@ def balance_sheet_quarter():
                             cnt=cnt+1
                       
                         k=k+1
+        end_time = datetime.now()
+        print('Duration: {}'.format(end_time - start_time))
 
       
                 

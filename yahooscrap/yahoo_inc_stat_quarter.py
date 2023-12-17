@@ -14,6 +14,7 @@ from selenium.webdriver.edge.options import Options
 
 import MySQLdb
 from datetime import datetime
+from decimal import Decimal
 
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -92,6 +93,8 @@ def inc_stat_quarter():
     # driver = webdriver.Edge(executable_path=r'C:\Users\wardians\stockcapture\msedgedriver.exe')
     # references : https://learn.microsoft.com/en-us/microsoft-edge/webdriver-chromium/ie-mode?tabs=python
     
+    start_time = datetime.now()
+    
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
@@ -118,15 +121,16 @@ def inc_stat_quarter():
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
-              
-                
                 txt_ticker = x[0]
+
+                # url='https://finance.yahoo.com/quote/UNTR.JK/financials?p=UNTR.JK'
+                # txt_ticker = 'UNTR'
           
                 
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
-                time.sleep(3)
+                time.sleep(1)
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
               
@@ -202,12 +206,15 @@ def inc_stat_quarter():
                                    
                                 
                                 #cleansing data
-                                txt_value = txt_data.text.replace(",","")
-                                txt_value = txt_value.replace(".","")
-                                if txt_value == '-' :
-                                    txt_value = 0
-                                if debug == True: 
-                                    print("=== print text header before: "+ txt_tblheaders[col_header].text)
+                                if txt_data.text.find("k")>0:
+                                    txt_value = txt_data.text
+                                    txt_value = txt_value.replace("k","")
+                                    txt_value = Decimal(txt_value) * 1000 
+                                else:
+                                    txt_value = txt_data.text.replace(",","")
+                                    txt_value = txt_value.replace(".","")
+                                    if txt_value == '-' :
+                                        txt_value = 0
                                 
                                 if txt_tblheaders[col_header].text != 'TTM':
                                     arr_header =  txt_tblheaders[col_header].text.split("/")
@@ -216,8 +223,7 @@ def inc_stat_quarter():
                                 else:
                                     lbl_header = '1999-12-01'
                                 
-                                if debug == True: 
-                                    print("=== print text header after : "+ lbl_header)
+                               
                                 
                                 arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
                                 cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg1)
@@ -238,11 +244,8 @@ def inc_stat_quarter():
                             cnt=cnt+1
                       
                         k=k+1
-
-      
-                
-       
-      
+        end_time = datetime.now()
+        print('Duration: {}'.format(end_time - start_time))    
     
     except MySQLdb.Error as ex:
         try:

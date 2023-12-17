@@ -14,6 +14,7 @@ from selenium.webdriver.edge.options import Options
 
 import MySQLdb
 from datetime import datetime
+from decimal import Decimal
 
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -118,10 +119,8 @@ def balance_sheet_annual():
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK'
-              
-                
                 txt_ticker = x[0]
-          
+
                 
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
@@ -207,10 +206,15 @@ def balance_sheet_annual():
                                     print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
                             
                                 #cleansing data
-                                txt_value = txt_data.text.replace(",","")
-                                txt_value = txt_value.replace(".","")
-                                if txt_value == '-' :
-                                    txt_value = 0
+                                if txt_data.text.find("k")>0:
+                                    txt_value = txt_data.text
+                                    txt_value = txt_value.replace("k","")
+                                    txt_value = Decimal(txt_value) * 1000 
+                                else:
+                                    txt_value = txt_data.text.replace(",","")
+                                    txt_value = txt_value.replace(".","")
+                                    if txt_value == '-' :
+                                        txt_value = 0
                                 
                                 # if debug == True:
                                 #     print("=== print text header before: "+ txt_tblheaders[col_header].text)

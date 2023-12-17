@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
-
+from decimal import Decimal
 import MySQLdb
 from datetime import datetime
 
@@ -202,10 +202,17 @@ def cash_flow_quarter():
                                    
                                 
                                 #cleansing data
-                                txt_value = txt_data.text.replace(",","")
-                                txt_value = txt_value.replace(".","")
-                                if txt_value == '-' :
-                                    txt_value = 0
+                                if txt_data.text.find("k")>0:
+                                    txt_value = txt_data.text
+                                    txt_value = txt_value.replace("k","")
+                                    txt_value = Decimal(txt_value) * 1000 
+                                else:
+                                    txt_value = txt_data.text.replace(",","")
+                                    txt_value = txt_value.replace(".","")
+                                    if txt_value == '-' :
+                                        txt_value = 0
+                               
+                               
                                 if debug == True: 
                                     print("=== print text header before: "+ txt_tblheaders[col_header].text)
                                 
