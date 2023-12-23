@@ -81,7 +81,13 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
             
     return  v_ticker, v_finance_key, ttm_val
     
-
+def upd_stock_last_modify(conn,txt_ticker):
+    cursor = conn.cursor()
+    qry="update stocks set stock_fin_bal_sheet_quarter = now() where ticker= %s "
+    cursor.execute(qry,(txt_ticker,))
+    conn.commit()
+    
+    
 def balance_sheet_quarter():
     start_time = datetime.now()
     
@@ -111,7 +117,7 @@ def balance_sheet_quarter():
     cursor = conn.cursor()
     try:
     
-        cursor.execute("SELECT ticker FROM stocks")
+        cursor.execute("SELECT ticker FROM stocks order by stock_fin_bal_sheet_quarter")
         result = cursor.fetchall()  
     
         if result is not None:      
@@ -233,6 +239,8 @@ def balance_sheet_quarter():
                             cnt=cnt+1
                       
                         k=k+1
+                upd_stock_last_modify(conn,txt_ticker)
+                
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
 

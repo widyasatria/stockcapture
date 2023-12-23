@@ -27,7 +27,12 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 debug = True
 
-
+def upd_stock_last_modify(conn,txt_ticker):
+    cursor = conn.cursor()
+    qry="update stocks set stock_fin_inc_stat_year = now() where ticker= %s "
+    cursor.execute(qry,(txt_ticker,))
+    conn.commit()
+    
 
 def inc_stat_annual():
     
@@ -58,7 +63,7 @@ def inc_stat_annual():
     cursor = conn.cursor()
     try:
     
-        cursor.execute("SELECT ticker FROM stocks")
+        cursor.execute("SELECT ticker FROM stocks order by stock_fin_inc_stat_year")
         result = cursor.fetchall()  
     
         if result is not None:      
@@ -191,7 +196,7 @@ def inc_stat_annual():
                             cnt=cnt+1
                       
                         k=k+1
-
+                upd_stock_last_modify(conn,txt_ticker)
     except MySQLdb.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))

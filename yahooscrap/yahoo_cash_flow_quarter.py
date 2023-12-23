@@ -79,7 +79,13 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
             
     return  v_ticker, v_finance_key, ttm_val
     
-
+def upd_stock_last_modify(conn,txt_ticker):
+    cursor = conn.cursor()
+    qry="update stocks set stock_fin_cash_flow_quarter = now() where ticker= %s "
+    cursor.execute(qry,(txt_ticker,))
+    conn.commit()
+    
+    
 def cash_flow_quarter():
     
     
@@ -109,7 +115,7 @@ def cash_flow_quarter():
     cursor = conn.cursor()
     try:
     
-        cursor.execute("SELECT ticker FROM stocks")
+        cursor.execute("SELECT ticker FROM stocks order by stock_fin_cash_flow_quarter")
         result = cursor.fetchall()  
     
         if result is not None:      
@@ -234,6 +240,7 @@ def cash_flow_quarter():
                             cnt=cnt+1
                       
                         k=k+1
+                upd_stock_last_modify(conn,txt_ticker)
 
       
                 

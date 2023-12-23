@@ -27,7 +27,12 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 debug = True
 
-
+def upd_stock_last_modify(conn,txt_ticker):
+    cursor = conn.cursor()
+    qry="update stocks set stock_fin_cash_flow_year = now() where ticker= %s "
+    cursor.execute(qry,(txt_ticker,))
+    conn.commit()
+    
 
 def cash_flow_annual():
     
@@ -58,7 +63,7 @@ def cash_flow_annual():
     cursor = conn.cursor()
     try:
     
-        cursor.execute("SELECT ticker FROM stocks")
+        cursor.execute("SELECT ticker FROM stocks order by stock_fin_cash_flow_year")
         result = cursor.fetchall()  
     
         if result is not None:      
@@ -186,10 +191,10 @@ def cash_flow_annual():
                             if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column 
                                 break
                             
-                            cnt=cnt+1
-                            
-                      
+                            cnt=cnt+1  
+                         
                         k=k+1
+                upd_stock_last_modify(conn,txt_ticker)
 
     except MySQLdb.Error as ex:
         try:

@@ -21,14 +21,19 @@ from selenium.webdriver.support import expected_conditions
 
 def insert_stock_price(vals,conn):
     # insert to database'
-    cmd = 'insert into stock_price(ticker, url, last_price, price_change, txt_last_update_in_site, updated_at) '
-    cmd = cmd + 'values (%s,%s,%s,%s,%s,%s)'
-    val= (vals[0],vals[1],vals[2],vals[3],vals[4],vals[5])
+    cmd = 'insert into stock_intraday(ticker, url, last_price, price_change, txt_last_update_in_site,inter_val,updated_at)'
+    cmd = cmd + 'values ( %s, %s, %s, %s, %s, 15, now() ) '
+    val= (vals[0],vals[1],vals[2],vals[3],vals[4])
+    print((vals[0],vals[1],vals[2],vals[3],vals[4]))
+    
     cursor = conn.cursor()
+    
+    #cursor.execute(cmd,(str(vals[0]),str(vals[1]),str(vals[2]),str(vals[3]),str(vals[4])) )
     cursor.execute(cmd,val)
     result = conn.commit()
     
     return result
+
 def get_latest_price():
     
     #requirement selenium versi 4.13.0
@@ -64,12 +69,12 @@ def get_latest_price():
         if result is not None:      
             for x in result:
                 if debug == True :
-                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
+                    print(' Getting price from : https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
-                
+              
                 
                 driver.implicitly_wait(4)
 

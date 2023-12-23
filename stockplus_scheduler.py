@@ -47,20 +47,23 @@ from lib.market_data_feed import get_daily_market_data
 def main():
     
     
-    #done tested new version
-    
-    #balance_sheet_annual() 
-    #get_daily_market_data()
-
-    # income statement 
-    
-    #inc_stat_annual()
-    # Cash flow
-
-    #cash_flow_annual()
-    
-    #cash_flow_quarter()
-    inc_stat_quarter()
     #balance_sheet_quarter()
+    #balance_sheet_annual() 
+    
+
+    
+    # Cash flow
+    #cash_flow_annual()
+    #cash_flow_quarter()
+    
+    #to get daily market data
+    #get_daily_market_data()
+    #get_latest_price()
+    
+    # Done tested dengan menambahkan last update di table stock
+    
+    # income statement 
+    #inc_stat_quarter()
+    inc_stat_annual()
 if __name__ == "__main__":
     main()

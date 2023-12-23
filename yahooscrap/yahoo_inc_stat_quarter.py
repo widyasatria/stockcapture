@@ -80,6 +80,13 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
             
     return  v_ticker, v_finance_key, ttm_val
     
+def upd_stock_last_modify(conn,txt_ticker):
+    cursor = conn.cursor()
+    qry="update stocks set stock_fin_inc_stat_quarter = now() where ticker= %s "
+    cursor.execute(qry,(txt_ticker,))
+    conn.commit()
+    
+    
 
 def inc_stat_quarter():
     
@@ -112,7 +119,7 @@ def inc_stat_quarter():
     cursor = conn.cursor()
     try:
     
-        cursor.execute("SELECT ticker FROM stocks")
+        cursor.execute("SELECT ticker FROM stocks order by stock_fin_inc_stat_quarter")
         result = cursor.fetchall()  
     
         if result is not None:      
@@ -237,13 +244,13 @@ def inc_stat_quarter():
                                 arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-1','TTM',2]
                                 result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg_recalc_ttm)
                                 
-                                
                             if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
                                 break
                             
                             cnt=cnt+1
                       
                         k=k+1
+                upd_stock_last_modify(conn,txt_ticker)       
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))    
     

@@ -137,11 +137,6 @@ def get_daily_market_data():
                 else:
                     print("NO API url available for this activity")
                     break
-       
-        
-        
-
-
         
     except MySQLdb.Error as ex:
         try:
