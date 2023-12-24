@@ -21,6 +21,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
+
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -49,6 +50,7 @@ def inc_stat_annual():
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
+    
     service = Service(verbose = False)
     
     

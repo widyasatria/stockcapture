@@ -63,7 +63,7 @@ def main():
     # Done tested dengan menambahkan last update di table stock
     
     # income statement 
-    #inc_stat_quarter()
-    inc_stat_annual()
+    inc_stat_quarter()
+    #inc_stat_annual()
 if __name__ == "__main__":
     main()
