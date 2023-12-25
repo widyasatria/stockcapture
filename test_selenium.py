@@ -25,8 +25,12 @@ service = Service(verbose = False)
 url='https://finance.yahoo.com/quote/UNTR.JK/financials?p=UNTR.JK'
                 # txt_ticker = 'UNTR'
           
-                
+debug=True                
 driver = webdriver.Edge(service = service, options = options)
 driver.get(url)
+link_stock_header = driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[2]/div[1]/div[1]/h1')
+if link_stock_header is not None:
+  if debug == True :
+     print("Stock Name :", link_stock_header.text)
     
     
