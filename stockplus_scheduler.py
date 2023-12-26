@@ -58,7 +58,8 @@ def main():
     
     #to get daily market data
     #get_daily_market_data()
-    #get_latest_price()
+    #get_latest_price()99
+    
     
     # Done tested dengan menambahkan last update di table stock
     
