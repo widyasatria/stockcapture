@@ -19,6 +19,10 @@ from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('./conf/config.ini')
+
 def insert_stock_price(vals,conn):
     # insert to database'
     cmd = 'insert into stock_intraday(ticker, url, last_price, price_change, txt_last_update_in_site,inter_val,updated_at)'
@@ -34,7 +38,7 @@ def insert_stock_price(vals,conn):
     
     return result
 
-def get_latest_price():
+def main():
     
     #requirement selenium versi 4.13.0
     #ms edge webdriver : https://msedgedriver.azureedge.net/119.0.2151.72/edgedriver_win64.zip
@@ -49,28 +53,29 @@ def get_latest_price():
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
-    options
+    options.add_argument("log-level=2")
     service = Service(verbose = False)
     debug = True
 
     conn = MySQLdb.connect(
-    host="localhost",
-    user="root",
-    password="password",
-    database="db_api",
-    auth_plugin='mysql_native_password'
+    host=config.get('db_connection', 'host'),
+    user=config.get('db_connection', 'user'),
+    password=config.get('db_connection', 'pwd'),
+    database=config.get('db_connection', 'db'),
+    auth_plugin=config.get('db_connection', 'auth')
     )
     
     cursor = conn.cursor()
     try:
-        cursor.execute("SELECT ticker FROM stocks")
+        cursor.execute("SELECT ticker FROM stocks order by stock_intraday")
         result = cursor.fetchall()  
     
         if result is not None:      
             for x in result:
                 if debug == True :
                     print(' Getting price from : https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
-            
+
+                txt_ticker = x[0]
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
@@ -130,9 +135,12 @@ def get_latest_price():
     except ValueError as ex:
         print(ex)
         return None
+    except Exception as ex:
+        print('Generic Error caught on: '+ txt_ticker +' : ' + str(ex) )
+        return None
     finally:
         conn.close
               
 
-# if __name__ == "__get_latest_price__":
-#     get_latest_price()
+if __name__ == "__main__":
+    main()

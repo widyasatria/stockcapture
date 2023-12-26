@@ -154,5 +154,8 @@ def get_daily_market_data():
     except ValueError as ex:
         print(ex)
         return None
+    except Exception as ex:
+        print('Generic Error caught on: '+ ticker +' : ' + str(ex) )
+        return None
     finally:
         conn.close
