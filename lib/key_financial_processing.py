@@ -87,15 +87,28 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
         cursor.execute(qry,(finance_key,txt_finance_date, txt_ticker))
         rows = cursor.fetchone() 
         txt_finance_value = rows[0]
-    
-    
-    
     return txt_finance_value
-      
+
+def calculate_ttm(txt_ticker,txt_finance_date, txt_net_income_stakeholder):
+    val_finance_date = str(txt_finance_date).split('-')
+    month = int(val_finance_date[1])
+    if month == 12:
+        ttm_value = txt_net_income_stakeholder
+    if month == 9:
+        ttm_value = (txt_net_income_stakeholder/3)*4
+    if month == 6:
+        ttm_value = (txt_net_income_stakeholder/2)*4
+    if month == 3:
+        ttm_value = (txt_net_income_stakeholder)*4
+    
+    return ttm_value
+    
+          
 def update_key_financial_records(conn,val_ticker,val_finance_date):
     
     cursor = conn.cursor()
     txt_share_issued = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Share Issued')
+    #txt last price ini kalau bisa ambil pada saat tanggal yang ditentukan
     txt_last_price = get_last_price(cursor,val_ticker)
     txt_stockholders_equity = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Stockholders\' Equity')
     
@@ -107,8 +120,15 @@ def update_key_financial_records(conn,val_ticker,val_finance_date):
     txt_current_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Current Assets')
     txt_total_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Assets')
     txt_net_income_stakeholders = get_finance_value(cursor,'stock_fin_inc_stat_quarter',val_ticker,val_finance_date,'Net Income Common Stockholders')
-    txt_net_income_ttm = 0
     
+    txt_net_income_ttm = calculate_ttm(val_ticker,val_finance_date,txt_net_income_stakeholders)
+    #harus ada calculation untuk USD vs IDR, di txt_book_value dan juga rate usd to idr
+    
+    txt_book_value = round(( (txt_stockholders_equity*1000)/(txt_share_issued*1000) )*15480,2)
+    
+ 
+    txt_price_to_book_value = round((txt_last_price/txt_book_value),2)
+    print("txt_last_price " + str(txt_last_price) + " txt_book_value "  + str(txt_book_value) + " round((txt_last_price/txt_book_value),2) : " + str(round((txt_last_price/txt_book_value),2)) )
     # print(" txt_share_issued: " + str(txt_share_issued) + " txt_last_price  :" + str(txt_last_price) + " txt_stockholders equyity  :" + str(txt_stockholders_equity) + " txt_total_liabilities   :" + str(txt_total_liabilities))
     
     
@@ -125,13 +145,15 @@ def update_key_financial_records(conn,val_ticker,val_finance_date):
     qry = qry + " current_assets=%s, "
     qry = qry + " total_assets=%s, "
     qry = qry + " net_income_stakeholders=%s, "
-    qry = qry + " net_income_ttm=%s "
+    qry = qry + " net_income_ttm=%s, "
+    qry = qry + " book_value=%s, "
+    qry = qry + " price_to_book_value=%s "
     
     qry = qry + " where ticker=%s "
     qry = qry + " and finance_date =%s "
     
     cursor.execute(qry,(txt_share_issued,txt_last_price,txt_stockholders_equity,txt_total_liabilities,txt_current_liabilities,txt_non_current_liabilities,txt_non_current_assets,
-                        txt_current_assets,txt_total_assets,txt_net_income_stakeholders,txt_net_income_ttm, val_ticker,val_finance_date))
+                        txt_current_assets,txt_total_assets,txt_net_income_stakeholders,txt_net_income_ttm,txt_book_value, round((txt_last_price/txt_book_value),2) , val_ticker,val_finance_date))
     conn.commit() 
 
 def key_financial_processing():
