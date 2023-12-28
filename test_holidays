@@ -1,0 +1,28 @@
+
+from datetime import datetime, timedelta  
+import holidays
+
+id_holidays = holidays.country_holidays('ID') 
+idx_holidays = holidays.WEEKEND
+government = holidays.GOVERNMENT
+
+print(idx_holidays)
+print(id_holidays)
+print(government)
+
+print (datetime(2023,12,25) in id_holidays) 
+print (datetime(2023,12,24).weekday() ) 
+
+val_finance_date = datetime(2023,12,23)
+val_finance_date = datetime(2022,9,29) + timedelta(days=35) # tambah interval
+
+ONE_DAY = timedelta(days=1)
+# if val_finance_date.weekday()== 5 or val_finance_date.weekday() == 6 :
+#     next_finance_date =  val_finance_date + ONE_DAY
+
+
+while val_finance_date.weekday() ==5 or val_finance_date.weekday() ==6 or val_finance_date in id_holidays:
+    val_finance_date =  val_finance_date + timedelta(days=1)
+    print(str(val_finance_date))
+    
+print("lastest : " + str(val_finance_date))

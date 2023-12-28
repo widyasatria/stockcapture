@@ -159,3 +159,8 @@ def get_daily_market_data():
         return None
     finally:
         conn.close
+
+
+    
+if __name__ == '__main__':
+    get_daily_market_data()

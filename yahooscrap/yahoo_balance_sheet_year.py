@@ -102,6 +102,7 @@ def balance_sheet_annual():
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
+    options.add_argument("log-level=2")
     service = Service(verbose = False)
     
     

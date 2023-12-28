@@ -103,6 +103,7 @@ def balance_sheet_quarter():
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
+    options.add_argument("log-level=2")
     service = Service(verbose = False)
     
     
@@ -127,6 +128,8 @@ def balance_sheet_quarter():
             
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK'
                 txt_ticker = x[0]
+                # txt_ticker = 'APLN'
+                # url='https://finance.yahoo.com/quote/APLN.JK/balance-sheet?p=APLN.JK'
           
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
@@ -268,6 +271,7 @@ def balance_sheet_quarter():
     finally:
         conn.close
         driver.quit()
-# if __name__ == "__main__":
-#     main()
+        
+if __name__ == "__main__":
+    balance_sheet_quarter()
 

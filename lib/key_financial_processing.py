@@ -1,29 +1,103 @@
+
+#requires  pip install --upgrade holidays, python-mysql
+# holidays https://pypi.org/project/holidays/
 import MySQLdb
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
+import holidays, requests
 
 from configparser import ConfigParser
 
 debug = True
 config = ConfigParser()
 config.read('./conf/config.ini')
-
-
-def get_last_price(cursor,txt_ticker):
-    qry= " select last_price from stock_intraday where ticker = %s "
-    qry = qry + " order by updated_at desc limit 1 "
-    print(qry)
-    
+api_limit = 980
+def get_iso_ticker(cursor,txt_ticker):
+     
+    qry= " select CONCAT(ticker,'.', exchange) as iso_ticker "
+    qry = qry + " from stocks where ticker=%s "    
     cursor.execute(qry,(txt_ticker,))
     rows = cursor.fetchone() 
-    print(txt_ticker)
+    if cursor.rowcount > 0:
+        return rows[0]
+    else:
+        return ''
+    
+def get_last_price(conn,txt_ticker,val_finance_date):
+    cursor = conn.cursor()
+    #estimasi rata2 tanggal release laporan keuangan
+    val_finance_date = val_finance_date + timedelta(days=35)
+    
+    txt_ticker = get_iso_ticker(cursor,txt_ticker)
+    
+    id_holidays = holidays.country_holidays('ID') 
+    if debug is True:
+        print("Date Before : " + str(val_finance_date))
+    while val_finance_date.weekday() ==5 or val_finance_date.weekday() ==6 or val_finance_date in id_holidays:
+        val_finance_date =  val_finance_date + timedelta(days=1)
+    
+    if debug is True:    
+        print("Date After Busines Working Day : " + str(val_finance_date))
+    
+    qry= " select close,date from stock_daily where ticker = %s "
+    qry = qry + " and  date = %s  limit 1"
+    
+    cursor.execute(qry,(txt_ticker,val_finance_date))
+    rows = cursor.fetchone() 
+
     if cursor.rowcount > 0:
         if debug is True:
-           print(" Last Price : "+ str(rows[0]) )
+           print( str(txt_ticker) + " Price at  : "+ str(rows[1]) + " : " + str(rows[0]) )
+        return rows[0]
     else:
-        print("no data")
+        print("No data set price to 0")
+        print( str(txt_ticker) + " Price = 0 ")
+        cl_price = 0
+        return cl_price 
     
-    return rows[0]
+        # print("No data Contacting Market Data Provider")
+        # query="""SELECT id, source_url,secret_key,number_of_call FROM db_api.stock_data_feed where number_of_call <= %s limit 1"""
+        # cursor.execute(query,(api_limit,))
+        # id, source_url, secret_key, number_of_call = cursor.fetchone()  
+        # if cursor.rowcount > 0:
+        #     #set parameter
+        #     params = {
+        #                 'symbols' : txt_ticker,
+        #                 'access_key': secret_key,
+        #                 'date_from' : val_finance_date,
+        #                 'date_to': val_finance_date,
+        #                 'limit' : '1000'
+        #                 }
+                        
+                      
+        #     api_result = requests.get(source_url, params)
+        #     api_response = api_result.json()
+        #     if debug == True:
+        #             print("Parameter to be send ", params)
+        #             print(" API return status code : ", api_result.status_code)  
+                    
+        #     if api_result.status_code == 200:
+        #         cl_price=0
+        #         for stock_data in api_response["data"]:     
+        #             if stock_data['close'] :
+        #                 print(stock_data['close'])
+        #                 cl_price = stock_data['close']
+           
+        #     if api_result.status_code != 200:
+        #                 print(" API return content for " + txt_ticker + " " + str(api_result.content))      
+            
+        #     qry="""update db_api.stock_data_feed set number_of_call=%s where id=%s"""
+        #     number_of_call = number_of_call +1
+        #     res= cursor.execute(qry,(number_of_call,id,))
+        #     conn.commit()
+            
+            
+           
+        # else:
+        #     return 0
+        
+    
+    
  
 def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_key):
     
@@ -37,7 +111,7 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
         
         rows = cursor.fetchone() 
         max_year = rows[0]
-        
+    
         val_finance_date = str(txt_finance_date).split('-')
         #print("boskuuu" + val_finance_date[0] + " max_year " + max_year)
         if int(val_finance_date[0]) == int(max_year):
@@ -48,7 +122,11 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
             qry = qry + " and finance_key = %s " #'Net Income Common Stockholders'
             cursor.execute(qry,(txt_ticker,txt_finance_date,max_year,finance_key))
             rows = cursor.fetchone() 
-            txt_finance_value = rows[0]
+            if cursor.rowcount > 0:
+                txt_finance_value = rows[0]
+                
+            else:
+                txt_finance_value = 0
         
       
         if int(val_finance_date[0]) == int(max_year)-1: 
@@ -65,7 +143,10 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
                 
                 cursor.execute(qry,(txt_ticker,finance_key, txt_finance_date))
                 rows = cursor.fetchone() 
-                txt_finance_value = rows[0]
+                if cursor.rowcount > 0:
+                    txt_finance_value = rows[0]
+                else:
+                    txt_finance_value = 0
                 
             if int(val_finance_date[1]) == 9 or int(val_finance_date[1]) == 3:
                 
@@ -80,13 +161,19 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
                 rows = cursor.fetchone() 
                 if cursor.rowcount > 0:
                     txt_finance_value = rows[0]
+                else:
+                    txt_finance_value = 0
                     
     else:
+        
         qry = "select finance_value from "+ table_name +" where finance_key = %s and finance_date = %s and ticker = %s limit 1"
-        print(qry)
+        print(finance_key + " finance_date : "+ str(txt_finance_date) + "txt ticker : " + txt_ticker + " query " + qry )
         cursor.execute(qry,(finance_key,txt_finance_date, txt_ticker))
         rows = cursor.fetchone() 
-        txt_finance_value = rows[0]
+        if cursor.rowcount > 0:
+            txt_finance_value = rows[0]
+        else:
+            txt_finance_value = 0
     return txt_finance_value
 
 def calculate_ttm(txt_ticker,txt_finance_date, txt_net_income_stakeholder):
@@ -102,14 +189,35 @@ def calculate_ttm(txt_ticker,txt_finance_date, txt_net_income_stakeholder):
         ttm_value = (txt_net_income_stakeholder)*4
     
     return ttm_value
+
+def calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_equity,txt_share_issued):  
     
-          
+    qry = " select cx.rate, s.unit_of_number,s.currency, s.ticker from stocks s, currency_fx cx "
+    qry = qry + " where s.currency = cx.currency "  
+    qry = qry + " and ticker = %s "
+    cursor.execute(qry,(val_ticker,))
+    rows = cursor.fetchone()
+    if cursor.rowcount > 0:
+        txt_rate = rows[0]
+        txt_unit_of_number = rows[1]
+        txt_book_value = round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) )*txt_rate,2)
+        if debug==True:
+            print("=============")
+            print (" txt_stockholders_equity*txt_unit_of_number : " + str(txt_stockholders_equity*txt_unit_of_number))
+            print("txt_share_issued*txt_unit_of_number : " + str(txt_share_issued*txt_unit_of_number))
+            print("round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) ) )*txt_rate,2 : " + str(txt_book_value) )
+            print("=============")
+        
+        
+    else:
+        txt_book_value = 0
+    return txt_book_value
 def update_key_financial_records(conn,val_ticker,val_finance_date):
     
     cursor = conn.cursor()
     txt_share_issued = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Share Issued')
     #txt last price ini kalau bisa ambil pada saat tanggal yang ditentukan
-    txt_last_price = get_last_price(cursor,val_ticker)
+    txt_last_price = get_last_price(conn,val_ticker, val_finance_date)
     txt_stockholders_equity = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Stockholders\' Equity')
     
     txt_total_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Liabilities Net Minority Interest')
@@ -120,15 +228,16 @@ def update_key_financial_records(conn,val_ticker,val_finance_date):
     txt_current_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Current Assets')
     txt_total_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Assets')
     txt_net_income_stakeholders = get_finance_value(cursor,'stock_fin_inc_stat_quarter',val_ticker,val_finance_date,'Net Income Common Stockholders')
-    
+   
     txt_net_income_ttm = calculate_ttm(val_ticker,val_finance_date,txt_net_income_stakeholders)
-    #harus ada calculation untuk USD vs IDR, di txt_book_value dan juga rate usd to idr
     
-    txt_book_value = round(( (txt_stockholders_equity*1000)/(txt_share_issued*1000) )*15480,2)
-    
- 
+    txt_book_value = calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_equity,txt_share_issued)
+  
+   
+    #print('price to book : ' + str(txt_last_price) + " : " + str(txt_book_value) )
     txt_price_to_book_value = round((txt_last_price/txt_book_value),2)
-    print("txt_last_price " + str(txt_last_price) + " txt_book_value "  + str(txt_book_value) + " round((txt_last_price/txt_book_value),2) : " + str(round((txt_last_price/txt_book_value),2)) )
+    
+    #print("txt_last_price " + str(txt_last_price) + " txt_book_value "  + str(txt_book_value) + " round((txt_last_price/txt_book_value),2) : " + str(round((txt_last_price/txt_book_value),2)) )
     # print(" txt_share_issued: " + str(txt_share_issued) + " txt_last_price  :" + str(txt_last_price) + " txt_stockholders equyity  :" + str(txt_stockholders_equity) + " txt_total_liabilities   :" + str(txt_total_liabilities))
     
     
@@ -153,21 +262,21 @@ def update_key_financial_records(conn,val_ticker,val_finance_date):
     qry = qry + " and finance_date =%s "
     
     cursor.execute(qry,(txt_share_issued,txt_last_price,txt_stockholders_equity,txt_total_liabilities,txt_current_liabilities,txt_non_current_liabilities,txt_non_current_assets,
-                        txt_current_assets,txt_total_assets,txt_net_income_stakeholders,txt_net_income_ttm,txt_book_value, round((txt_last_price/txt_book_value),2) , val_ticker,val_finance_date))
+                        txt_current_assets,txt_total_assets,txt_net_income_stakeholders,txt_net_income_ttm,txt_book_value, txt_price_to_book_value , val_ticker,val_finance_date))
     conn.commit() 
 
 def key_financial_processing():
     conn = MySQLdb.connect(
-        host=config.get('db_connection', 'host'),
-        user=config.get('db_connection', 'user'),
-        password=config.get('db_connection', 'pwd'),
-        database=config.get('db_connection', 'db'),
-        auth_plugin=config.get('db_connection', 'auth')
-        # host="localhost",
-        # user="root",
-        # password="password",
-        # database="db_api",
-        # auth_plugin='mysql_native_password'
+        # host=config.get('db_connection', 'host'),
+        # user=config.get('db_connection', 'user'),
+        # password=config.get('db_connection', 'pwd'),
+        # database=config.get('db_connection', 'db'),
+        # auth_plugin=config.get('db_connection', 'auth')
+        host="localhost",
+        user="root",
+        password="password",
+        database="db_api",
+        auth_plugin='mysql_native_password'
         )
     
     cursor = conn.cursor()
@@ -178,7 +287,7 @@ def key_financial_processing():
         if stocklists is not None:   
             for x in stocklists:
                 txt_ticker = x[0]
-                txt_ticker = 'ABMM'
+                # txt_ticker = 'ABMM'
                
                 
                 qry = " select bs.ticker, bs.finance_key,finance_value, finance_date,txt_header from stock_fin_bal_sheet_quarter bs "
@@ -248,6 +357,8 @@ def key_financial_processing():
                                 print("Jumlah Row : " + str(numrow[0])  + " UPDATE " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key)+ " " + str(bs_finance_value) )
                             # jika total_assets sudah ada di update
                             update_key_financial_records(conn,bs_ticker,bs_finance_date) 
+                # if bs_ticker=='ITMG':
+                #     break
                         
                     
                         
