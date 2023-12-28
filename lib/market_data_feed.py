@@ -4,9 +4,14 @@ import MySQLdb
 import time
 
 from datetime import datetime, timedelta
-
+from configparser import ConfigParser
 api_limit = 980
+
 debug = True
+config = ConfigParser()
+config.read('./conf/config.ini')
+api_limit = 980
+
 
 def isnull(val):
     if val is None:
@@ -16,11 +21,16 @@ def isnull(val):
 def get_daily_market_data():
     
     conn = MySQLdb.connect(
-        host="localhost",
-        user="root",
-        password="password",
-        database="db_api",
-        auth_plugin='mysql_native_password'
+        host=config.get('db_connection', 'host'),
+        user=config.get('db_connection', 'user'),
+        password=config.get('db_connection', 'pwd'),
+        database=config.get('db_connection', 'db'),
+        auth_plugin=config.get('db_connection', 'auth')
+        # host="localhost",
+        # user="root",
+        # password="password",
+        # database="db_api",
+        # auth_plugin='mysql_native_password'
         )
     
     cursor = conn.cursor()
