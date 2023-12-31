@@ -29,7 +29,7 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('./conf/config.ini')
 
-debug = False
+debug = True
 
 def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     strtxt = v_ticker + "-" + v_finance_key 
@@ -130,16 +130,13 @@ def main():
     
         if result is not None:      
             for x in result:
-                if debug == True :
-                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
-            
+               
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
                 txt_ticker = x[0]
+                stime = datetime.now()
+                print('')
+                print('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
 
-                # url='https://finance.yahoo.com/quote/UNTR.JK/financials?p=UNTR.JK'
-                # txt_ticker = 'UNTR'
-          
-                
                 driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
@@ -164,7 +161,7 @@ def main():
                 col_headers = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, txt_headers_xpath))) 
                 
                 if col_headers is not None:
-                    time.sleep(1)
+                    time.sleep(0.5)
                     driver.implicitly_wait(4)
                     txt_tblheaders = driver.find_elements(By.XPATH,txt_headers_xpath)
                    
@@ -172,93 +169,111 @@ def main():
                         print('panjang headers ', len(txt_tblheaders))
                     
                     col_length = len(txt_tblheaders)
-                    
+                
                     for txt_header in txt_tblheaders:
                         if debug == True:
-                            print(txt_header.text)
+                            print('txt_header : ' + txt_header.text)
+                    
+                  
+                    
+                    #gara2 internet ga bisa
+                    # max_fin_dt = txt_tblheaders[2].text.split("/")
+                    # print("pjg max_fin_dt " + str(len(max_fin_dt)))
+                    # max_fin_date = max_fin_dt[2]+"-"+max_fin_dt[0]+"-"+max_fin_dt[1]
+                    # print("max_fin_date " + str(max_fin_date))    
                     
                     
+                # if debug == True:
+                #     print("max_fin_date : "+ str(max_fin_date))
+                # qry=" select count(finance_key)  from stock_fin_inc_stat_quarter where ticker= %s and finance_key='Total Revenue' and finance_date=%s"
+                # cursor.execute(qry,(txt_ticker,max_fin_date))
+                # rows = cursor.fetchone() 
+                # if debug == True:
+                #     print("jumlah row : " + str(rows[0]))
+                # if cursor.rowcount > 0 and rows is not None:
                     
-                driver.implicitly_wait(4)
-                
-                if col_length > 2:
-                    txt_all_data_css = 'rw-expnded'
-                    all_datas = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, txt_all_data_css))) 
-                    
-                    print("getting financial data from ... "+ url)
-                    
-                    if all_datas is not None:
-                        driver.implicitly_wait(4)
-                        txt_tbody = driver.find_elements(By.CLASS_NAME,txt_all_data_css)
-                        driver.implicitly_wait(4)
-                                
-                        if debug==True:
-                            print(" Panjang rw-expanded ", len(txt_tbody))
-                        k=1
-                        for txt_labels in txt_tbody:
-                            time.sleep(1)
-                            # row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
-                            # search data using DIV  not using span -- NEW Version
-                            row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
-                            
+                #     if rows[0] == 0: #jika tidak ada data nya baru ambil dari web otherwise skip
+                #         print("Belum ada data "+ str(url) + " di database ")
+                 
+                    driver.implicitly_wait(4)
+                    if col_length > 2:
+                        txt_all_data_css = 'rw-expnded'
+                        all_datas = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, txt_all_data_css))) 
+                        
+                        if all_datas is not None:
                             driver.implicitly_wait(4)
+                            txt_tbody = driver.find_elements(By.CLASS_NAME,txt_all_data_css)
+                            driver.implicitly_wait(4)
+                                    
                             if debug==True:
-                                print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
-                            
-                            time.sleep(0.5)
-                        
-                            cnt=1
-                            col_header=1 # col_header 0= breakdown, col_header 1 dst isi tanggal
-                            for txt_data in row_datas:
-                                #Hanya array 1 yang punya data lengkap
+                                print(" Panjang rw-expanded ", len(txt_tbody))
+                            k=1
+                            for txt_labels in txt_tbody:
+                                time.sleep(1)
+                                # row_datas=txt_labels.find_elements(By.TAG_NAME,'span')
+                                # search data using DIV  not using span -- NEW Version
+                                row_datas=txt_labels.find_elements(By.TAG_NAME,'div')
+                                
+                                driver.implicitly_wait(4)
                                 if debug==True:
-                                    print ("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
-                                if cnt == 2:
-                                    txt_breakdown = txt_data.text
+                                    print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                                 
-                                # array data disimpan di array no 5 = TTM dst sampai 10  hardcoded
-                                if cnt >=5 and cnt<=(5+(col_length-2)):
-                                    print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
+                                time.sleep(0.5)
+                            
+                                cnt=1
+                                col_header=1 # col_header 0= breakdown, col_header 1 dst isi tanggal
+                                for txt_data in row_datas:
+                                    #Hanya array 1 yang punya data lengkap
+                                    if debug==True:
+                                        print ("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
+                                    if cnt == 2:
+                                        txt_breakdown = txt_data.text
                                     
+                                    # array data disimpan di array no 5 = TTM dst sampai 10  hardcoded
+                                    if cnt >=5 and cnt<=(5+(col_length-2)):
+                                        print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
+                                        
+                                        
+                                        #cleansing data
+                                        if txt_data.text.find("k")>0:
+                                            txt_value = txt_data.text
+                                            txt_value = txt_value.replace("k","")
+                                            txt_value = Decimal(txt_value) * 1000 
+                                        else:
+                                            txt_value = txt_data.text.replace(",","")
+                                            txt_value = txt_value.replace(".","")
+                                            if txt_value == '-' :
+                                                txt_value = 0
+                                        
+                                        if txt_tblheaders[col_header].text != 'TTM':
+                                            arr_header =  txt_tblheaders[col_header].text.split("/")
+                                            if len(arr_header)>2 :
+                                                lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                        else:
+                                            lbl_header = '1999-12-01'
+                                        
                                     
-                                    #cleansing data
-                                    if txt_data.text.find("k")>0:
-                                        txt_value = txt_data.text
-                                        txt_value = txt_value.replace("k","")
-                                        txt_value = Decimal(txt_value) * 1000 
-                                    else:
-                                        txt_value = txt_data.text.replace(",","")
-                                        txt_value = txt_value.replace(".","")
-                                        if txt_value == '-' :
-                                            txt_value = 0
+                                        
+                                        arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
+                                        cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg1)
+                                        
+                                        col_header=col_header+1 
+                                        time.sleep(0.5)
                                     
-                                    if txt_tblheaders[col_header].text != 'TTM':
-                                        arr_header =  txt_tblheaders[col_header].text.split("/")
-                                        if len(arr_header)>2 :
-                                            lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                    else:
-                                        lbl_header = '1999-12-01'
+                                    # di akhir kolom recalculate TTM
+                                    if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
+                                        r_ticker, r_finance_key, r_ttm_val = recalculate_ttm(cursor, txt_ticker, txt_breakdown)
+                                        arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-1','TTM',2]
+                                        result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg_recalc_ttm)
+                                        
+                                    if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
+                                        break
                                     
-                                
-                                    
-                                    arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
-                                    cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg1)
-                                    
-                                    col_header=col_header+1 
-                                    time.sleep(0.5)
-                                
-                                # di akhir kolom recalculate TTM
-                                if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
-                                    r_ticker, r_finance_key, r_ttm_val = recalculate_ttm(cursor, txt_ticker, txt_breakdown)
-                                    arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-1','TTM',2]
-                                    result_args = cursor.callproc('stock_fin_inc_stat_quarter_upsert',arg_recalc_ttm)
-                                    
-                                if cnt==(5+(col_length-2)): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column  
-                                    break
-                                
-                                cnt=cnt+1
-                        
-                            k=k+1
+                                    cnt=cnt+1
+                            
+                                k=k+1
+                etime = datetime.now()
+                print('Duration for this url {}'.format(etime - stime))        
                 upd_stock_last_modify(conn,txt_ticker)       
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))    
