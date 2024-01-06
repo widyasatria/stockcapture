@@ -1,6 +1,7 @@
 import requests
 import MySQLdb
-
+from pathlib import Path
+import os
 import time
 
 from datetime import datetime, timedelta
@@ -8,8 +9,10 @@ from configparser import ConfigParser
 api_limit = 980
 
 debug = True
-config = ConfigParser()
-config.read('./conf/config.ini')
+
+
+
+
 api_limit = 980
 
 
@@ -19,7 +22,17 @@ def isnull(val):
     return val
     
 def get_daily_market_data():
+   
+  
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+    config_path = os.path.join(up_onefolder,"conf")
+    conf_file = os.path.join(config_path,"config.ini")
     
+    config = ConfigParser()
+    config.read(conf_file)
+ 
+   
     conn = MySQLdb.connect(
         host=config.get('db_connection', 'host'),
         user=config.get('db_connection', 'user'),

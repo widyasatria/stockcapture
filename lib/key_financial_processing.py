@@ -2,16 +2,17 @@
 #requires  pip install --upgrade holidays, python-mysql
 # holidays https://pypi.org/project/holidays/
 import MySQLdb
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from decimal import Decimal
 import holidays, requests
-
+from pathlib import Path
+import os
 from configparser import ConfigParser
 
-debug = False
-config = ConfigParser()
-config.read('./conf/config.ini')
+debug = True
+
 api_limit = 980
+
 def get_iso_ticker(cursor,txt_ticker):
      
     qry= " select CONCAT(ticker,'.', exchange) as iso_ticker "
@@ -22,83 +23,85 @@ def get_iso_ticker(cursor,txt_ticker):
         return rows[0]
     else:
         return ''
-    
-def get_last_price(conn,txt_ticker,val_finance_date):
+
+def is_max_finance_date(conn,txt_ticker,val_finance_date):
+    qry="select max(finance_date) from key_financials where ticker = %s"
     cursor = conn.cursor()
-    #estimasi rata2 tanggal release laporan keuangan
-    val_finance_date = val_finance_date + timedelta(days=35)
+    cursor.execute(qry,(txt_ticker,))
+    rows = cursor.fetchone() 
+    bool = False
+    if cursor.rowcount > 0 :
+        if rows[0] == val_finance_date :
+            print("rows[0] " + str(rows[0]) + " val_finance_date : " + str(val_finance_date))
+            bool = True
+        else:
+            bool = False
     
-    txt_ticker = get_iso_ticker(cursor,txt_ticker)
-    
-    id_holidays = holidays.country_holidays('ID') 
-    if debug is True:
-        print("Date Before : " + str(val_finance_date))
-    while val_finance_date.weekday() ==5 or val_finance_date.weekday() ==6 or val_finance_date in id_holidays:
-        val_finance_date =  val_finance_date + timedelta(days=1)
-    
-    if debug is True:    
-        print("Date After Busines Working Day : " + str(val_finance_date))
-    
+    return bool
+
+def get_ticker_price_by_date(cursor,txt_ticker,the_date):
     qry= " select close,date from stock_daily where ticker = %s "
     qry = qry + " and  date = %s  limit 1"
     
-    cursor.execute(qry,(txt_ticker,val_finance_date))
+    cursor.execute(qry,(txt_ticker,the_date))
     rows = cursor.fetchone() 
 
     if cursor.rowcount > 0:
         if debug is True:
-           print( str(txt_ticker) + " Price at  : "+ str(rows[1]) + " : " + str(rows[0]) )
+            print( str(txt_ticker) + " Price at  : "+ str(rows[1]) + " : " + str(rows[0]) )
         return rows[0]
     else:
+        if debug is True:
+            print("No data set price to 0")
         
-        print("No data set price to 0")
-        print( str(txt_ticker) + " val_finance_date "+ str(val_finance_date) + "  Price = 0 ")
+        print( str(txt_ticker) + " val_finance_date "+ str(the_date) + "  Price = 0 ")
         cl_price = 0
         return cl_price 
     
-        # print("No data Contacting Market Data Provider")
-        # query="""SELECT id, source_url,secret_key,number_of_call FROM db_api.stock_data_feed where number_of_call <= %s limit 1"""
-        # cursor.execute(query,(api_limit,))
-        # id, source_url, secret_key, number_of_call = cursor.fetchone()  
-        # if cursor.rowcount > 0:
-        #     #set parameter
-        #     params = {
-        #                 'symbols' : txt_ticker,
-        #                 'access_key': secret_key,
-        #                 'date_from' : val_finance_date,
-        #                 'date_to': val_finance_date,
-        #                 'limit' : '1000'
-        #                 }
-                        
-                      
-        #     api_result = requests.get(source_url, params)
-        #     api_response = api_result.json()
-        #     if debug == True:
-        #             print("Parameter to be send ", params)
-        #             print(" API return status code : ", api_result.status_code)  
-                    
-        #     if api_result.status_code == 200:
-        #         cl_price=0
-        #         for stock_data in api_response["data"]:     
-        #             if stock_data['close'] :
-        #                 print(stock_data['close'])
-        #                 cl_price = stock_data['close']
-           
-        #     if api_result.status_code != 200:
-        #                 print(" API return content for " + txt_ticker + " " + str(api_result.content))      
-            
-        #     qry="""update db_api.stock_data_feed set number_of_call=%s where id=%s"""
-        #     number_of_call = number_of_call +1
-        #     res= cursor.execute(qry,(number_of_call,id,))
-        #     conn.commit()
-            
-            
-           
-        # else:
-        #     return 0
+def get_last_price(conn,txt_ticker,val_finance_date):
+    cursor = conn.cursor()
+    
+    bool_max_date = is_max_finance_date(conn,txt_ticker,val_finance_date)
+    if debug == True:
+        print("============== GET LAST PRICE ==================")
+       
+        print(" Is max_finance date " + str(val_finance_date) + " : " + str(bool_max_date) )
+   
+    if bool_max_date == True:
+        txt_ticker = get_iso_ticker(cursor,txt_ticker)
+        id_holidays = holidays.country_holidays('ID') 
+        dt_today = date.today()
+        dt_yesterday = dt_today - timedelta(days=1)
+        print("tanggal kemarin: " + str(dt_yesterday) )
         
-    
-    
+        while dt_yesterday.weekday() ==5 or dt_yesterday.weekday() ==6 or val_finance_date in id_holidays:
+            dt_yesterday =  dt_yesterday - timedelta(days=1)
+        
+        the_price = get_ticker_price_by_date(cursor,txt_ticker,dt_yesterday)
+        if debug is True:    
+            print("Date After Busines Working Day : " + str(dt_yesterday) + " the price  : "+ str(the_price))
+            print("============== END OF GET LAST PRICE ==================")
+    else:
+        #estimasi rata2 tanggal release laporan keuangan
+        val_finance_date = val_finance_date + timedelta(days=35)
+        
+        txt_ticker = get_iso_ticker(cursor,txt_ticker)
+        
+        id_holidays = holidays.country_holidays('ID') 
+        if debug is True:
+            print("Date Before : " + str(val_finance_date) )
+       
+        while val_finance_date.weekday() ==5 or val_finance_date.weekday() ==6 or val_finance_date in id_holidays:
+            val_finance_date =  val_finance_date + timedelta(days=1)
+        
+     
+        the_price = get_ticker_price_by_date(cursor,txt_ticker,val_finance_date)
+        if debug is True:    
+            print("Date After Busines Working Day : " + str(val_finance_date) + " the price  : "+ str(the_price))
+            print("============== END OF GET LAST PRICE ==================")
+            
+    return the_price
+            
  
 def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_key):
     
@@ -210,11 +213,11 @@ def calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_eq
         txt_unit_of_number = rows[1]
         txt_book_value = round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) )*txt_rate,2)
         if debug==True:
-            print("=============")
+            print("============= CALCULATE BOOK VALUE ======")
             print (" txt_stockholders_equity*txt_unit_of_number : " + str(txt_stockholders_equity*txt_unit_of_number))
             print("txt_share_issued*txt_unit_of_number : " + str(txt_share_issued*txt_unit_of_number))
             print("round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) ) )*txt_rate,2 : " + str(txt_book_value) )
-            print("=============")
+            print("============= END OF CALCULATE BOOK VALUE =====")
         
         
     else:
@@ -353,6 +356,16 @@ def update_key_financial_records(conn,val_ticker,val_finance_date,txt_currency, 
     conn.commit() 
 
 def key_financial_processing():
+    
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+    config_path = os.path.join(up_onefolder,"conf")
+    conf_file = os.path.join(config_path,"config.ini")
+    
+    config = ConfigParser()
+    config.read(conf_file)
+ 
+    
     conn = MySQLdb.connect(
         host=config.get('db_connection', 'host'),
         user=config.get('db_connection', 'user'),
