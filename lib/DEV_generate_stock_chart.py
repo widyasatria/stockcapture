@@ -1,3 +1,4 @@
+#test gitignore
 from pathlib import Path
 import os, MySQLdb
 from configparser import ConfigParser
