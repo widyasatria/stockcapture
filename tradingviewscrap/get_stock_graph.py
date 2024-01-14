@@ -82,7 +82,8 @@ def get_stock_graph():
                     print('https://id.tradingview.com/chart/evADUI5b/?symbol='+x[0])
                 
                 txt_ticker = x[0]
-                url='https://id.tradingview.com/chart/evADUI5b/?symbol='+txt_ticker
+                url='https://id.tradingview.com/chart/evADUI5b/?symbol=IDX%3A'+txt_ticker
+                #IDX%3AITMG
                 
                
                 search_address.set_edit_text(url)
