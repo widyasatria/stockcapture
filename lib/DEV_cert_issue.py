@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # install_certifi.py
-# jalan kan script ini untuk error certificate menjalankan yfinance / yahooquery menggunakan linux
-# dfile deleted
+# jalan kan script ini untuk error certificate menjalankan yfinance / yahooquery menggunakan linux ini ya
+
 # sample script to install or update a set of default Root Certificates
 # for the ssl module.  Uses the certificates provided by the certifi package:
 #       https://pypi.python.org/pypi/certifi
