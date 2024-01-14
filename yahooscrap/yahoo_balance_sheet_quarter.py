@@ -6,7 +6,9 @@
 import os, time
 from selenium import webdriver
 #pip install msedge-selenium-tools
-
+from pathlib import Path
+import os
+from configparser import ConfigParser
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
@@ -107,12 +109,26 @@ def balance_sheet_quarter():
     service = Service(verbose = False)
     
     
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+    config_path = os.path.join(up_onefolder,"conf")
+    conf_file = os.path.join(config_path,"config.ini")
+    
+    config = ConfigParser()
+    config.read(conf_file)
+
+    
     conn = MySQLdb.connect(
-    host="localhost",
-    user="root",
-    password="password",
-    database="db_api",
-    auth_plugin='mysql_native_password'
+    # host="localhost",
+    # user="root",
+    # password="password",
+    # database="db_api",
+    # auth_plugin='mysql_native_password'
+    host=config.get('db_connection', 'host'),
+    user=config.get('db_connection', 'user'),
+    password=config.get('db_connection', 'pwd'),
+    database=config.get('db_connection', 'db'),
+    auth_plugin=config.get('db_connection', 'auth')
     )
     
     cursor = conn.cursor()
