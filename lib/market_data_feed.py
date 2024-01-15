@@ -20,9 +20,23 @@ def isnull(val):
     if val is None:
         val = 0
     return val
+
+def set_api_number_of_call(conn):
     
+    dt = datetime.now().strftime('%d')
+    if int(dt)==1 :
+        print("tgl sekarang : " + str(dt)) 
+        print("Resetting number of api call : " + str(dt)) 
+        
+        qry="""update db_api.stock_data_feed set number_of_call=1 where source_url='http://api.marketstack.com/v1/eod'"""
+        cursor = conn.cursor()
+        cursor.execute(qry)
+        conn.commit()
+        
+    else:
+        print("tgl sekarang : " + str(dt)) 
 def get_daily_market_data():
-   
+    
   
     path = Path(__file__)
     up_onefolder = path.parent.absolute().parent
@@ -48,6 +62,11 @@ def get_daily_market_data():
     
     cursor = conn.cursor()
     try:
+    
+        #set API call num 
+        set_api_number_of_call(conn)
+ 
+    
         #disini harus ada iterasi from table stock
         cursor.execute("SELECT ticker,exchange FROM stocks")
         stocklists = cursor.fetchall()  
