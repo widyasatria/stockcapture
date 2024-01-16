@@ -20,14 +20,14 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-
+from pathlib import Path
 
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from configparser import ConfigParser
 config = ConfigParser()
-config.read('./conf/config.ini')
+
 
 debug = True
 
@@ -66,12 +66,15 @@ def main():
     
     service = Service(verbose = False)
     
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+    config_path = os.path.join(up_onefolder,"conf")
+    conf_file = os.path.join(config_path,"config.ini")
+    
+    config = ConfigParser()
+    config.read(conf_file)
+
     conn = MySQLdb.connect(
-    # host="localhost",
-    # user="root",
-    # password="password",
-    # database="db_api",
-    # auth_plugin='mysql_native_password'
     host=config.get('db_connection', 'host'),
     user=config.get('db_connection', 'user'),
     password=config.get('db_connection', 'pwd'),

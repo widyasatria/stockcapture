@@ -7,6 +7,7 @@ from selenium import webdriver
 import datetime
 import mysql.connector
 import MySQLdb
+from pathlib import Path
 from decimal import Decimal
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -20,8 +21,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 from configparser import ConfigParser
-config = ConfigParser()
-config.read('./conf/config.ini')
+
+def upd_stock_last_modify(conn,txt_ticker):
+    cursor = conn.cursor()
+    qry="update stocks set stock_intraday = now() where ticker= %s "
+    cursor.execute(qry,(txt_ticker,))
+    conn.commit()
 
 def insert_stock_price(vals,conn):
     # insert to database'
@@ -56,6 +61,14 @@ def main():
     options.add_argument("log-level=2")
     service = Service(verbose = False)
     debug = True
+    
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+    config_path = os.path.join(up_onefolder,"conf")
+    conf_file = os.path.join(config_path,"config.ini")
+    
+    config = ConfigParser()
+    config.read(conf_file)
 
     conn = MySQLdb.connect(
     host=config.get('db_connection', 'host'),
@@ -116,6 +129,8 @@ def main():
                 values.append(txt_prices[1])
                 values.append(datetime.datetime.now())
                 res = insert_stock_price(values,conn)
+                
+                upd_stock_last_modify(conn,txt_ticker)
                 if debug == True :
                     print("exec result ",res)
                 

@@ -1,0 +1,134 @@
+tgl sekarang : 15
+Number of records found : 1
+Parameter to be send  {'symbols': 'SOCI.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  SOCI.XIDX
+ Date_to  {'symbols': 'SOCI.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'PTBA.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  PTBA.XIDX
+ Date_to  {'symbols': 'PTBA.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'MBAP.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  MBAP.XIDX
+ Date_to  {'symbols': 'MBAP.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'BYAN.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  BYAN.XIDX
+ Date_to  {'symbols': 'BYAN.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'SGER.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  SGER.XIDX
+ Date_to  {'symbols': 'SGER.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'BSSR.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  BSSR.XIDX
+ Date_to  {'symbols': 'BSSR.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'MCOL.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  MCOL.XIDX
+ Date_to  {'symbols': 'MCOL.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'UNTR.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  UNTR.XIDX
+ Date_to  {'symbols': 'UNTR.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'ABMM.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  ABMM.XIDX
+ Date_to  {'symbols': 'ABMM.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'ADRO.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  ADRO.XIDX
+ Date_to  {'symbols': 'ADRO.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'TEBE.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  TEBE.XIDX
+ Date_to  {'symbols': 'TEBE.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'TOTO.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  TOTO.XIDX
+ Date_to  {'symbols': 'TOTO.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'SIDO.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  SIDO.XIDX
+ Date_to  {'symbols': 'SIDO.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'MDKA.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  MDKA.XIDX
+ Date_to  {'symbols': 'MDKA.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'AALI.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  AALI.XIDX
+ Date_to  {'symbols': 'AALI.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'ACES.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  ACES.XIDX
+ Date_to  {'symbols': 'ACES.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'ADHI.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  ADHI.XIDX
+ Date_to  {'symbols': 'ADHI.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'ADMR.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  ADMR.XIDX
+ Date_to  {'symbols': 'ADMR.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
+Number of records found : 1
+Parameter to be send  {'symbols': 'AGII.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ API return status code :  200
+ Getting data from  : http://api.marketstack.com/v1/eod
+ Ticker :  AGII.XIDX
+ Date_to  {'symbols': 'AGII.XIDX', 'access_key': '53a78e9e1fc8c591ae6a6b8aa2afd04f', 'date_from': '2024-01-13', 'date_to': '2024-01-14', 'limit': '1000'}
+ Number of data inserted  0
