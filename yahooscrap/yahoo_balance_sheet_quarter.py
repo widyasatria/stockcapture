@@ -140,7 +140,7 @@ def balance_sheet_quarter():
         if result is not None:      
             for x in result:
                 txt_ticker = x[0]
-                print('=== Populating Yearly Balance Sheet for '+ txt_ticker)
+                print('=== Populating Quarterly Balance Sheet for '+ txt_ticker)
                 if debug == True :
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
