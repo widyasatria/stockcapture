@@ -26,7 +26,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from configparser import ConfigParser
-
+import logging
 
 debug = True
 
@@ -101,6 +101,25 @@ def main():
     
     start_time = datetime.now()
     
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+    
+   
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"yahoo_inc_stat_quarter.log")
+
+    
+    #DEBUG
+    #INFO
+    #WARNING
+    #ERROR
+    #CRITICAL
+    FORMAT = '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file, level=logging.INFO, format=FORMAT, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('yahoo_inc_stat_quarter')
+    logger.info('=================START SCRIPT yahoo_inc_start_quarter================= ')
+    
+   
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
@@ -108,8 +127,7 @@ def main():
     service = Service(verbose = False)
     
     
-    path = Path(__file__)
-    up_onefolder = path.parent.absolute().parent
+ 
     config_path = os.path.join(up_onefolder,"conf")
     conf_file = os.path.join(config_path,"config.ini")
     
@@ -129,17 +147,19 @@ def main():
     
         cursor.execute("SELECT ticker FROM stocks order by stock_fin_inc_stat_quarter")
         result = cursor.fetchall()  
-    
+        driver = webdriver.Edge(service = service, options = options)
         if result is not None:      
             for x in result:
-               
-                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
                 txt_ticker = x[0]
+                print('=== Populating Quarterly income statement for '+ txt_ticker)
+                logger.info('=== Populating Quarterly income statement for '+ txt_ticker)
+                
+                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
+               
                 stime = datetime.now()
-                print('')
+          
                 print('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
 
-                driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
 
                 time.sleep(1)
@@ -169,12 +189,15 @@ def main():
                    
                     if debug == True:
                         print('panjang headers ', len(txt_tblheaders))
+                        logger.info('panjang headers ', len(txt_tblheaders))
+                        
                     
                     col_length = len(txt_tblheaders)
                 
                     for txt_header in txt_tblheaders:
                         if debug == True:
                             print('txt_header : ' + txt_header.text)
+                            logger.info('txt_header : ' + txt_header.text)
                     
                   
                     
@@ -209,6 +232,7 @@ def main():
                                     
                             if debug==True:
                                 print(" Panjang rw-expanded ", len(txt_tbody))
+                                logger.info(" Panjang rw-expanded " + str(len(txt_tbody)))
                             k=1
                             for txt_labels in txt_tbody:
                                 time.sleep(1)
@@ -219,6 +243,7 @@ def main():
                                 driver.implicitly_wait(4)
                                 if debug==True:
                                     print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
+                                    logger.info("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                                 
                                 time.sleep(0.5)
                             
@@ -227,13 +252,15 @@ def main():
                                 for txt_data in row_datas:
                                     #Hanya array 1 yang punya data lengkap
                                     if debug==True:
-                                        print ("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
+                                        print("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
+                                        logger.info("txt_data.text isi "+ txt_data.text+ " CNT " +str(cnt))
                                     if cnt == 2:
                                         txt_breakdown = txt_data.text
                                     
                                     # array data disimpan di array no 5 = TTM dst sampai 10  hardcoded
                                     if cnt >=5 and cnt<=(5+(col_length-2)):
                                         print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
+                                        logger.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
                                         
                                         
                                         #cleansing data
@@ -279,25 +306,44 @@ def main():
                 upd_stock_last_modify(conn,txt_ticker)       
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))    
-    
+        logger.info('Duration: {}'.format(end_time - start_time))    
+        logger.info('=================End script yahoo_inc_start_quarter================= ')
+        
     except MySQLdb.Error as ex:
-        try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
-            return None
-        except IndexError:
-            print (f"MySQL Error: %s",str(ex))
-            return None
+        print('Mysql Generic error caught on: ' + str(ex))
+        logger.error('Mysql Generic error caught on: ' + str(ex))
+        # try:
+        #     print(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+        #     logger.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+        #     return None
+        # except IndexError:
+        #     print (f"MySQL Error: %s",str(ex))
+        #     logger.error(f"MySQL Error: %s",str(ex))
+        #     return None
+    except MySQLdb.DatabaseError as ex:
+        logger.error('MYSQL DatabaseError  caught on: ' + str(ex))
+    
+    except OperationalError as ex:
+        print('MYSQL operational error caught on: ' + str(ex))
+        logger.error('MYSQL operational error caught on: ' + str(ex))
+
+        return None
     except MySQLdb.OperationalError as ex:
-        print(ex)
+        print('MYSQL operational error caught on: ' + str(ex))
+        logger.error('MYSQL operational error caught on: ' + str(ex))
+ 
         return None
     except TypeError as ex:
         print(ex)
+        logger.error(ex)
         return None
     except ValueError as ex:
         print(ex)
+        logger.error(ex)
         return None
     except Exception as ex:
-        print('Generic Error caught on: '+ txt_ticker +' : ' + str(ex) )
+        print('Generic Error caught on: ' + str(ex) )
+        logger.error('Generic Error caught on: ' + str(ex) )
         return None
     finally:
         conn.close

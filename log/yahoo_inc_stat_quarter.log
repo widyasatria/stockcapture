@@ -1,0 +1,627 @@
+17-Jan-24 12:23:49 - =================START SCRIPT yahoo_inc_start_quarter================= 
+17-Jan-24 12:23:49 - ====WARNING=====START SCRIPT yahoo_inc_start_quarter================= 
+17-Jan-24 12:24:05 - =================START SCRIPT yahoo_inc_start_quarter================= 
+17-Jan-24 12:24:05 - ====WARNING=====START SCRIPT yahoo_inc_start_quarter================= 
+17-Jan-24 12:26:07 - =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:29:21 - =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:31:42 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:35:21 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:36:11 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:39:19 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:41:28 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:47:59 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:49:53 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:52:15 : yahoo_inc_stat_quarter : INFO : =================START SCRIPT yahoo_inc_start_quarter=================  - Line : 120
+17-Jan-24 12:52:17 : yahoo_inc_stat_quarter : INFO : === Populating Quarterly income statement for ABMM - Line : 155
+17-Jan-24 12:52:25 : yahoo_inc_stat_quarter : INFO : txt_header : Breakdown - Line : 200
+17-Jan-24 12:52:25 : yahoo_inc_stat_quarter : INFO : txt_header : TTM - Line : 200
+17-Jan-24 12:52:25 : yahoo_inc_stat_quarter : INFO : txt_header : 9/29/2023 - Line : 200
+17-Jan-24 12:52:25 : yahoo_inc_stat_quarter : INFO : txt_header : 6/29/2023 - Line : 200
+17-Jan-24 12:52:25 : yahoo_inc_stat_quarter : INFO : txt_header : 3/30/2023 - Line : 200
+17-Jan-24 12:52:25 : yahoo_inc_stat_quarter : INFO : txt_header : 12/30/2022 - Line : 200
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : === ROW ke 1 Panjang div row data 21 - Line : 246
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Revenue
+1,550,034 370,411 375,321 387,863 416,439 CNT 1 - Line : 256
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Revenue CNT 2 - Line : 256
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Revenue CNT 3 - Line : 256
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,550,034 CNT 5 - Line : 256
+17-Jan-24 12:52:26 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Revenue - txt_data 1,550,034 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:27 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 370,411 CNT 6 - Line : 256
+17-Jan-24 12:52:27 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Revenue - txt_data 370,411 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:27 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 375,321 CNT 7 - Line : 256
+17-Jan-24 12:52:27 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Revenue - txt_data 375,321 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:28 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 387,863 CNT 8 - Line : 256
+17-Jan-24 12:52:28 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Revenue - txt_data 387,863 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:29 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 416,439 CNT 9 - Line : 256
+17-Jan-24 12:52:29 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Revenue - txt_data 416,439 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:30 : yahoo_inc_stat_quarter : INFO : === ROW ke 2 Panjang div row data 10 - Line : 246
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Revenue
+1,550,034 370,411 375,321 387,863 416,439 CNT 1 - Line : 256
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Revenue CNT 2 - Line : 256
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Revenue CNT 3 - Line : 256
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,550,034 CNT 5 - Line : 256
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Revenue - txt_data 1,550,034 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 370,411 CNT 6 - Line : 256
+17-Jan-24 12:52:31 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Revenue - txt_data 370,411 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:32 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 375,321 CNT 7 - Line : 256
+17-Jan-24 12:52:32 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Revenue - txt_data 375,321 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:33 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 387,863 CNT 8 - Line : 256
+17-Jan-24 12:52:33 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Revenue - txt_data 387,863 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:33 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 416,439 CNT 9 - Line : 256
+17-Jan-24 12:52:33 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Revenue - txt_data 416,439 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : === ROW ke 3 Panjang div row data 10 - Line : 246
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Cost of Revenue
+1,100,044 292,001 263,415 257,915 286,712 CNT 1 - Line : 256
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Cost of Revenue CNT 2 - Line : 256
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Cost of Revenue CNT 3 - Line : 256
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,100,044 CNT 5 - Line : 256
+17-Jan-24 12:52:35 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Cost of Revenue - txt_data 1,100,044 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:36 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 292,001 CNT 6 - Line : 256
+17-Jan-24 12:52:36 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Cost of Revenue - txt_data 292,001 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:37 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 263,415 CNT 7 - Line : 256
+17-Jan-24 12:52:37 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Cost of Revenue - txt_data 263,415 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:37 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 257,915 CNT 8 - Line : 256
+17-Jan-24 12:52:37 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Cost of Revenue - txt_data 257,915 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:38 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 286,712 CNT 9 - Line : 256
+17-Jan-24 12:52:38 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Cost of Revenue - txt_data 286,712 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:39 : yahoo_inc_stat_quarter : INFO : === ROW ke 4 Panjang div row data 10 - Line : 246
+17-Jan-24 12:52:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Gross Profit
+449,991 78,410 111,906 129,948 129,727 CNT 1 - Line : 256
+17-Jan-24 12:52:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Gross Profit CNT 2 - Line : 256
+17-Jan-24 12:52:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Gross Profit CNT 3 - Line : 256
+17-Jan-24 12:52:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 449,991 CNT 5 - Line : 256
+17-Jan-24 12:52:40 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Gross Profit - txt_data 449,991 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:41 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 78,410 CNT 6 - Line : 256
+17-Jan-24 12:52:41 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Gross Profit - txt_data 78,410 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:41 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 111,906 CNT 7 - Line : 256
+17-Jan-24 12:52:41 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Gross Profit - txt_data 111,906 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:42 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 129,948 CNT 8 - Line : 256
+17-Jan-24 12:52:42 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Gross Profit - txt_data 129,948 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:42 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 129,727 CNT 9 - Line : 256
+17-Jan-24 12:52:42 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Gross Profit - txt_data 129,727 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:44 : yahoo_inc_stat_quarter : INFO : === ROW ke 5 Panjang div row data 65 - Line : 246
+17-Jan-24 12:52:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Expense
+123,342 14,011 27,207 33,415 48,709 CNT 1 - Line : 256
+17-Jan-24 12:52:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Expense CNT 2 - Line : 256
+17-Jan-24 12:52:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Expense CNT 3 - Line : 256
+17-Jan-24 12:52:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 123,342 CNT 5 - Line : 256
+17-Jan-24 12:52:45 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Expense - txt_data 123,342 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 14,011 CNT 6 - Line : 256
+17-Jan-24 12:52:45 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Expense - txt_data 14,011 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:46 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 27,207 CNT 7 - Line : 256
+17-Jan-24 12:52:46 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Expense - txt_data 27,207 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:46 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 33,415 CNT 8 - Line : 256
+17-Jan-24 12:52:46 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Expense - txt_data 33,415 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:47 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 48,709 CNT 9 - Line : 256
+17-Jan-24 12:52:47 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Expense - txt_data 48,709 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : === ROW ke 6 Panjang div row data 43 - Line : 246
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Selling General and Administrative
+71,262 15,726 13,138 20,927 21,470 CNT 1 - Line : 256
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Selling General and Administrative CNT 2 - Line : 256
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Selling General and Administrative CNT 3 - Line : 256
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 71,262 CNT 5 - Line : 256
+17-Jan-24 12:52:49 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling General and Administrative - txt_data 71,262 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:50 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 15,726 CNT 6 - Line : 256
+17-Jan-24 12:52:50 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling General and Administrative - txt_data 15,726 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:50 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 13,138 CNT 7 - Line : 256
+17-Jan-24 12:52:50 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling General and Administrative - txt_data 13,138 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:51 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 20,927 CNT 8 - Line : 256
+17-Jan-24 12:52:51 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling General and Administrative - txt_data 20,927 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:51 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 21,470 CNT 9 - Line : 256
+17-Jan-24 12:52:51 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling General and Administrative - txt_data 21,470 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:53 : yahoo_inc_stat_quarter : INFO : === ROW ke 7 Panjang div row data 21 - Line : 246
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi General & Administrative Expense
+33,547 15,881 -4,447 11,019 11,095 CNT 1 - Line : 256
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi General & Administrative Expense CNT 2 - Line : 256
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi General & Administrative Expense CNT 3 - Line : 256
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 33,547 CNT 5 - Line : 256
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - General & Administrative Expense - txt_data 33,547 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 15,881 CNT 6 - Line : 256
+17-Jan-24 12:52:54 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - General & Administrative Expense - txt_data 15,881 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:55 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -4,447 CNT 7 - Line : 256
+17-Jan-24 12:52:55 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - General & Administrative Expense - txt_data -4,447 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:52:55 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 11,019 CNT 8 - Line : 256
+17-Jan-24 12:52:55 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - General & Administrative Expense - txt_data 11,019 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:52:56 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 11,095 CNT 9 - Line : 256
+17-Jan-24 12:52:56 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - General & Administrative Expense - txt_data 11,095 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : === ROW ke 8 Panjang div row data 10 - Line : 246
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Rental & Landing Fees
+427.438 407.65 388.721 801.926 -1,171 CNT 1 - Line : 256
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Rental & Landing Fees CNT 2 - Line : 256
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Rental & Landing Fees CNT 3 - Line : 256
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 427.438 CNT 5 - Line : 256
+17-Jan-24 12:52:58 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rental & Landing Fees - txt_data 427.438 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:52:59 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 407.65 CNT 6 - Line : 256
+17-Jan-24 12:52:59 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rental & Landing Fees - txt_data 407.65 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:52:59 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 388.721 CNT 7 - Line : 256
+17-Jan-24 12:53:00 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rental & Landing Fees - txt_data 388.721 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:00 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 801.926 CNT 8 - Line : 256
+17-Jan-24 12:53:00 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rental & Landing Fees - txt_data 801.926 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:01 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -1,171 CNT 9 - Line : 256
+17-Jan-24 12:53:01 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rental & Landing Fees - txt_data -1,171 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:02 : yahoo_inc_stat_quarter : INFO : === ROW ke 9 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Selling & Marketing Expense
+37,715 -154.363 17,586 9,909 10,375 CNT 1 - Line : 256
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Selling & Marketing Expense CNT 2 - Line : 256
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Selling & Marketing Expense CNT 3 - Line : 256
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 37,715 CNT 5 - Line : 256
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling & Marketing Expense - txt_data 37,715 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -154.363 CNT 6 - Line : 256
+17-Jan-24 12:53:04 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling & Marketing Expense - txt_data -154.363 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:04 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 17,586 CNT 7 - Line : 256
+17-Jan-24 12:53:04 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling & Marketing Expense - txt_data 17,586 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:05 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 9,909 CNT 8 - Line : 256
+17-Jan-24 12:53:05 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling & Marketing Expense - txt_data 9,909 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:05 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 10,375 CNT 9 - Line : 256
+17-Jan-24 12:53:05 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Selling & Marketing Expense - txt_data 10,375 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:07 : yahoo_inc_stat_quarter : INFO : === ROW ke 10 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Other Operating Expenses
+51,465 6,114 11,695 7,212 26,443 CNT 1 - Line : 256
+17-Jan-24 12:53:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Other Operating Expenses CNT 2 - Line : 256
+17-Jan-24 12:53:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Other Operating Expenses CNT 3 - Line : 256
+17-Jan-24 12:53:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 51,465 CNT 5 - Line : 256
+17-Jan-24 12:53:08 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Other Operating Expenses - txt_data 51,465 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:08 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 6,114 CNT 6 - Line : 256
+17-Jan-24 12:53:08 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Other Operating Expenses - txt_data 6,114 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:09 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 11,695 CNT 7 - Line : 256
+17-Jan-24 12:53:09 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Other Operating Expenses - txt_data 11,695 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:09 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 7,212 CNT 8 - Line : 256
+17-Jan-24 12:53:09 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Other Operating Expenses - txt_data 7,212 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:10 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 26,443 CNT 9 - Line : 256
+17-Jan-24 12:53:10 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Other Operating Expenses - txt_data 26,443 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:11 : yahoo_inc_stat_quarter : INFO : === ROW ke 11 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Income
+326,649 64,399 84,699 96,533 81,018 CNT 1 - Line : 256
+17-Jan-24 12:53:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Income CNT 2 - Line : 256
+17-Jan-24 12:53:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Operating Income CNT 3 - Line : 256
+17-Jan-24 12:53:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 326,649 CNT 5 - Line : 256
+17-Jan-24 12:53:12 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Income - txt_data 326,649 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:13 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 64,399 CNT 6 - Line : 256
+17-Jan-24 12:53:13 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Income - txt_data 64,399 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:13 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 84,699 CNT 7 - Line : 256
+17-Jan-24 12:53:13 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Income - txt_data 84,699 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:14 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 96,533 CNT 8 - Line : 256
+17-Jan-24 12:53:14 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Income - txt_data 96,533 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:14 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 81,018 CNT 9 - Line : 256
+17-Jan-24 12:53:14 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Operating Income - txt_data 81,018 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:16 : yahoo_inc_stat_quarter : INFO : === ROW ke 12 Panjang div row data 32 - Line : 246
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Non Operating Interest Income Expense
+-85,562 -29,270 -24,602 -22,488 -9,203 CNT 1 - Line : 256
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Non Operating Interest Income Expense CNT 2 - Line : 256
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Non Operating Interest Income Expense CNT 3 - Line : 256
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -85,562 CNT 5 - Line : 256
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Non Operating Interest Income Expense - txt_data -85,562 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -29,270 CNT 6 - Line : 256
+17-Jan-24 12:53:17 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Non Operating Interest Income Expense - txt_data -29,270 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:18 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -24,602 CNT 7 - Line : 256
+17-Jan-24 12:53:18 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Non Operating Interest Income Expense - txt_data -24,602 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:18 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -22,488 CNT 8 - Line : 256
+17-Jan-24 12:53:18 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Non Operating Interest Income Expense - txt_data -22,488 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:19 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -9,203 CNT 9 - Line : 256
+17-Jan-24 12:53:19 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Non Operating Interest Income Expense - txt_data -9,203 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : === ROW ke 13 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Income Non Operating
+4,214 1,224 1,213 1,040 736.645 CNT 1 - Line : 256
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Income Non Operating CNT 2 - Line : 256
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Income Non Operating CNT 3 - Line : 256
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 4,214 CNT 5 - Line : 256
+17-Jan-24 12:53:21 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income Non Operating - txt_data 4,214 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:22 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,224 CNT 6 - Line : 256
+17-Jan-24 12:53:22 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income Non Operating - txt_data 1,224 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:22 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,213 CNT 7 - Line : 256
+17-Jan-24 12:53:22 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income Non Operating - txt_data 1,213 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:23 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,040 CNT 8 - Line : 256
+17-Jan-24 12:53:23 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income Non Operating - txt_data 1,040 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:24 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 736.645 CNT 9 - Line : 256
+17-Jan-24 12:53:24 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income Non Operating - txt_data 736.645 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:25 : yahoo_inc_stat_quarter : INFO : === ROW ke 14 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Expense Non Operating
+89,775 30,493 25,815 23,528 9,940 CNT 1 - Line : 256
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Expense Non Operating CNT 2 - Line : 256
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Expense Non Operating CNT 3 - Line : 256
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 89,775 CNT 5 - Line : 256
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense Non Operating - txt_data 89,775 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 30,493 CNT 6 - Line : 256
+17-Jan-24 12:53:26 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense Non Operating - txt_data 30,493 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:27 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 25,815 CNT 7 - Line : 256
+17-Jan-24 12:53:27 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense Non Operating - txt_data 25,815 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:28 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 23,528 CNT 8 - Line : 256
+17-Jan-24 12:53:28 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense Non Operating - txt_data 23,528 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:28 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 9,940 CNT 9 - Line : 256
+17-Jan-24 12:53:28 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense Non Operating - txt_data 9,940 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:30 : yahoo_inc_stat_quarter : INFO : === ROW ke 15 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Pretax Income
+432,006 52,653 110,574 137,269 131,510 CNT 1 - Line : 256
+17-Jan-24 12:53:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Pretax Income CNT 2 - Line : 256
+17-Jan-24 12:53:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Pretax Income CNT 3 - Line : 256
+17-Jan-24 12:53:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 432,006 CNT 5 - Line : 256
+17-Jan-24 12:53:31 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Pretax Income - txt_data 432,006 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 52,653 CNT 6 - Line : 256
+17-Jan-24 12:53:31 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Pretax Income - txt_data 52,653 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:32 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 110,574 CNT 7 - Line : 256
+17-Jan-24 12:53:32 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Pretax Income - txt_data 110,574 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:32 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 137,269 CNT 8 - Line : 256
+17-Jan-24 12:53:32 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Pretax Income - txt_data 137,269 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:33 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 131,510 CNT 9 - Line : 256
+17-Jan-24 12:53:33 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Pretax Income - txt_data 131,510 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : === ROW ke 16 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Tax Provision
+69,684 12,530 17,292 17,303 22,560 CNT 1 - Line : 256
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Tax Provision CNT 2 - Line : 256
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Tax Provision CNT 3 - Line : 256
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 69,684 CNT 5 - Line : 256
+17-Jan-24 12:53:35 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Tax Provision - txt_data 69,684 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:36 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 12,530 CNT 6 - Line : 256
+17-Jan-24 12:53:36 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Tax Provision - txt_data 12,530 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:36 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 17,292 CNT 7 - Line : 256
+17-Jan-24 12:53:36 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Tax Provision - txt_data 17,292 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:37 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 17,303 CNT 8 - Line : 256
+17-Jan-24 12:53:37 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Tax Provision - txt_data 17,303 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:37 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 22,560 CNT 9 - Line : 256
+17-Jan-24 12:53:37 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Tax Provision - txt_data 22,560 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:39 : yahoo_inc_stat_quarter : INFO : === ROW ke 17 Panjang div row data 65 - Line : 246
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Common Stockholders
+325,757 37,245 82,489 106,036 99,987 CNT 1 - Line : 256
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Common Stockholders CNT 2 - Line : 256
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Common Stockholders CNT 3 - Line : 256
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 325,757 CNT 5 - Line : 256
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Common Stockholders - txt_data 325,757 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 37,245 CNT 6 - Line : 256
+17-Jan-24 12:53:40 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Common Stockholders - txt_data 37,245 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:41 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 82,489 CNT 7 - Line : 256
+17-Jan-24 12:53:41 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Common Stockholders - txt_data 82,489 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:41 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 106,036 CNT 8 - Line : 256
+17-Jan-24 12:53:41 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Common Stockholders - txt_data 106,036 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:42 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 99,987 CNT 9 - Line : 256
+17-Jan-24 12:53:42 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Common Stockholders - txt_data 99,987 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : === ROW ke 18 Panjang div row data 43 - Line : 246
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income
+325,757 37,245 82,489 106,036 99,987 CNT 1 - Line : 256
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income CNT 2 - Line : 256
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income CNT 3 - Line : 256
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 325,757 CNT 5 - Line : 256
+17-Jan-24 12:53:44 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income - txt_data 325,757 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 37,245 CNT 6 - Line : 256
+17-Jan-24 12:53:45 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income - txt_data 37,245 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 82,489 CNT 7 - Line : 256
+17-Jan-24 12:53:45 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income - txt_data 82,489 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:46 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 106,036 CNT 8 - Line : 256
+17-Jan-24 12:53:46 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income - txt_data 106,036 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:47 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 99,987 CNT 9 - Line : 256
+17-Jan-24 12:53:47 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income - txt_data 99,987 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:48 : yahoo_inc_stat_quarter : INFO : === ROW ke 19 Panjang div row data 21 - Line : 246
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Including Non-Controlling Interests
+362,322 40,124 93,282 119,966 108,951 CNT 1 - Line : 256
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Including Non-Controlling Interests CNT 2 - Line : 256
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Including Non-Controlling Interests CNT 3 - Line : 256
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 362,322 CNT 5 - Line : 256
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Including Non-Controlling Interests - txt_data 362,322 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 40,124 CNT 6 - Line : 256
+17-Jan-24 12:53:49 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Including Non-Controlling Interests - txt_data 40,124 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:50 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 93,282 CNT 7 - Line : 256
+17-Jan-24 12:53:50 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Including Non-Controlling Interests - txt_data 93,282 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:51 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 119,966 CNT 8 - Line : 256
+17-Jan-24 12:53:51 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Including Non-Controlling Interests - txt_data 119,966 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:51 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 108,951 CNT 9 - Line : 256
+17-Jan-24 12:53:51 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Including Non-Controlling Interests - txt_data 108,951 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:53 : yahoo_inc_stat_quarter : INFO : === ROW ke 20 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Continuous Operations
+362,322 40,124 93,282 119,966 108,951 CNT 1 - Line : 256
+17-Jan-24 12:53:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Continuous Operations CNT 2 - Line : 256
+17-Jan-24 12:53:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income Continuous Operations CNT 3 - Line : 256
+17-Jan-24 12:53:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 362,322 CNT 5 - Line : 256
+17-Jan-24 12:53:54 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Continuous Operations - txt_data 362,322 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 40,124 CNT 6 - Line : 256
+17-Jan-24 12:53:54 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Continuous Operations - txt_data 40,124 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:55 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 93,282 CNT 7 - Line : 256
+17-Jan-24 12:53:55 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Continuous Operations - txt_data 93,282 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:53:55 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 119,966 CNT 8 - Line : 256
+17-Jan-24 12:53:55 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Continuous Operations - txt_data 119,966 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:53:56 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 108,951 CNT 9 - Line : 256
+17-Jan-24 12:53:56 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income Continuous Operations - txt_data 108,951 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : === ROW ke 21 Panjang div row data 10 - Line : 246
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Minority Interests
+-36,565 -2,878 -10,793 -13,930 -8,964 CNT 1 - Line : 256
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Minority Interests CNT 2 - Line : 256
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Minority Interests CNT 3 - Line : 256
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -36,565 CNT 5 - Line : 256
+17-Jan-24 12:53:58 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Minority Interests - txt_data -36,565 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:53:59 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -2,878 CNT 6 - Line : 256
+17-Jan-24 12:53:59 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Minority Interests - txt_data -2,878 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:53:59 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -10,793 CNT 7 - Line : 256
+17-Jan-24 12:53:59 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Minority Interests - txt_data -10,793 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:00 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -13,930 CNT 8 - Line : 256
+17-Jan-24 12:54:00 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Minority Interests - txt_data -13,930 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:01 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -8,964 CNT 9 - Line : 256
+17-Jan-24 12:54:01 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Minority Interests - txt_data -8,964 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:02 : yahoo_inc_stat_quarter : INFO : === ROW ke 22 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Otherunder Preferred Stock Dividend
+0 0 0 0 0 CNT 1 - Line : 256
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Otherunder Preferred Stock Dividend CNT 2 - Line : 256
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Otherunder Preferred Stock Dividend CNT 3 - Line : 256
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0 CNT 5 - Line : 256
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Otherunder Preferred Stock Dividend - txt_data 0 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0 CNT 6 - Line : 256
+17-Jan-24 12:54:03 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Otherunder Preferred Stock Dividend - txt_data 0 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:04 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0 CNT 7 - Line : 256
+17-Jan-24 12:54:04 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Otherunder Preferred Stock Dividend - txt_data 0 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:05 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0 CNT 8 - Line : 256
+17-Jan-24 12:54:05 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Otherunder Preferred Stock Dividend - txt_data 0 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:05 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0 CNT 9 - Line : 256
+17-Jan-24 12:54:05 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Otherunder Preferred Stock Dividend - txt_data 0 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : === ROW ke 23 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted NI Available to Com Stockholders
+325,757 37,245 82,489 106,036 99,987 CNT 1 - Line : 256
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted NI Available to Com Stockholders CNT 2 - Line : 256
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted NI Available to Com Stockholders CNT 3 - Line : 256
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 325,757 CNT 5 - Line : 256
+17-Jan-24 12:54:07 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted NI Available to Com Stockholders - txt_data 325,757 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:08 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 37,245 CNT 6 - Line : 256
+17-Jan-24 12:54:08 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted NI Available to Com Stockholders - txt_data 37,245 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:09 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 82,489 CNT 7 - Line : 256
+17-Jan-24 12:54:09 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted NI Available to Com Stockholders - txt_data 82,489 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:09 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 106,036 CNT 8 - Line : 256
+17-Jan-24 12:54:09 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted NI Available to Com Stockholders - txt_data 106,036 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:10 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 99,987 CNT 9 - Line : 256
+17-Jan-24 12:54:10 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted NI Available to Com Stockholders - txt_data 99,987 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:11 : yahoo_inc_stat_quarter : INFO : === ROW ke 24 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Basic EPS
+0.12 - - 0.04 - CNT 1 - Line : 256
+17-Jan-24 12:54:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Basic EPS CNT 2 - Line : 256
+17-Jan-24 12:54:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Basic EPS CNT 3 - Line : 256
+17-Jan-24 12:54:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0.12 CNT 5 - Line : 256
+17-Jan-24 12:54:12 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic EPS - txt_data 0.12 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:13 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 6 - Line : 256
+17-Jan-24 12:54:13 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic EPS - txt_data - - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:13 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 7 - Line : 256
+17-Jan-24 12:54:13 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic EPS - txt_data - - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:14 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0.04 CNT 8 - Line : 256
+17-Jan-24 12:54:14 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic EPS - txt_data 0.04 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:15 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 9 - Line : 256
+17-Jan-24 12:54:15 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic EPS - txt_data - - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:16 : yahoo_inc_stat_quarter : INFO : === ROW ke 25 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted EPS
+0.12 - - 0.04 - CNT 1 - Line : 256
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted EPS CNT 2 - Line : 256
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted EPS CNT 3 - Line : 256
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0.12 CNT 5 - Line : 256
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted EPS - txt_data 0.12 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 6 - Line : 256
+17-Jan-24 12:54:17 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted EPS - txt_data - - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:18 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 7 - Line : 256
+17-Jan-24 12:54:18 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted EPS - txt_data - - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:18 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 0.04 CNT 8 - Line : 256
+17-Jan-24 12:54:18 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted EPS - txt_data 0.04 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:19 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 9 - Line : 256
+17-Jan-24 12:54:19 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted EPS - txt_data - - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : === ROW ke 26 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Basic Average Shares
+2,753,192 - - 2,753,165 - CNT 1 - Line : 256
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Basic Average Shares CNT 2 - Line : 256
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Basic Average Shares CNT 3 - Line : 256
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 2,753,192 CNT 5 - Line : 256
+17-Jan-24 12:54:21 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic Average Shares - txt_data 2,753,192 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:22 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 6 - Line : 256
+17-Jan-24 12:54:22 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic Average Shares - txt_data - - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:22 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 7 - Line : 256
+17-Jan-24 12:54:22 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic Average Shares - txt_data - - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:23 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 2,753,165 CNT 8 - Line : 256
+17-Jan-24 12:54:23 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic Average Shares - txt_data 2,753,165 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:24 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 9 - Line : 256
+17-Jan-24 12:54:24 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Basic Average Shares - txt_data - - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:25 : yahoo_inc_stat_quarter : INFO : === ROW ke 27 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted Average Shares
+2,753,192 - - 2,753,165 - CNT 1 - Line : 256
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted Average Shares CNT 2 - Line : 256
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Diluted Average Shares CNT 3 - Line : 256
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 2,753,192 CNT 5 - Line : 256
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted Average Shares - txt_data 2,753,192 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 6 - Line : 256
+17-Jan-24 12:54:26 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted Average Shares - txt_data - - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:27 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 7 - Line : 256
+17-Jan-24 12:54:27 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted Average Shares - txt_data - - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:28 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 2,753,165 CNT 8 - Line : 256
+17-Jan-24 12:54:28 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted Average Shares - txt_data 2,753,165 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:28 : yahoo_inc_stat_quarter : INFO : txt_data.text isi - CNT 9 - Line : 256
+17-Jan-24 12:54:28 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Diluted Average Shares - txt_data - - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : === ROW ke 28 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Operating Income as Reported
+326,649 64,399 84,699 96,533 81,018 CNT 1 - Line : 256
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Operating Income as Reported CNT 2 - Line : 256
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Operating Income as Reported CNT 3 - Line : 256
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 326,649 CNT 5 - Line : 256
+17-Jan-24 12:54:30 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Operating Income as Reported - txt_data 326,649 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:31 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 64,399 CNT 6 - Line : 256
+17-Jan-24 12:54:31 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Operating Income as Reported - txt_data 64,399 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:32 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 84,699 CNT 7 - Line : 256
+17-Jan-24 12:54:32 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Operating Income as Reported - txt_data 84,699 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:32 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 96,533 CNT 8 - Line : 256
+17-Jan-24 12:54:32 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Operating Income as Reported - txt_data 96,533 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:33 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 81,018 CNT 9 - Line : 256
+17-Jan-24 12:54:33 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Operating Income as Reported - txt_data 81,018 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : === ROW ke 29 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Rent Expense Supplemental
+142,146 79,551 36,105 33,944 -7,454 CNT 1 - Line : 256
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Rent Expense Supplemental CNT 2 - Line : 256
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Rent Expense Supplemental CNT 3 - Line : 256
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 142,146 CNT 5 - Line : 256
+17-Jan-24 12:54:35 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rent Expense Supplemental - txt_data 142,146 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:36 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 79,551 CNT 6 - Line : 256
+17-Jan-24 12:54:36 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rent Expense Supplemental - txt_data 79,551 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:36 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 36,105 CNT 7 - Line : 256
+17-Jan-24 12:54:36 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rent Expense Supplemental - txt_data 36,105 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:37 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 33,944 CNT 8 - Line : 256
+17-Jan-24 12:54:37 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rent Expense Supplemental - txt_data 33,944 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:37 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -7,454 CNT 9 - Line : 256
+17-Jan-24 12:54:37 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Rent Expense Supplemental - txt_data -7,454 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:39 : yahoo_inc_stat_quarter : INFO : === ROW ke 30 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Expenses
+1,223,385 306,012 290,622 291,330 335,421 CNT 1 - Line : 256
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Expenses CNT 2 - Line : 256
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Total Expenses CNT 3 - Line : 256
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,223,385 CNT 5 - Line : 256
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Expenses - txt_data 1,223,385 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 306,012 CNT 6 - Line : 256
+17-Jan-24 12:54:40 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Expenses - txt_data 306,012 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:41 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 290,622 CNT 7 - Line : 256
+17-Jan-24 12:54:41 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Expenses - txt_data 290,622 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:41 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 291,330 CNT 8 - Line : 256
+17-Jan-24 12:54:41 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Expenses - txt_data 291,330 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:42 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 335,421 CNT 9 - Line : 256
+17-Jan-24 12:54:42 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Total Expenses - txt_data 335,421 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : === ROW ke 31 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income from Continuing & Discontinued Operation
+325,757 37,245 82,489 106,036 99,987 CNT 1 - Line : 256
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income from Continuing & Discontinued Operation CNT 2 - Line : 256
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Income from Continuing & Discontinued Operation CNT 3 - Line : 256
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 325,757 CNT 5 - Line : 256
+17-Jan-24 12:54:44 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income from Continuing & Discontinued Operation - txt_data 325,757 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 37,245 CNT 6 - Line : 256
+17-Jan-24 12:54:45 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income from Continuing & Discontinued Operation - txt_data 37,245 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:45 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 82,489 CNT 7 - Line : 256
+17-Jan-24 12:54:45 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income from Continuing & Discontinued Operation - txt_data 82,489 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:46 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 106,036 CNT 8 - Line : 256
+17-Jan-24 12:54:46 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income from Continuing & Discontinued Operation - txt_data 106,036 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:47 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 99,987 CNT 9 - Line : 256
+17-Jan-24 12:54:47 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Income from Continuing & Discontinued Operation - txt_data 99,987 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:48 : yahoo_inc_stat_quarter : INFO : === ROW ke 32 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Normalized Income
+325,757 37,245 82,489 106,036 99,987 CNT 1 - Line : 256
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Normalized Income CNT 2 - Line : 256
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Normalized Income CNT 3 - Line : 256
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 325,757 CNT 5 - Line : 256
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Normalized Income - txt_data 325,757 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 37,245 CNT 6 - Line : 256
+17-Jan-24 12:54:49 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Normalized Income - txt_data 37,245 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:50 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 82,489 CNT 7 - Line : 256
+17-Jan-24 12:54:50 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Normalized Income - txt_data 82,489 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:51 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 106,036 CNT 8 - Line : 256
+17-Jan-24 12:54:51 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Normalized Income - txt_data 106,036 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:51 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 99,987 CNT 9 - Line : 256
+17-Jan-24 12:54:51 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Normalized Income - txt_data 99,987 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : === ROW ke 33 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Income
+4,214 1,224 1,213 1,040 736.645 CNT 1 - Line : 256
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Income CNT 2 - Line : 256
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Income CNT 3 - Line : 256
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 4,214 CNT 5 - Line : 256
+17-Jan-24 12:54:53 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income - txt_data 4,214 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:54 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,224 CNT 6 - Line : 256
+17-Jan-24 12:54:54 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income - txt_data 1,224 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:55 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,213 CNT 7 - Line : 256
+17-Jan-24 12:54:55 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income - txt_data 1,213 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:54:55 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,040 CNT 8 - Line : 256
+17-Jan-24 12:54:55 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income - txt_data 1,040 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:54:56 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 736.645 CNT 9 - Line : 256
+17-Jan-24 12:54:56 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Income - txt_data 736.645 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:54:57 : yahoo_inc_stat_quarter : INFO : === ROW ke 34 Panjang div row data 10 - Line : 246
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Expense
+89,775 30,493 25,815 23,528 9,940 CNT 1 - Line : 256
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Expense CNT 2 - Line : 256
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Interest Expense CNT 3 - Line : 256
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 89,775 CNT 5 - Line : 256
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense - txt_data 89,775 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:54:58 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 30,493 CNT 6 - Line : 256
+17-Jan-24 12:54:59 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense - txt_data 30,493 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:54:59 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 25,815 CNT 7 - Line : 256
+17-Jan-24 12:54:59 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense - txt_data 25,815 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:55:00 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 23,528 CNT 8 - Line : 256
+17-Jan-24 12:55:00 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense - txt_data 23,528 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:55:00 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 9,940 CNT 9 - Line : 256
+17-Jan-24 12:55:00 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Interest Expense - txt_data 9,940 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : === ROW ke 35 Panjang div row data 10 - Line : 246
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Interest Income
+-85,562 -29,270 -24,602 -22,488 -9,203 CNT 1 - Line : 256
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Interest Income CNT 2 - Line : 256
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Net Interest Income CNT 3 - Line : 256
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -85,562 CNT 5 - Line : 256
+17-Jan-24 12:55:02 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Interest Income - txt_data -85,562 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:55:03 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -29,270 CNT 6 - Line : 256
+17-Jan-24 12:55:03 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Interest Income - txt_data -29,270 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:55:04 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -24,602 CNT 7 - Line : 256
+17-Jan-24 12:55:04 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Interest Income - txt_data -24,602 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:55:04 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -22,488 CNT 8 - Line : 256
+17-Jan-24 12:55:04 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Interest Income - txt_data -22,488 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:55:05 : yahoo_inc_stat_quarter : INFO : txt_data.text isi -9,203 CNT 9 - Line : 256
+17-Jan-24 12:55:05 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Net Interest Income - txt_data -9,203 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:55:06 : yahoo_inc_stat_quarter : INFO : === ROW ke 36 Panjang div row data 10 - Line : 246
+17-Jan-24 12:55:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi EBIT
+521,782 83,147 136,389 160,796 141,450 CNT 1 - Line : 256
+17-Jan-24 12:55:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi EBIT CNT 2 - Line : 256
+17-Jan-24 12:55:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi EBIT CNT 3 - Line : 256
+17-Jan-24 12:55:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:55:07 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 521,782 CNT 5 - Line : 256
+17-Jan-24 12:55:07 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBIT - txt_data 521,782 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:55:08 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 83,147 CNT 6 - Line : 256
+17-Jan-24 12:55:08 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBIT - txt_data 83,147 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:55:08 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 136,389 CNT 7 - Line : 256
+17-Jan-24 12:55:08 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBIT - txt_data 136,389 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:55:09 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 160,796 CNT 8 - Line : 256
+17-Jan-24 12:55:09 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBIT - txt_data 160,796 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:55:09 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 141,450 CNT 9 - Line : 256
+17-Jan-24 12:55:09 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBIT - txt_data 141,450 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:55:11 : yahoo_inc_stat_quarter : INFO : === ROW ke 37 Panjang div row data 10 - Line : 246
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi EBITDA
+526,763 84,089 137,680 161,434 143,561 CNT 1 - Line : 256
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi EBITDA CNT 2 - Line : 256
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi EBITDA CNT 3 - Line : 256
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 526,763 CNT 5 - Line : 256
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBITDA - txt_data 526,763 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 84,089 CNT 6 - Line : 256
+17-Jan-24 12:55:12 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBITDA - txt_data 84,089 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:55:13 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 137,680 CNT 7 - Line : 256
+17-Jan-24 12:55:13 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBITDA - txt_data 137,680 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:55:13 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 161,434 CNT 8 - Line : 256
+17-Jan-24 12:55:13 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBITDA - txt_data 161,434 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263
+17-Jan-24 12:55:14 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 143,561 CNT 9 - Line : 256
+17-Jan-24 12:55:14 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - EBITDA - txt_data 143,561 - header 12/30/2022 - counter 9 - colheader 5 - colheader 6 - Line : 263
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : === ROW ke 38 Panjang div row data 10 - Line : 246
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Reconciled Cost of Revenue
+1,100,044 292,001 263,415 257,915 286,712 CNT 1 - Line : 256
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Reconciled Cost of Revenue CNT 2 - Line : 256
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : txt_data.text isi Reconciled Cost of Revenue CNT 3 - Line : 256
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : txt_data.text isi  CNT 4 - Line : 256
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 1,100,044 CNT 5 - Line : 256
+17-Jan-24 12:55:16 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Reconciled Cost of Revenue - txt_data 1,100,044 - header TTM - counter 5 - colheader 1 - colheader 2 - Line : 263
+17-Jan-24 12:55:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 292,001 CNT 6 - Line : 256
+17-Jan-24 12:55:17 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Reconciled Cost of Revenue - txt_data 292,001 - header 9/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 263
+17-Jan-24 12:55:17 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 263,415 CNT 7 - Line : 256
+17-Jan-24 12:55:18 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Reconciled Cost of Revenue - txt_data 263,415 - header 6/29/2023 - counter 7 - colheader 3 - colheader 4 - Line : 263
+17-Jan-24 12:55:18 : yahoo_inc_stat_quarter : INFO : txt_data.text isi 257,915 CNT 8 - Line : 256
+17-Jan-24 12:55:18 : yahoo_inc_stat_quarter : INFO : == txt_tickers : ABMM - txt_breakdown: - Reconciled Cost of Revenue - txt_data 257,915 - header 3/30/2023 - counter 8 - colheader 4 - colheader 5 - Line : 263

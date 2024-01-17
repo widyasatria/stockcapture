@@ -87,16 +87,17 @@ def main():
     
         cursor.execute("SELECT ticker FROM stocks order by stock_fin_inc_stat_year")
         result = cursor.fetchall()  
-    
+        driver = webdriver.Edge(service = service, options = options)
         if result is not None:      
             for x in result:
-                print('')
+                txt_ticker = x[0]
+                print('=== Populating Yearly income statement for '+ txt_ticker)
                 print('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
                 stime = datetime.now()
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
-                txt_ticker = x[0]
                 
-                driver = webdriver.Edge(service = service, options = options)
+                
+                
                 driver.get(url)
 
                 time.sleep(3)

@@ -82,15 +82,18 @@ def main():
     try:
         cursor.execute("SELECT ticker FROM stocks order by stock_intraday")
         result = cursor.fetchall()  
-    
+        driver = webdriver.Edge(service = service, options = options)
         if result is not None:      
             for x in result:
+                txt_ticker = x[0]
+                print('=== Populating Intraday Price for '+ txt_ticker)
+                
                 if debug == True :
                     print(' Getting price from : https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
 
-                txt_ticker = x[0]
+                
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
-                driver = webdriver.Edge(service = service, options = options)
+               
                 driver.get(url)
               
                 
@@ -101,7 +104,7 @@ def main():
                     if debug == True :
                         print("Stock Name :", link_stock_header.text)
                     
-                txt_income_statement = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/h3/span')
+                txt__statement = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/h3/span')
                 if debug == True :
                     print("txt_income : ", txt_income_statement.text)
                 

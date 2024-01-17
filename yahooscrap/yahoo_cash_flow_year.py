@@ -65,19 +65,17 @@ def cash_flow_annual():
     
         cursor.execute("SELECT ticker FROM stocks order by stock_fin_cash_flow_year")
         result = cursor.fetchall()  
-    
+        driver = webdriver.Edge(service = service, options = options)
+        
         if result is not None:      
             for x in result:
+                txt_ticker = x[0]
+                print('=== Populating yearly cash flow for '+ txt_ticker)
+                
                 if debug == True :
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/cash-flow?p='+x[0]+'.JK')
-            
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/cash-flow?p='+x[0]+'.JK'
-                txt_ticker = x[0]
-                
-                
-                driver = webdriver.Edge(service = service, options = options)
                 driver.get(url)
-
                 time.sleep(3)
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
