@@ -5,7 +5,7 @@ import os
 from selenium import webdriver
 #pip install msedge-selenium-tools
 import datetime
-import mysql.connector
+
 import MySQLdb
 from pathlib import Path
 from decimal import Decimal
@@ -104,7 +104,7 @@ def main():
                     if debug == True :
                         print("Stock Name :", link_stock_header.text)
                     
-                txt__statement = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/h3/span')
+                txt_income_statement = driver.find_element(By.XPATH,'//*[@id="Col1-1-Financials-Proxy"]/section/div[2]/h3/span')
                 if debug == True :
                     print("txt_income : ", txt_income_statement.text)
                 
