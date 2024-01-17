@@ -189,7 +189,7 @@ def main():
                    
                     if debug == True:
                         print('panjang headers ', len(txt_tblheaders))
-                        logger.info('panjang headers ', len(txt_tblheaders))
+                        logger.info('panjang headers ' + str(len(txt_tblheaders)))
                         
                     
                     col_length = len(txt_tblheaders)
