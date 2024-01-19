@@ -19,7 +19,7 @@ from yahooscrap.yahoo_balance_sheet_quarter import balance_sheet_quarter
 from yahooscrap.yahoo_cash_flow_year import cash_flow_annual 
 from yahooscrap.yahoo_cash_flow_quarter import cash_flow_quarter
 
-from lib.market_data_feed import get_daily_market_data
+from stockcapture.lib.archive.market_data_feed import get_daily_market_data
 
 
 # def job():
