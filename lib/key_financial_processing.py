@@ -228,7 +228,7 @@ def average_values(cursor,val_ticker,val_finance_date):
     
     qry = " select IFNULL(avg(price_to_book_value),0) pbv_avg, "
     qry = qry + "IFNULL(avg(price_earning_ratio),0) per_avg, "
-    qry = qry + "IFNULL(avg(return_on_equity),0) roe_avg  from db_api.key_financials "
+    qry = qry + "IFNULL(avg(return_on_equity),0) roe_avg  from key_financials "
     qry = qry + " where ticker = %s and price_to_book_value <> 0 and price_earning_ratio <> 0 and return_on_equity <> 0 and finance_date <= %s"  
    
     cursor.execute(qry,(val_ticker,val_finance_date))
@@ -412,7 +412,7 @@ def key_financial_processing():
                         bs_finance_date = y[3]
                         bs_txt_header = y[4]
                     
-                        qry = " select count(*) rowexist from db_api.key_financials where ticker= %s and finance_date = %s and total_assets is not null" 
+                        qry = " select count(*) rowexist from key_financials where ticker= %s and finance_date = %s and total_assets is not null" 
                         cursor.execute(qry,(bs_ticker,bs_finance_date))
                         numrow = cursor.fetchone()  
                         if debug == True:

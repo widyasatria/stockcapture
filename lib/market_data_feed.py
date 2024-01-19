@@ -28,7 +28,7 @@ def set_api_number_of_call(conn):
         print("tgl sekarang : " + str(dt)) 
         print("Resetting number of api call : " + str(dt)) 
         
-        qry="""update db_api.stock_data_feed set number_of_call=1 where source_url='http://api.marketstack.com/v1/eod'"""
+        qry="""update stock_data_feed set number_of_call=1 where source_url='http://api.marketstack.com/v1/eod'"""
         cursor = conn.cursor()
         cursor.execute(qry)
         conn.commit()
@@ -77,14 +77,14 @@ def get_daily_market_data():
                 ticker = x[0]+"."+x[1]
                 
       
-                query="""SELECT id, source_url,secret_key,number_of_call FROM db_api.stock_data_feed where number_of_call <= %s limit 1"""
+                query="""SELECT id, source_url,secret_key,number_of_call FROM stock_data_feed where number_of_call <= %s limit 1"""
                 cursor.execute(query,(api_limit,))
                 id, source_url, secret_key, number_of_call = cursor.fetchone()  
             
                 if secret_key is not None:  
                     query = """ select ticker, date_format(now(),'%%Y-%%m-%%d') as today_date,  date_format(date,'%%Y-%%m-%%d') as existing_lastdate, datediff(now(),date) as selisih, """
                     query = query + """ date_format(date_sub(now(), INTERVAL 1 day),'%%Y-%%m-%%d') as today_minus1,  """
-                    query = query + """ date_format(date_add(date, INTERVAL 1 day),'%%Y-%%m-%%d') as lastday_plus1 from db_api.stock_daily where ticker = %s order by date desc limit 1 """
+                    query = query + """ date_format(date_add(date, INTERVAL 1 day),'%%Y-%%m-%%d') as lastday_plus1 from stock_daily where ticker = %s order by date desc limit 1 """
                     
                     cursor.execute(query,(ticker,))
                     result = cursor.fetchall()
@@ -145,7 +145,7 @@ def get_daily_market_data():
                     #api_response = None
                 
                         
-                    qry="""update db_api.stock_data_feed set number_of_call=%s where id=%s"""
+                    qry="""update stock_data_feed set number_of_call=%s where id=%s"""
                     number_of_call = number_of_call +1
                     res= cursor.execute(qry,(number_of_call,id,))
                     conn.commit()
@@ -156,7 +156,7 @@ def get_daily_market_data():
                             #print(f'Ticker %s has a day high of  %s on %s', stock_data['symbol'],stock_data['high'],stock_data['date'])
                             # print(stock_data['open'])
                             
-                            qry = """INSERT INTO db_api.stock_daily (ticker,open,high,low,close,volume,adj_high,adj_low,adj_close,adj_open,adj_volume,split_factor,dividend,exchange,date,updated_at,created_at)"""
+                            qry = """INSERT INTO stock_daily (ticker,open,high,low,close,volume,adj_high,adj_low,adj_close,adj_open,adj_volume,split_factor,dividend,exchange,date,updated_at,created_at)"""
                             qry = qry + """ VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),now()) """
                             
                             
