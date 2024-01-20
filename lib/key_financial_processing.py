@@ -372,11 +372,6 @@ def key_financial_processing():
         password=config.get('db_connection', 'pwd'),
         database=config.get('db_connection', 'db'),
         auth_plugin=config.get('db_connection', 'auth')
-        # host="localhost",
-        # user="root",
-        # password="password",
-        # database="db_api",
-        # auth_plugin='mysql_native_password'
         )
     
     cursor = conn.cursor()
