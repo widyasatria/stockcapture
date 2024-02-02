@@ -1,4 +1,5 @@
-import os, time, MySQLdb
+import os, time
+import mysql.connector
 from pathlib import Path
 from datetime import datetime
 from configparser import ConfigParser
@@ -9,6 +10,8 @@ import requests
 from PIL import ImageGrab
 from pywinauto import mouse
 from time import gmtime, strftime
+import logging
+from logging.handlers import TimedRotatingFileHandler
 
 
 debug = True
@@ -29,16 +32,7 @@ def upload_graph(url, fname,ticker, username, password):
 def get_stock_graph():
 
     start_time = datetime.now()
-        
-    #requirement selenium versi 4.13.0
-    #ms edge webdriver : https://msedgedriver.azureedge.net/119.0.2151.72/edgedriver_win64.zip
-    
-    # parameter executable_path ini sudah tidak di bisa di pakai di selenium versi 4, caranya ketik di command prompt echo %Path% untuk mengetahui existing environment variable
-    # kemudian copy msedge webdriver ke salah satu path yang terdaftar.
-    
-    # driver = webdriver.Edge(executable_path=r'C:\Users\wardians\stockcapture\msedgedriver.exe')
-    # references : https://learn.microsoft.com/en-us/microsoft-edge/webdriver-chromium/ie-mode?tabs=python
-    
+   
     path = Path(__file__)
     up_onefolder = path.parent.absolute().parent
     config_path = os.path.join(up_onefolder,"conf")
@@ -47,7 +41,21 @@ def get_stock_graph():
     config = ConfigParser()
     config.read(conf_file)
 
-    conn = MySQLdb.connect(
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"yahoo_balance_sheet_quarter.log")
+    
+    #Log Level DEBUG INFO  WARNING ERROR CRITICAL
+    # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
+    my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('yahoo_balance_sheet_quarter')
+
+    handler = TimedRotatingFileHandler(log_file,when="midnight", backupCount=30)
+    handler.suffix = "%Y%m%d"
+    logger.addHandler(handler)
+    
+    
+    conn = mysql.connector.connect(
     # host="localhost",
     # user="root",
     # password="password",
@@ -74,8 +82,10 @@ def get_stock_graph():
             app.connect(title=u'New tab - Work - Microsoft​ Edge',found_index=0) #supaya windows bisa dikenali pastikan copy title dari UI Spy
             window = app.top_window()   
             AppBar = window.child_window(title=u'App bar', auto_id="view_1000", control_type="ToolBar")
-            #AppBar.print_control_identifiers()
-            search_address = AppBar.child_window(auto_id="view_1021", control_type="Edit")
+            
+            AppBar.print_control_identifiers()
+            #jika ada error cek menggunakan UI Spy di hover di search_address kadang auto_id / automationID berubah pastikan sama dengan yang ada di UISpy
+            search_address = AppBar.child_window(auto_id="view_1022", control_type="Edit")
             
             for x in result:
                 if debug == True :
@@ -116,6 +126,9 @@ def get_stock_graph():
                 if debug == True:
                     print("Status Code", response.status_code)
                     print("JSON Response ", response.json())
+                    logging.info("Status Code" + str(response.status_code))
+                    logging.info("JSON Response "+ str(response.json()))
+                    
                 
                 if response.status_code < 400:
                     if(os.path.isfile(screenshotfile)):
@@ -125,34 +138,26 @@ def get_stock_graph():
                         if debug == True:
                             #
                             print("File Deleted successfully")
+                            logging.info("File Deleted successfully")
                     else:
                         if debug == True:
                             print("File does not exist")
+                            logging.error("File does not exist")
                 
-            
-
-
-              
                 # break
-            
-       
-      
-    
-    except MySQLdb.Error as ex:
+ 
+    except mysql.connector.Error as ex:
         try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            print(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logging.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            print(f"MySQL Error: %s",str(ex))
+            logging.error(f"MySQL Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
-        return None
-    except TypeError as ex:
-        print(ex)
-        return None
-    except ValueError as ex:
-        print(ex)
+    except Exception as ex:
+        print(f"Exception caught Error: %s",str(ex))
+        logging.error(f"Exception caught Error: %s",str(ex))
         return None
     finally:
         conn.close
