@@ -188,3 +188,357 @@
 02-Feb-24 19:28:15 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
 02-Feb-24 19:28:15 : mysql.connector : INFO : plugin_name: caching_sha2_password - Line : 152
 02-Feb-24 19:28:15 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin - Line : 156
+02-Feb-24 20:06:09 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
+02-Feb-24 20:06:09 : mysql.connector : INFO : plugin_name: mysql_native_password - Line : 152
+02-Feb-24 20:06:09 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin - Line : 156
+02-Feb-24 20:06:09 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
+02-Feb-24 20:06:09 : mysql.connector : INFO : plugin_name: caching_sha2_password - Line : 152
+02-Feb-24 20:06:09 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin - Line : 156
+02-Feb-24 20:06:17 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:17 : root : INFO : JSON Response {'ticker': 'TOTO', 'uploaded_date': '2024-02-02', 'file': '/media/TOTO_2024-02-02_130617.png', 'uploaded_on': '2024-02-02T20:06:17.516209+07:00'} - Line : 130
+02-Feb-24 20:06:17 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:06:24 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:24 : root : INFO : JSON Response {'ticker': 'SIDO', 'uploaded_date': '2024-02-02', 'file': '/media/SIDO_2024-02-02_130623.png', 'uploaded_on': '2024-02-02T20:06:24.066193+07:00'} - Line : 130
+02-Feb-24 20:06:24 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:06:30 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:30 : root : INFO : JSON Response {'ticker': 'MDKA', 'uploaded_date': '2024-02-02', 'file': '/media/MDKA_2024-02-02_130630.png', 'uploaded_on': '2024-02-02T20:06:30.580170+07:00'} - Line : 130
+02-Feb-24 20:06:30 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:06:37 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:37 : root : INFO : JSON Response {'ticker': 'AALI', 'uploaded_date': '2024-02-02', 'file': '/media/AALI_2024-02-02_130636.png', 'uploaded_on': '2024-02-02T20:06:37.103986+07:00'} - Line : 130
+02-Feb-24 20:06:37 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:06:43 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:43 : root : INFO : JSON Response {'ticker': 'ACES', 'uploaded_date': '2024-02-02', 'file': '/media/ACES_2024-02-02_130643.png', 'uploaded_on': '2024-02-02T20:06:43.699429+07:00'} - Line : 130
+02-Feb-24 20:06:43 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:06:50 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:50 : root : INFO : JSON Response {'ticker': 'ADHI', 'uploaded_date': '2024-02-02', 'file': '/media/ADHI_2024-02-02_130649.png', 'uploaded_on': '2024-02-02T20:06:50.448261+07:00'} - Line : 130
+02-Feb-24 20:06:50 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:06:57 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:06:57 : root : INFO : JSON Response {'ticker': 'ADMR', 'uploaded_date': '2024-02-02', 'file': '/media/ADMR_2024-02-02_130656.png', 'uploaded_on': '2024-02-02T20:06:57.043471+07:00'} - Line : 130
+02-Feb-24 20:06:57 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:03 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:03 : root : INFO : JSON Response {'ticker': 'AGII', 'uploaded_date': '2024-02-02', 'file': '/media/AGII_2024-02-02_130703.png', 'uploaded_on': '2024-02-02T20:07:03.465977+07:00'} - Line : 130
+02-Feb-24 20:07:03 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:09 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:09 : root : INFO : JSON Response {'ticker': 'AGRO', 'uploaded_date': '2024-02-02', 'file': '/media/AGRO_2024-02-02_130709.png', 'uploaded_on': '2024-02-02T20:07:09.988508+07:00'} - Line : 130
+02-Feb-24 20:07:09 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:16 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:16 : root : INFO : JSON Response {'ticker': 'AKRA', 'uploaded_date': '2024-02-02', 'file': '/media/AKRA_2024-02-02_130716.png', 'uploaded_on': '2024-02-02T20:07:16.413511+07:00'} - Line : 130
+02-Feb-24 20:07:16 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:22 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:22 : root : INFO : JSON Response {'ticker': 'AMRT', 'uploaded_date': '2024-02-02', 'file': '/media/AMRT_2024-02-02_130722.png', 'uploaded_on': '2024-02-02T20:07:22.899343+07:00'} - Line : 130
+02-Feb-24 20:07:22 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:29 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:29 : root : INFO : JSON Response {'ticker': 'ANTM', 'uploaded_date': '2024-02-02', 'file': '/media/ANTM_2024-02-02_130728.png', 'uploaded_on': '2024-02-02T20:07:29.483368+07:00'} - Line : 130
+02-Feb-24 20:07:29 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:35 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:35 : root : INFO : JSON Response {'ticker': 'ARTO', 'uploaded_date': '2024-02-02', 'file': '/media/ARTO_2024-02-02_130735.png', 'uploaded_on': '2024-02-02T20:07:35.920962+07:00'} - Line : 130
+02-Feb-24 20:07:35 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:42 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:42 : root : INFO : JSON Response {'ticker': 'ASII', 'uploaded_date': '2024-02-02', 'file': '/media/ASII_2024-02-02_130741.png', 'uploaded_on': '2024-02-02T20:07:42.383579+07:00'} - Line : 130
+02-Feb-24 20:07:42 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:48 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:48 : root : INFO : JSON Response {'ticker': 'ASSA', 'uploaded_date': '2024-02-02', 'file': '/media/ASSA_2024-02-02_130748.png', 'uploaded_on': '2024-02-02T20:07:48.931864+07:00'} - Line : 130
+02-Feb-24 20:07:48 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:07:55 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:07:55 : root : INFO : JSON Response {'ticker': 'AVIA', 'uploaded_date': '2024-02-02', 'file': '/media/AVIA_2024-02-02_130754.png', 'uploaded_on': '2024-02-02T20:07:55.347426+07:00'} - Line : 130
+02-Feb-24 20:07:55 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:01 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:01 : root : INFO : JSON Response {'ticker': 'BBCA', 'uploaded_date': '2024-02-02', 'file': '/media/BBCA_2024-02-02_130801.png', 'uploaded_on': '2024-02-02T20:08:01.863827+07:00'} - Line : 130
+02-Feb-24 20:08:01 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:08 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:08 : root : INFO : JSON Response {'ticker': 'BBKP', 'uploaded_date': '2024-02-02', 'file': '/media/BBKP_2024-02-02_130807.png', 'uploaded_on': '2024-02-02T20:08:08.357724+07:00'} - Line : 130
+02-Feb-24 20:08:08 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:14 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:14 : root : INFO : JSON Response {'ticker': 'BBNI', 'uploaded_date': '2024-02-02', 'file': '/media/BBNI_2024-02-02_130814.png', 'uploaded_on': '2024-02-02T20:08:14.850256+07:00'} - Line : 130
+02-Feb-24 20:08:14 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:21 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:21 : root : INFO : JSON Response {'ticker': 'BBRI', 'uploaded_date': '2024-02-02', 'file': '/media/BBRI_2024-02-02_130821.png', 'uploaded_on': '2024-02-02T20:08:21.639210+07:00'} - Line : 130
+02-Feb-24 20:08:21 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:28 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:28 : root : INFO : JSON Response {'ticker': 'BBTN', 'uploaded_date': '2024-02-02', 'file': '/media/BBTN_2024-02-02_130827.png', 'uploaded_on': '2024-02-02T20:08:28.267938+07:00'} - Line : 130
+02-Feb-24 20:08:28 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:34 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:34 : root : INFO : JSON Response {'ticker': 'BDMN', 'uploaded_date': '2024-02-02', 'file': '/media/BDMN_2024-02-02_130834.png', 'uploaded_on': '2024-02-02T20:08:34.939259+07:00'} - Line : 130
+02-Feb-24 20:08:34 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:41 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:41 : root : INFO : JSON Response {'ticker': 'BELI', 'uploaded_date': '2024-02-02', 'file': '/media/BELI_2024-02-02_130841.png', 'uploaded_on': '2024-02-02T20:08:41.665593+07:00'} - Line : 130
+02-Feb-24 20:08:41 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:48 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:48 : root : INFO : JSON Response {'ticker': 'BFIN', 'uploaded_date': '2024-02-02', 'file': '/media/BFIN_2024-02-02_130847.png', 'uploaded_on': '2024-02-02T20:08:48.149088+07:00'} - Line : 130
+02-Feb-24 20:08:48 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:08:54 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:08:54 : root : INFO : JSON Response {'ticker': 'BMRI', 'uploaded_date': '2024-02-02', 'file': '/media/BMRI_2024-02-02_130854.png', 'uploaded_on': '2024-02-02T20:08:54.609470+07:00'} - Line : 130
+02-Feb-24 20:08:54 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:01 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:01 : root : INFO : JSON Response {'ticker': 'BMTR', 'uploaded_date': '2024-02-02', 'file': '/media/BMTR_2024-02-02_130900.png', 'uploaded_on': '2024-02-02T20:09:01.095805+07:00'} - Line : 130
+02-Feb-24 20:09:01 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:07 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:07 : root : INFO : JSON Response {'ticker': 'BRIS', 'uploaded_date': '2024-02-02', 'file': '/media/BRIS_2024-02-02_130907.png', 'uploaded_on': '2024-02-02T20:09:07.531831+07:00'} - Line : 130
+02-Feb-24 20:09:07 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:14 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:14 : root : INFO : JSON Response {'ticker': 'BRMS', 'uploaded_date': '2024-02-02', 'file': '/media/BRMS_2024-02-02_130913.png', 'uploaded_on': '2024-02-02T20:09:14.000374+07:00'} - Line : 130
+02-Feb-24 20:09:14 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:20 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:20 : root : INFO : JSON Response {'ticker': 'BRPT', 'uploaded_date': '2024-02-02', 'file': '/media/BRPT_2024-02-02_130920.png', 'uploaded_on': '2024-02-02T20:09:20.513723+07:00'} - Line : 130
+02-Feb-24 20:09:20 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:26 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:26 : root : INFO : JSON Response {'ticker': 'BSDE', 'uploaded_date': '2024-02-02', 'file': '/media/BSDE_2024-02-02_130926.png', 'uploaded_on': '2024-02-02T20:09:26.990090+07:00'} - Line : 130
+02-Feb-24 20:09:26 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:33 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:33 : root : INFO : JSON Response {'ticker': 'BTPS', 'uploaded_date': '2024-02-02', 'file': '/media/BTPS_2024-02-02_130933.png', 'uploaded_on': '2024-02-02T20:09:33.414482+07:00'} - Line : 130
+02-Feb-24 20:09:33 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:39 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:39 : root : INFO : JSON Response {'ticker': 'BUKA', 'uploaded_date': '2024-02-02', 'file': '/media/BUKA_2024-02-02_130939.png', 'uploaded_on': '2024-02-02T20:09:39.815055+07:00'} - Line : 130
+02-Feb-24 20:09:39 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:46 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:46 : root : INFO : JSON Response {'ticker': 'CPIN', 'uploaded_date': '2024-02-02', 'file': '/media/CPIN_2024-02-02_130945.png', 'uploaded_on': '2024-02-02T20:09:46.262274+07:00'} - Line : 130
+02-Feb-24 20:09:46 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:52 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:52 : root : INFO : JSON Response {'ticker': 'CTRA', 'uploaded_date': '2024-02-02', 'file': '/media/CTRA_2024-02-02_130952.png', 'uploaded_on': '2024-02-02T20:09:52.731421+07:00'} - Line : 130
+02-Feb-24 20:09:52 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:09:59 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:09:59 : root : INFO : JSON Response {'ticker': 'DOID', 'uploaded_date': '2024-02-02', 'file': '/media/DOID_2024-02-02_130958.png', 'uploaded_on': '2024-02-02T20:09:59.213884+07:00'} - Line : 130
+02-Feb-24 20:09:59 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:05 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:05 : root : INFO : JSON Response {'ticker': 'DSNG', 'uploaded_date': '2024-02-02', 'file': '/media/DSNG_2024-02-02_131005.png', 'uploaded_on': '2024-02-02T20:10:05.678318+07:00'} - Line : 130
+02-Feb-24 20:10:05 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:12 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:12 : root : INFO : JSON Response {'ticker': 'ELSA', 'uploaded_date': '2024-02-02', 'file': '/media/ELSA_2024-02-02_131011.png', 'uploaded_on': '2024-02-02T20:10:12.132503+07:00'} - Line : 130
+02-Feb-24 20:10:12 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:18 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:18 : root : INFO : JSON Response {'ticker': 'EMTK', 'uploaded_date': '2024-02-02', 'file': '/media/EMTK_2024-02-02_131018.png', 'uploaded_on': '2024-02-02T20:10:18.631984+07:00'} - Line : 130
+02-Feb-24 20:10:18 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:25 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:25 : root : INFO : JSON Response {'ticker': 'ENRG', 'uploaded_date': '2024-02-02', 'file': '/media/ENRG_2024-02-02_131024.png', 'uploaded_on': '2024-02-02T20:10:25.130949+07:00'} - Line : 130
+02-Feb-24 20:10:25 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:31 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:31 : root : INFO : JSON Response {'ticker': 'ERAA', 'uploaded_date': '2024-02-02', 'file': '/media/ERAA_2024-02-02_131031.png', 'uploaded_on': '2024-02-02T20:10:31.596703+07:00'} - Line : 130
+02-Feb-24 20:10:31 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:38 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:38 : root : INFO : JSON Response {'ticker': 'ESSA', 'uploaded_date': '2024-02-02', 'file': '/media/ESSA_2024-02-02_131037.png', 'uploaded_on': '2024-02-02T20:10:38.082131+07:00'} - Line : 130
+02-Feb-24 20:10:38 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:44 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:44 : root : INFO : JSON Response {'ticker': 'EXCL', 'uploaded_date': '2024-02-02', 'file': '/media/EXCL_2024-02-02_131044.png', 'uploaded_on': '2024-02-02T20:10:44.464443+07:00'} - Line : 130
+02-Feb-24 20:10:44 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:51 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:51 : root : INFO : JSON Response {'ticker': 'GGRM', 'uploaded_date': '2024-02-02', 'file': '/media/GGRM_2024-02-02_131050.png', 'uploaded_on': '2024-02-02T20:10:51.171425+07:00'} - Line : 130
+02-Feb-24 20:10:51 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:10:57 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:10:57 : root : INFO : JSON Response {'ticker': 'GOTO', 'uploaded_date': '2024-02-02', 'file': '/media/GOTO_2024-02-02_131057.png', 'uploaded_on': '2024-02-02T20:10:57.642559+07:00'} - Line : 130
+02-Feb-24 20:10:57 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:04 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:04 : root : INFO : JSON Response {'ticker': 'HEAL', 'uploaded_date': '2024-02-02', 'file': '/media/HEAL_2024-02-02_131103.png', 'uploaded_on': '2024-02-02T20:11:04.248861+07:00'} - Line : 130
+02-Feb-24 20:11:04 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:10 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:10 : root : INFO : JSON Response {'ticker': 'HMSP', 'uploaded_date': '2024-02-02', 'file': '/media/HMSP_2024-02-02_131110.png', 'uploaded_on': '2024-02-02T20:11:10.748617+07:00'} - Line : 130
+02-Feb-24 20:11:10 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:17 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:17 : root : INFO : JSON Response {'ticker': 'HRUM', 'uploaded_date': '2024-02-02', 'file': '/media/HRUM_2024-02-02_131116.png', 'uploaded_on': '2024-02-02T20:11:17.215613+07:00'} - Line : 130
+02-Feb-24 20:11:17 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:23 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:23 : root : INFO : JSON Response {'ticker': 'ICBP', 'uploaded_date': '2024-02-02', 'file': '/media/ICBP_2024-02-02_131123.png', 'uploaded_on': '2024-02-02T20:11:23.662536+07:00'} - Line : 130
+02-Feb-24 20:11:23 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:30 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:30 : root : INFO : JSON Response {'ticker': 'INCO', 'uploaded_date': '2024-02-02', 'file': '/media/INCO_2024-02-02_131129.png', 'uploaded_on': '2024-02-02T20:11:30.179320+07:00'} - Line : 130
+02-Feb-24 20:11:30 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:36 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:36 : root : INFO : JSON Response {'ticker': 'INDF', 'uploaded_date': '2024-02-02', 'file': '/media/INDF_2024-02-02_131136.png', 'uploaded_on': '2024-02-02T20:11:36.665793+07:00'} - Line : 130
+02-Feb-24 20:11:36 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:43 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:43 : root : INFO : JSON Response {'ticker': 'INDY', 'uploaded_date': '2024-02-02', 'file': '/media/INDY_2024-02-02_131142.png', 'uploaded_on': '2024-02-02T20:11:43.147464+07:00'} - Line : 130
+02-Feb-24 20:11:43 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:49 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:49 : root : INFO : JSON Response {'ticker': 'INKP', 'uploaded_date': '2024-02-02', 'file': '/media/INKP_2024-02-02_131149.png', 'uploaded_on': '2024-02-02T20:11:49.648773+07:00'} - Line : 130
+02-Feb-24 20:11:49 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:11:56 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:11:56 : root : INFO : JSON Response {'ticker': 'INTP', 'uploaded_date': '2024-02-02', 'file': '/media/INTP_2024-02-02_131155.png', 'uploaded_on': '2024-02-02T20:11:56.482068+07:00'} - Line : 130
+02-Feb-24 20:11:56 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:03 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:03 : root : INFO : JSON Response {'ticker': 'ISAT', 'uploaded_date': '2024-02-02', 'file': '/media/ISAT_2024-02-02_131203.png', 'uploaded_on': '2024-02-02T20:12:03.479461+07:00'} - Line : 130
+02-Feb-24 20:12:03 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:09 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:09 : root : INFO : JSON Response {'ticker': 'ITMG', 'uploaded_date': '2024-02-02', 'file': '/media/ITMG_2024-02-02_131209.png', 'uploaded_on': '2024-02-02T20:12:09.982074+07:00'} - Line : 130
+02-Feb-24 20:12:09 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:16 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:16 : root : INFO : JSON Response {'ticker': 'JKON', 'uploaded_date': '2024-02-02', 'file': '/media/JKON_2024-02-02_131215.png', 'uploaded_on': '2024-02-02T20:12:16.478780+07:00'} - Line : 130
+02-Feb-24 20:12:16 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:22 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:22 : root : INFO : JSON Response {'ticker': 'JPFA', 'uploaded_date': '2024-02-02', 'file': '/media/JPFA_2024-02-02_131222.png', 'uploaded_on': '2024-02-02T20:12:22.998340+07:00'} - Line : 130
+02-Feb-24 20:12:22 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:29 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:29 : root : INFO : JSON Response {'ticker': 'JSMR', 'uploaded_date': '2024-02-02', 'file': '/media/JSMR_2024-02-02_131229.png', 'uploaded_on': '2024-02-02T20:12:29.607001+07:00'} - Line : 130
+02-Feb-24 20:12:29 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:36 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:36 : root : INFO : JSON Response {'ticker': 'KLBF', 'uploaded_date': '2024-02-02', 'file': '/media/KLBF_2024-02-02_131235.png', 'uploaded_on': '2024-02-02T20:12:36.365365+07:00'} - Line : 130
+02-Feb-24 20:12:36 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:43 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:43 : root : INFO : JSON Response {'ticker': 'LPPF', 'uploaded_date': '2024-02-02', 'file': '/media/LPPF_2024-02-02_131242.png', 'uploaded_on': '2024-02-02T20:12:43.098713+07:00'} - Line : 130
+02-Feb-24 20:12:43 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:49 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:49 : root : INFO : JSON Response {'ticker': 'LSIP', 'uploaded_date': '2024-02-02', 'file': '/media/LSIP_2024-02-02_131249.png', 'uploaded_on': '2024-02-02T20:12:49.614872+07:00'} - Line : 130
+02-Feb-24 20:12:49 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:12:56 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:12:56 : root : INFO : JSON Response {'ticker': 'MAPI', 'uploaded_date': '2024-02-02', 'file': '/media/MAPI_2024-02-02_131255.png', 'uploaded_on': '2024-02-02T20:12:56.031373+07:00'} - Line : 130
+02-Feb-24 20:12:56 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:02 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:02 : root : INFO : JSON Response {'ticker': 'MEDC', 'uploaded_date': '2024-02-02', 'file': '/media/MEDC_2024-02-02_131302.png', 'uploaded_on': '2024-02-02T20:13:02.515128+07:00'} - Line : 130
+02-Feb-24 20:13:02 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:09 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:09 : root : INFO : JSON Response {'ticker': 'MIKA', 'uploaded_date': '2024-02-02', 'file': '/media/MIKA_2024-02-02_131308.png', 'uploaded_on': '2024-02-02T20:13:09.014351+07:00'} - Line : 130
+02-Feb-24 20:13:09 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:15 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:15 : root : INFO : JSON Response {'ticker': 'MNCN', 'uploaded_date': '2024-02-02', 'file': '/media/MNCN_2024-02-02_131315.png', 'uploaded_on': '2024-02-02T20:13:15.511859+07:00'} - Line : 130
+02-Feb-24 20:13:15 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:21 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:21 : root : INFO : JSON Response {'ticker': 'MPMX', 'uploaded_date': '2024-02-02', 'file': '/media/MPMX_2024-02-02_131321.png', 'uploaded_on': '2024-02-02T20:13:21.965199+07:00'} - Line : 130
+02-Feb-24 20:13:21 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:28 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:28 : root : INFO : JSON Response {'ticker': 'MSIN', 'uploaded_date': '2024-02-02', 'file': '/media/MSIN_2024-02-02_131327.png', 'uploaded_on': '2024-02-02T20:13:28.380238+07:00'} - Line : 130
+02-Feb-24 20:13:28 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:34 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:34 : root : INFO : JSON Response {'ticker': 'MTEL', 'uploaded_date': '2024-02-02', 'file': '/media/MTEL_2024-02-02_131334.png', 'uploaded_on': '2024-02-02T20:13:34.895237+07:00'} - Line : 130
+02-Feb-24 20:13:34 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:41 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:41 : root : INFO : JSON Response {'ticker': 'MTMH', 'uploaded_date': '2024-02-02', 'file': '/media/MTMH_2024-02-02_131341.png', 'uploaded_on': '2024-02-02T20:13:41.428209+07:00'} - Line : 130
+02-Feb-24 20:13:41 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:47 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:47 : root : INFO : JSON Response {'ticker': 'MYOR', 'uploaded_date': '2024-02-02', 'file': '/media/MYOR_2024-02-02_131347.png', 'uploaded_on': '2024-02-02T20:13:47.914965+07:00'} - Line : 130
+02-Feb-24 20:13:47 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:13:54 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:13:54 : root : INFO : JSON Response {'ticker': 'OMED', 'uploaded_date': '2024-02-02', 'file': '/media/OMED_2024-02-02_131353.png', 'uploaded_on': '2024-02-02T20:13:54.292216+07:00'} - Line : 130
+02-Feb-24 20:13:54 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:00 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:00 : root : INFO : JSON Response {'ticker': 'PGAS', 'uploaded_date': '2024-02-02', 'file': '/media/PGAS_2024-02-02_131400.png', 'uploaded_on': '2024-02-02T20:14:00.782040+07:00'} - Line : 130
+02-Feb-24 20:14:00 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:07 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:07 : root : INFO : JSON Response {'ticker': 'PNBN', 'uploaded_date': '2024-02-02', 'file': '/media/PNBN_2024-02-02_131406.png', 'uploaded_on': '2024-02-02T20:14:07.231229+07:00'} - Line : 130
+02-Feb-24 20:14:07 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:13 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:13 : root : INFO : JSON Response {'ticker': 'PNIN', 'uploaded_date': '2024-02-02', 'file': '/media/PNIN_2024-02-02_131413.png', 'uploaded_on': '2024-02-02T20:14:13.693709+07:00'} - Line : 130
+02-Feb-24 20:14:13 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:20 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:20 : root : INFO : JSON Response {'ticker': 'PNLF', 'uploaded_date': '2024-02-02', 'file': '/media/PNLF_2024-02-02_131419.png', 'uploaded_on': '2024-02-02T20:14:20.246776+07:00'} - Line : 130
+02-Feb-24 20:14:20 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:26 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:26 : root : INFO : JSON Response {'ticker': 'PTPP', 'uploaded_date': '2024-02-02', 'file': '/media/PTPP_2024-02-02_131426.png', 'uploaded_on': '2024-02-02T20:14:26.914678+07:00'} - Line : 130
+02-Feb-24 20:14:26 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:33 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:33 : root : INFO : JSON Response {'ticker': 'PWON', 'uploaded_date': '2024-02-02', 'file': '/media/PWON_2024-02-02_131433.png', 'uploaded_on': '2024-02-02T20:14:33.646288+07:00'} - Line : 130
+02-Feb-24 20:14:33 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:40 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:40 : root : INFO : JSON Response {'ticker': 'RAJA', 'uploaded_date': '2024-02-02', 'file': '/media/RAJA_2024-02-02_131439.png', 'uploaded_on': '2024-02-02T20:14:40.307487+07:00'} - Line : 130
+02-Feb-24 20:14:40 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:46 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:46 : root : INFO : JSON Response {'ticker': 'RMKE', 'uploaded_date': '2024-02-02', 'file': '/media/RMKE_2024-02-02_131446.png', 'uploaded_on': '2024-02-02T20:14:46.746692+07:00'} - Line : 130
+02-Feb-24 20:14:46 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:53 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:53 : root : INFO : JSON Response {'ticker': 'SCMA', 'uploaded_date': '2024-02-02', 'file': '/media/SCMA_2024-02-02_131452.png', 'uploaded_on': '2024-02-02T20:14:53.298118+07:00'} - Line : 130
+02-Feb-24 20:14:53 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:14:59 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:14:59 : root : INFO : JSON Response {'ticker': 'SMGR', 'uploaded_date': '2024-02-02', 'file': '/media/SMGR_2024-02-02_131459.png', 'uploaded_on': '2024-02-02T20:14:59.916627+07:00'} - Line : 130
+02-Feb-24 20:14:59 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:06 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:06 : root : INFO : JSON Response {'ticker': 'SMRA', 'uploaded_date': '2024-02-02', 'file': '/media/SMRA_2024-02-02_131506.png', 'uploaded_on': '2024-02-02T20:15:06.736027+07:00'} - Line : 130
+02-Feb-24 20:15:06 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:13 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:13 : root : INFO : JSON Response {'ticker': 'SRTG', 'uploaded_date': '2024-02-02', 'file': '/media/SRTG_2024-02-02_131513.png', 'uploaded_on': '2024-02-02T20:15:13.554192+07:00'} - Line : 130
+02-Feb-24 20:15:13 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:20 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:20 : root : INFO : JSON Response {'ticker': 'SSMS', 'uploaded_date': '2024-02-02', 'file': '/media/SSMS_2024-02-02_131519.png', 'uploaded_on': '2024-02-02T20:15:20.040757+07:00'} - Line : 130
+02-Feb-24 20:15:20 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:26 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:26 : root : INFO : JSON Response {'ticker': 'TAPG', 'uploaded_date': '2024-02-02', 'file': '/media/TAPG_2024-02-02_131526.png', 'uploaded_on': '2024-02-02T20:15:26.468553+07:00'} - Line : 130
+02-Feb-24 20:15:26 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:32 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:32 : root : INFO : JSON Response {'ticker': 'TBIG', 'uploaded_date': '2024-02-02', 'file': '/media/TBIG_2024-02-02_131532.png', 'uploaded_on': '2024-02-02T20:15:32.911474+07:00'} - Line : 130
+02-Feb-24 20:15:32 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:39 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:39 : root : INFO : JSON Response {'ticker': 'TINS', 'uploaded_date': '2024-02-02', 'file': '/media/TINS_2024-02-02_131538.png', 'uploaded_on': '2024-02-02T20:15:39.381522+07:00'} - Line : 130
+02-Feb-24 20:15:39 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:45 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:45 : root : INFO : JSON Response {'ticker': 'TKIM', 'uploaded_date': '2024-02-02', 'file': '/media/TKIM_2024-02-02_131545.png', 'uploaded_on': '2024-02-02T20:15:45.845564+07:00'} - Line : 130
+02-Feb-24 20:15:45 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:52 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:52 : root : INFO : JSON Response {'ticker': 'TLKM', 'uploaded_date': '2024-02-02', 'file': '/media/TLKM_2024-02-02_131551.png', 'uploaded_on': '2024-02-02T20:15:52.364412+07:00'} - Line : 130
+02-Feb-24 20:15:52 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:15:58 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:15:58 : root : INFO : JSON Response {'ticker': 'TOWR', 'uploaded_date': '2024-02-02', 'file': '/media/TOWR_2024-02-02_131558.png', 'uploaded_on': '2024-02-02T20:15:58.830777+07:00'} - Line : 130
+02-Feb-24 20:15:58 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:05 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:05 : root : INFO : JSON Response {'ticker': 'TPIA', 'uploaded_date': '2024-02-02', 'file': '/media/TPIA_2024-02-02_131604.png', 'uploaded_on': '2024-02-02T20:16:05.264414+07:00'} - Line : 130
+02-Feb-24 20:16:05 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:11 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:11 : root : INFO : JSON Response {'ticker': 'UNVR', 'uploaded_date': '2024-02-02', 'file': '/media/UNVR_2024-02-02_131611.png', 'uploaded_on': '2024-02-02T20:16:11.797432+07:00'} - Line : 130
+02-Feb-24 20:16:11 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:18 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:18 : root : INFO : JSON Response {'ticker': 'WIKA', 'uploaded_date': '2024-02-02', 'file': '/media/WIKA_2024-02-02_131617.png', 'uploaded_on': '2024-02-02T20:16:18.281195+07:00'} - Line : 130
+02-Feb-24 20:16:18 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:24 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:24 : root : INFO : JSON Response {'ticker': 'WIIM', 'uploaded_date': '2024-02-02', 'file': '/media/WIIM_2024-02-02_131624.png', 'uploaded_on': '2024-02-02T20:16:24.721531+07:00'} - Line : 130
+02-Feb-24 20:16:24 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:31 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:31 : root : INFO : JSON Response {'ticker': 'WOMF', 'uploaded_date': '2024-02-02', 'file': '/media/WOMF_2024-02-02_131630.png', 'uploaded_on': '2024-02-02T20:16:31.191368+07:00'} - Line : 130
+02-Feb-24 20:16:31 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:37 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:37 : root : INFO : JSON Response {'ticker': 'GPRA', 'uploaded_date': '2024-02-02', 'file': '/media/GPRA_2024-02-02_131637.png', 'uploaded_on': '2024-02-02T20:16:37.614032+07:00'} - Line : 130
+02-Feb-24 20:16:37 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:44 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:44 : root : INFO : JSON Response {'ticker': 'SMDM', 'uploaded_date': '2024-02-02', 'file': '/media/SMDM_2024-02-02_131643.png', 'uploaded_on': '2024-02-02T20:16:44.130787+07:00'} - Line : 130
+02-Feb-24 20:16:44 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:50 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:50 : root : INFO : JSON Response {'ticker': 'HRTA', 'uploaded_date': '2024-02-02', 'file': '/media/HRTA_2024-02-02_131650.png', 'uploaded_on': '2024-02-02T20:16:50.580697+07:00'} - Line : 130
+02-Feb-24 20:16:50 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:16:57 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:16:57 : root : INFO : JSON Response {'ticker': 'IMAS', 'uploaded_date': '2024-02-02', 'file': '/media/IMAS_2024-02-02_131656.png', 'uploaded_on': '2024-02-02T20:16:57.067482+07:00'} - Line : 130
+02-Feb-24 20:16:57 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:03 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:03 : root : INFO : JSON Response {'ticker': 'GJTL', 'uploaded_date': '2024-02-02', 'file': '/media/GJTL_2024-02-02_131703.png', 'uploaded_on': '2024-02-02T20:17:03.532906+07:00'} - Line : 130
+02-Feb-24 20:17:03 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:10 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:10 : root : INFO : JSON Response {'ticker': 'CFIN', 'uploaded_date': '2024-02-02', 'file': '/media/CFIN_2024-02-02_131709.png', 'uploaded_on': '2024-02-02T20:17:09.984304+07:00'} - Line : 130
+02-Feb-24 20:17:10 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:16 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:16 : root : INFO : JSON Response {'ticker': 'ASRI', 'uploaded_date': '2024-02-02', 'file': '/media/ASRI_2024-02-02_131716.png', 'uploaded_on': '2024-02-02T20:17:16.468263+07:00'} - Line : 130
+02-Feb-24 20:17:16 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:22 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:22 : root : INFO : JSON Response {'ticker': 'NISP', 'uploaded_date': '2024-02-02', 'file': '/media/NISP_2024-02-02_131722.png', 'uploaded_on': '2024-02-02T20:17:22.912778+07:00'} - Line : 130
+02-Feb-24 20:17:22 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:29 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:29 : root : INFO : JSON Response {'ticker': 'SOCI', 'uploaded_date': '2024-02-02', 'file': '/media/SOCI_2024-02-02_131728.png', 'uploaded_on': '2024-02-02T20:17:29.347216+07:00'} - Line : 130
+02-Feb-24 20:17:29 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:35 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:35 : root : INFO : JSON Response {'ticker': 'PTBA', 'uploaded_date': '2024-02-02', 'file': '/media/PTBA_2024-02-02_131735.png', 'uploaded_on': '2024-02-02T20:17:35.839724+07:00'} - Line : 130
+02-Feb-24 20:17:35 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:42 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:42 : root : INFO : JSON Response {'ticker': 'MBAP', 'uploaded_date': '2024-02-02', 'file': '/media/MBAP_2024-02-02_131741.png', 'uploaded_on': '2024-02-02T20:17:42.296046+07:00'} - Line : 130
+02-Feb-24 20:17:42 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:48 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:48 : root : INFO : JSON Response {'ticker': 'BYAN', 'uploaded_date': '2024-02-02', 'file': '/media/BYAN_2024-02-02_131748.png', 'uploaded_on': '2024-02-02T20:17:48.756694+07:00'} - Line : 130
+02-Feb-24 20:17:48 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:17:55 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:17:55 : root : INFO : JSON Response {'ticker': 'SGER', 'uploaded_date': '2024-02-02', 'file': '/media/SGER_2024-02-02_131754.png', 'uploaded_on': '2024-02-02T20:17:55.154919+07:00'} - Line : 130
+02-Feb-24 20:17:55 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:01 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:01 : root : INFO : JSON Response {'ticker': 'BSSR', 'uploaded_date': '2024-02-02', 'file': '/media/BSSR_2024-02-02_131801.png', 'uploaded_on': '2024-02-02T20:18:01.725497+07:00'} - Line : 130
+02-Feb-24 20:18:01 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:08 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:08 : root : INFO : JSON Response {'ticker': 'MCOL', 'uploaded_date': '2024-02-02', 'file': '/media/MCOL_2024-02-02_131807.png', 'uploaded_on': '2024-02-02T20:18:08.247173+07:00'} - Line : 130
+02-Feb-24 20:18:08 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:14 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:14 : root : INFO : JSON Response {'ticker': 'APLN', 'uploaded_date': '2024-02-02', 'file': '/media/APLN_2024-02-02_131814.png', 'uploaded_on': '2024-02-02T20:18:14.693241+07:00'} - Line : 130
+02-Feb-24 20:18:14 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:21 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:21 : root : INFO : JSON Response {'ticker': 'SMDR', 'uploaded_date': '2024-02-02', 'file': '/media/SMDR_2024-02-02_131820.png', 'uploaded_on': '2024-02-02T20:18:21.113807+07:00'} - Line : 130
+02-Feb-24 20:18:21 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:27 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:27 : root : INFO : JSON Response {'ticker': 'UNTR', 'uploaded_date': '2024-02-02', 'file': '/media/UNTR_2024-02-02_131827.png', 'uploaded_on': '2024-02-02T20:18:27.645348+07:00'} - Line : 130
+02-Feb-24 20:18:27 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:34 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:34 : root : INFO : JSON Response {'ticker': 'ABMM', 'uploaded_date': '2024-02-02', 'file': '/media/ABMM_2024-02-02_131833.png', 'uploaded_on': '2024-02-02T20:18:34.081263+07:00'} - Line : 130
+02-Feb-24 20:18:34 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:40 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:40 : root : INFO : JSON Response {'ticker': 'ADRO', 'uploaded_date': '2024-02-02', 'file': '/media/ADRO_2024-02-02_131840.png', 'uploaded_on': '2024-02-02T20:18:40.547373+07:00'} - Line : 130
+02-Feb-24 20:18:40 : root : INFO : File Deleted successfully - Line : 141
+02-Feb-24 20:18:46 : root : INFO : Status Code201 - Line : 129
+02-Feb-24 20:18:46 : root : INFO : JSON Response {'ticker': 'TEBE', 'uploaded_date': '2024-02-02', 'file': '/media/TEBE_2024-02-02_131846.png', 'uploaded_on': '2024-02-02T20:18:46.985603+07:00'} - Line : 130
+02-Feb-24 20:18:46 : root : INFO : File Deleted successfully - Line : 141
