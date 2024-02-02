@@ -166,20 +166,6 @@ def update_daily_stock_price():
         except IndexError:
             print (f"MySQL Index Error: %s",str(ex))
             return None
-    except mysql.connector.DatabaseError as ex:
-        print (f"MySQL Database Error : %s",str(ex))
-        return None
-    except mysql.connector.OperationalError as ex:
-        print('MYSQL operational error caught on: ' + str(ex))
-        return None
-    except TypeError as ex:
-        print('Type Error  caught on: ' + str(ex))
-        
-        return None
-    except ValueError as ex:
-        print('Value Error caught on: ' + str(ex))
-        
-        return None
     except Exception as ex:
         print('Exception Error caught on: ' + str(ex) )
         

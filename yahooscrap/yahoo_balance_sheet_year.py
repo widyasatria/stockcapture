@@ -12,7 +12,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 from configparser import ConfigParser
-import MySQLdb
+import mysql.connector
+import logging
+from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime
 from decimal import Decimal
 
@@ -35,7 +37,7 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     if debug==True:
         print(recalculate_result)
     
-    strquery = "select max(DATE_FORMAT(finance_date,'%%Y')) as max_finance_year from stock_fin_bal_sheet_quarter "
+    strquery = "select max(DATE_FORMAT(finance_date,'%Y')) as max_finance_year from stock_fin_bal_sheet_quarter "
     strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM'"
     v_cursor.execute(strquery,(v_ticker,v_finance_key))
     
@@ -49,7 +51,7 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
         
         strquery= "select count(ticker), sum(finance_value) from stock_fin_bal_sheet_quarter " 
         strquery = strquery + "where ticker = %s and finance_key = %s and txt_header <> 'TTM' "
-        strquery = strquery + "and DATE_FORMAT(finance_date,'%%Y')= %s "
+        strquery = strquery + "and DATE_FORMAT(finance_date,'%Y')= %s "
    
         v_cursor.execute(strquery,(v_ticker,v_finance_key,txtyear))
         rowquartervalues = v_cursor.fetchone()  
@@ -110,17 +112,25 @@ def balance_sheet_annual():
     up_onefolder = path.parent.absolute().parent
     config_path = os.path.join(up_onefolder,"conf")
     conf_file = os.path.join(config_path,"config.ini")
+        
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"yahoo_balance_sheet_year.log")
+    
+    #Log Level DEBUG INFO  WARNING ERROR CRITICAL
+    # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
+    my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('yahoo_balance_sheet_year')
+
+    handler = TimedRotatingFileHandler(log_file,when="midnight", backupCount=30)
+    handler.suffix = "%Y%m%d"
+    logger.addHandler(handler)
     
     config = ConfigParser()
     config.read(conf_file)
 
     
-    conn = MySQLdb.connect(
-    # host="localhost",
-    # user="root",
-    # password="password",
-    # database="db_api",
-    # auth_plugin='mysql_native_password'
+    conn = mysql.connector.connect(
     host=config.get('db_connection', 'host'),
     user=config.get('db_connection', 'user'),
     password=config.get('db_connection', 'pwd'),
@@ -139,6 +149,7 @@ def balance_sheet_annual():
             for x in result:
                 txt_ticker = x[0]
                 print('=== Populating Yearly Balance Sheet for '+ txt_ticker)
+                logging.info('=== Populating Yearly Balance Sheet for '+ txt_ticker)
                 if debug == True :
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
@@ -188,7 +199,8 @@ def balance_sheet_annual():
                 txt_all_data_css = 'rw-expnded'
                 all_datas = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, txt_all_data_css))) 
                 
-                print("getting financial data from ... "+ url)
+                print("Getting financial data from ... "+ url)
+                logging.info("Getting financial data from ... "+ url)
                 
                 if all_datas is not None:
                     driver.implicitly_wait(4)
@@ -207,7 +219,7 @@ def balance_sheet_annual():
                         driver.implicitly_wait(4)
                         if debug==True:
                             print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
-                        
+                            logging.info("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                         time.sleep(0.5)
                        
                         cnt=1
@@ -226,7 +238,7 @@ def balance_sheet_annual():
                             if cnt >=5 and cnt <(5+col_length-1):
                                 if debug == True:
                                     print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
-                            
+                                    logging.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
                                 #cleansing data
                                 if txt_data.text.find("k")>0:
                                     txt_value = txt_data.text
@@ -251,8 +263,6 @@ def balance_sheet_annual():
                                 arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, txt_tblheaders[col_header].text, col_header+1]
                                 cursor.callproc('stock_fin_bal_sheet_year_upsert',arg1)
                                 
-                               
-                                
                                 col_header=col_header+1 
                                 time.sleep(0.5)
                             if cnt > (5+col_length-1): # break loop jika data yang ada didalamnya sudah habis berdasarkan jumlah column 
@@ -263,22 +273,20 @@ def balance_sheet_annual():
                         k=k+1
                 upd_stock_last_modify(conn,txt_ticker)
 
-    except MySQLdb.Error as ex:
+    except mysql.connector.Error as ex:
         try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            print(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logging.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
             print (f"MySQL Error: %s",str(ex))
+            logging.error(f"MySQL Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
+    except Exception as ex:
+        print(f"MySQL Error: %s",str(ex))
+        logging.error(f"MySQL Error: %s",str(ex))
         return None
-    except TypeError as ex:
-        print(ex)
-        return None
-    except ValueError as ex:
-        print(ex)
-        return None
+    
     finally:
         conn.close
         driver.quit()

@@ -28,6 +28,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from configparser import ConfigParser
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
 debug = True
 
@@ -108,16 +109,23 @@ def main():
     up_onefolder = path.parent.absolute().parent
     config_path = os.path.join(up_onefolder,"conf")
     conf_file = os.path.join(config_path,"config.ini")
-      
+  
     log_path = os.path.join(up_onefolder,"log")
     log_file = os.path.join(log_path,"yahoo_inc_stat_quarter.log")
     
     #Log Level DEBUG INFO  WARNING ERROR CRITICAL
-    
+    # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
     my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
     logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
     logger = logging.getLogger('yahoo_inc_stat_quarter')
+
+    handler = TimedRotatingFileHandler(log_file, when="midnight", backupCount=30)
+    handler.suffix = "%Y%m%d"
+    logger.addHandler(handler)
+
     logger.info('=================START SCRIPT yahoo_inc_start_quarter================= ')
+    
+    
     
     options = Options()
     options.use_chromium=True
@@ -308,7 +316,8 @@ def main():
                                 k+=1
                              
                 etime = datetime.now()
-                print('Duration for this url {}'.format(etime - stime))        
+                print('Duration for this url {}'.format(etime - stime))     
+                logger.info('Duration for this url {}'.format(etime - stime))   
                 upd_stock_last_modify(conn,txt_ticker)       
         
         end_time = datetime.now()
@@ -327,22 +336,6 @@ def main():
             print (f"MySQL Index Error: %s",str(ex))
             logger.error(f"MySQL Index Error: %s",str(ex))
             return None
-    except mysql.connector.DatabaseError as ex:
-        logger.error('MYSQL DatabaseError  caught on: ' + str(ex))
-    
-    except mysql.connector.OperationalError as ex:
-        print('MYSQL operational error caught on: ' + str(ex))
-        logger.error('MYSQL operational error caught on: ' + str(ex))
-
-        return None
-    except TypeError as ex:
-        print('Type Error  caught on: ' + str(ex))
-        logger.error('Type Error  caught on: ' + str(ex))
-        return None
-    except ValueError as ex:
-        print('Value Error caught on: ' + str(ex))
-        logger.error('Type Error caught on: ' + str(ex))
-        return None
     except Exception as ex:
         print('Exception Error caught on: ' + str(ex) )
         logger.error('Exception Error caught on: ' + str(ex) )

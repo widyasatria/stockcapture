@@ -14,7 +14,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
-import MySQLdb
+import mysql.connector
+import logging
+from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime
 from decimal import Decimal
 
@@ -38,7 +40,7 @@ def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
         print(recalculate_result)
 
  
-    strquery = "select date_format(finance_date,'%%Y'), finance_date, finance_value, date_format(finance_date,'%%m') from stock_fin_bal_sheet_quarter "
+    strquery = "select date_format(finance_date,'%Y'), finance_date, finance_value, date_format(finance_date,'%m') from stock_fin_bal_sheet_quarter "
     strquery = strquery +  " where ticker = %s and finance_key = %s and txt_header <> 'TTM' "
     strquery = strquery +  " order by finance_date desc limit 1 "
     v_cursor.execute(strquery,(v_ticker,v_finance_key))
@@ -117,13 +119,21 @@ def balance_sheet_quarter():
     config = ConfigParser()
     config.read(conf_file)
 
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"yahoo_balance_sheet_quarter.log")
     
-    conn = MySQLdb.connect(
-    # host="localhost",
-    # user="root",
-    # password="password",
-    # database="db_api",
-    # auth_plugin='mysql_native_password'
+    #Log Level DEBUG INFO  WARNING ERROR CRITICAL
+    # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
+    my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('yahoo_balance_sheet_quarter')
+
+    handler = TimedRotatingFileHandler(log_file,when="midnight", backupCount=30)
+    handler.suffix = "%Y%m%d"
+    logger.addHandler(handler)
+
+    
+    conn = mysql.connector.connect(
     host=config.get('db_connection', 'host'),
     user=config.get('db_connection', 'user'),
     password=config.get('db_connection', 'pwd'),
@@ -192,7 +202,8 @@ def balance_sheet_quarter():
                 txt_all_data_css = 'rw-expnded'
                 all_datas = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, txt_all_data_css))) 
                 
-                print("getting financial data from ... "+ url)
+                print("Getting financial data from ... "+ url)
+                logging.info("Getting financial data from ... "+ url)
                 
                 if all_datas is not None:
                     driver.implicitly_wait(4)
@@ -226,7 +237,7 @@ def balance_sheet_quarter():
                             if cnt >=5 and cnt<=(5+(col_length-2)):
                                 
                                 print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
-                                   
+                                logging.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
                                 
                                 #cleansing data
                                 if txt_data.text.find("k")>0:
@@ -264,27 +275,19 @@ def balance_sheet_quarter():
                 
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
-
-      
-                
-       
-      
     
-    except MySQLdb.Error as ex:
+    except mysql.connector.Error as ex:
         try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            print(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logging.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            print(f"MySQL Error: %s",str(ex))
+            logging.error(f"MySQL Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
-        return None
-    except TypeError as ex:
-        print(ex)
-        return None
-    except ValueError as ex:
-        print(ex)
+    except Exception as ex:
+        print(f"Exception Error: %s",str(ex))
+        logging.error(f"Exception Error: %s",str(ex))
         return None
     finally:
         conn.close

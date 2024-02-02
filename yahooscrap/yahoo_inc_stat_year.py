@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
-import MySQLdb
+import mysql.connector
 from datetime import datetime
 from decimal import Decimal
 # for wait
@@ -27,7 +27,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from configparser import ConfigParser
 config = ConfigParser()
-
+import logging
+from logging.handlers import TimedRotatingFileHandler
 
 debug = True
 
@@ -74,7 +75,23 @@ def main():
     config = ConfigParser()
     config.read(conf_file)
 
-    conn = MySQLdb.connect(
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"yahoo_inc_stat_year.log")
+    
+    #Log Level DEBUG INFO  WARNING ERROR CRITICAL
+    # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
+    my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('yahoo_inc_stat_year')
+
+    handler = TimedRotatingFileHandler(log_file, when="midnight", backupCount=30)
+    handler.suffix = "%Y%m%d"
+    logger.addHandler(handler)
+
+    logger.info('=================START SCRIPT yahoo_inc_stat_year ================= ')
+    
+    
+    conn = mysql.connector.connect(
     host=config.get('db_connection', 'host'),
     user=config.get('db_connection', 'user'),
     password=config.get('db_connection', 'pwd'),
@@ -93,6 +110,10 @@ def main():
                 txt_ticker = x[0]
                 print('=== Populating Yearly income statement for '+ txt_ticker)
                 print('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
+                
+                logger.info('=== Populating Yearly income statement for '+ txt_ticker)
+                logger.info('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
+                
                 stime = datetime.now()
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
                 
@@ -128,12 +149,14 @@ def main():
                    
                     if debug == True:
                         print('panjang headers ', len(txt_tblheaders))
+                        logger.info(('panjang headers ', len(txt_tblheaders)))
                     
                     col_length = len(txt_tblheaders)
                     
                     for txt_header in txt_tblheaders:
                         if debug == True:
                             print('txt_header : ' + txt_header.text)
+                            logger.info('txt_header : ' + txt_header.text)
                         if txt_header.text != 'Breakdown' and txt_header.text != 'TTM':
                             max_fin_dt = txt_header.text.split("/")
                             max_fin_date = max_fin_dt[2]+"-"+max_fin_dt[0]+"-"+max_fin_dt[1]
@@ -142,15 +165,19 @@ def main():
                 # iterasi ke table header jika sudah ada total revenue dengan tanggal yang ada di t diberi if, jika sudah ada langsung pass ke next ticker biar tidak ambil data lagi
                 if debug == True:
                     print("max_fin_date : "+ str(max_fin_date))
+                    logger.info("max_fin_date : "+ str(max_fin_date))
                 qry=" select count(finance_key)  from stock_fin_inc_stat_year where ticker= %s and finance_key='Total Revenue' and finance_date=%s"
                 cursor.execute(qry,(txt_ticker,max_fin_date))
                 rows = cursor.fetchone() 
                 if debug == True:
                     print("jumlah row : " + str(rows[0]))
+                    logger.info("jumlah row : " + str(rows[0]))
+                    
                 if cursor.rowcount > 0 and rows is not None:
                     
                     if rows[0] == 0: #jika tidak ada data nya baru ambil dari web otherwise skip
                         print("Belum ada data "+ str(url) + " di database ")
+                        logger.info("Belum ada data "+ str(url) + " di database ")
                         
                         driver.implicitly_wait(4)    
                         if col_length > 2:
@@ -164,6 +191,7 @@ def main():
                                         
                                 if debug==True:
                                     print(" Panjang rw-expanded ", len(txt_tbody))
+                                    logger.info(" Panjang rw-expanded ", len(txt_tbody))
                                 k=1
                                 for txt_labels in txt_tbody:
                                     time.sleep(1)
@@ -174,6 +202,7 @@ def main():
                                     driver.implicitly_wait(4)
                                     if debug==True:
                                         print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
+                                        logger.info("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                                     
                                     time.sleep(0.5)
                                 
@@ -193,8 +222,8 @@ def main():
                                         # untuk inc_stat_year
                                         if cnt >=5 and cnt<=(5+(col_length-2)):
                                             print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
-                                            if debug == True:
-                                                print("Ada karakter k? : ", txt_data.text.find("k"))
+                                            logger.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
+                                         
                                             #cleansing data
                                             
                                             if txt_data.text.find("k")>0:
@@ -233,27 +262,22 @@ def main():
                                     k=k+1
                     if rows[0] > 0:
                         print("Sudah ada data di database : " + str(rows[0]))
+                        logger.info("Sudah ada data di database : " + str(rows[0]))
                 etime = datetime.now()
                 print('Duration for this url {}'.format(etime - stime))        
+                logger.info('Duration for this url {}'.format(etime - stime))        
                 upd_stock_last_modify(conn,txt_ticker)
-    except MySQLdb.Error as ex:
+    except mysql.connector.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logger.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            logger.error(f"MySQL Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
-        return None
-    except TypeError as ex:
-        print(ex)
-        return None
-    except ValueError as ex:
-        print(ex)
-        return None
     except Exception as ex:
-        print('Generic Error caught on: '+ txt_ticker +' : ' + str(ex) )
+        print('Generic Exception Error caught on: '+ txt_ticker +' : ' + str(ex) )
+        logger.error('Generic Exception Error caught on: '+ txt_ticker +' : ' + str(ex) )
         return None
     finally:
         conn.close
