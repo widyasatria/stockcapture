@@ -6,7 +6,7 @@ from selenium import webdriver
 #pip install msedge-selenium-tools
 import datetime
 
-import MySQLdb
+import mysql.connector
 from pathlib import Path
 from decimal import Decimal
 from selenium.webdriver.common.by import By
@@ -70,7 +70,7 @@ def main():
     config = ConfigParser()
     config.read(conf_file)
 
-    conn = MySQLdb.connect(
+    conn = mysql.connector.connect(
     host=config.get('db_connection', 'host'),
     user=config.get('db_connection', 'user'),
     password=config.get('db_connection', 'pwd'),
@@ -137,25 +137,25 @@ def main():
                 if debug == True :
                     print("exec result ",res)
                 
-    except MySQLdb.Error as ex:
-        try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
-            return None
-        except IndexError:
-            print (f"MySQL Error: %s",str(ex))
-            return None
-    except MySQLdb.OperationalError as ex:
+    except mysql.connector.Error as ex:
+        print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+        return None
+    except mysql.OperationalError as ex:
+        print (f"MySQL Error: %s",str(ex))
+        return None
+    except mysql.IndexError as ex:
+        print (f"MySQL Error: %s",str(ex))
+        return None
+    except mysql.ValueError as ex:
         print(ex)
         return None
-    except TypeError as ex:
-        print(ex)
-        return None
-    except ValueError as ex:
-        print(ex)
+    except IndexError as ex:
+        print (f"MySQL Index Error: %s",str(ex))
         return None
     except Exception as ex:
         print('Generic Error caught on: '+ txt_ticker +' : ' + str(ex) )
         return None
+    
     finally:
         conn.close
               

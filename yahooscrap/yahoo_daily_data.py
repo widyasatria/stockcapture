@@ -10,7 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
-import MySQLdb
+import mysql.connector
 from datetime import datetime
 from decimal import Decimal
 import csv
@@ -60,7 +60,7 @@ def update_daily_stock_price():
     config.read(conf_file)
 
     
-    conn = MySQLdb.connect(
+    conn = mysql.connector.connect(
     host=config.get('db_connection', 'host'),
     user=config.get('db_connection', 'user'),
     password=config.get('db_connection', 'pwd'),
@@ -105,9 +105,9 @@ def update_daily_stock_price():
                 time.sleep(4)
                
                 #get existing record from db
-                query = """ select ticker, date_format(now(),'%%Y-%%m-%%d') as today_date,  date_format(date,'%%Y-%%m-%%d') as existing_lastdate, datediff(now(),date) as selisih, """
-                query = query + """ date_format(date_sub(now(), INTERVAL 1 day),'%%Y-%%m-%%d') as today_minus1,  """
-                query = query + """ date_format(date_add(date, INTERVAL 1 day),'%%Y-%%m-%%d') as lastday_plus1 from stock_daily where ticker = %s order by date desc limit 1 """
+                query = """ select ticker, date_format(now(),'%Y-%m-%d') as today_date,  date_format(date,'%Y-%m-%d') as existing_lastdate, datediff(now(),date) as selisih, """
+                query = query + """ date_format(date_sub(now(), INTERVAL 1 day),'%Y-%m-%d') as today_minus1,  """
+                query = query + """ date_format(date_add(date, INTERVAL 1 day),'%Y-%m-%d') as lastday_plus1 from stock_daily where ticker = %s order by date desc limit 1 """
                 
                 cursor.execute(query,(ticker_xidx,))
                 result = cursor.fetchall()
@@ -158,21 +158,31 @@ def update_daily_stock_price():
                 
                 #break
     
-    except MySQLdb.Error as ex:
+    except mysql.connector.Error as ex:
+        print('Mysql Generic Error caught on: ' + str(ex))
         try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            print(f"MySQL Generic Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            print (f"MySQL Index Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
+    except mysql.connector.DatabaseError as ex:
+        print (f"MySQL Database Error : %s",str(ex))
+        return None
+    except mysql.connector.OperationalError as ex:
+        print('MYSQL operational error caught on: ' + str(ex))
         return None
     except TypeError as ex:
-        print(ex)
+        print('Type Error  caught on: ' + str(ex))
+        
         return None
     except ValueError as ex:
-        print(ex)
+        print('Value Error caught on: ' + str(ex))
+        
+        return None
+    except Exception as ex:
+        print('Exception Error caught on: ' + str(ex) )
+        
         return None
     finally:
         conn.close

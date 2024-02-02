@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
-import MySQLdb
+import mysql.connector
 from datetime import datetime
 from decimal import Decimal
 # for wait
@@ -52,7 +52,7 @@ def cash_flow_annual():
     service = Service(verbose = False)
     
     
-    conn = MySQLdb.connect(
+    conn = mysql.connector.connect(
     host="localhost",
     user="root",
     password="password",
@@ -193,17 +193,14 @@ def cash_flow_annual():
                          
                         k=k+1
                 upd_stock_last_modify(conn,txt_ticker)
-
-    except MySQLdb.Error as ex:
+                
+    except mysql.connector.Error as ex:
         try:
             print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            print (f"MySQL Index Error : %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
-        return None
     except TypeError as ex:
         print(ex)
         return None
@@ -213,6 +210,8 @@ def cash_flow_annual():
     finally:
         conn.close
         driver.quit()
-# if __name__ == "__main__":
-#     main()
+
+if __name__ == "__main__":
+    cash_flow_annual()
+     
 
