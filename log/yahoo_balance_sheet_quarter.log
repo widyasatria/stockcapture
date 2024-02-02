@@ -1,0 +1,88 @@
+02-Feb-24 19:06:29 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
+02-Feb-24 19:06:29 : mysql.connector : INFO : plugin_name: mysql_native_password - Line : 152
+02-Feb-24 19:06:29 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin - Line : 156
+02-Feb-24 19:06:29 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
+02-Feb-24 19:06:29 : mysql.connector : INFO : plugin_name: caching_sha2_password - Line : 152
+02-Feb-24 19:06:29 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin - Line : 156
+02-Feb-24 19:06:29 : selenium.webdriver.common.selenium_manager : WARNING : The msedgedriver version (120.0.2210.121) detected in PATH at C:\Users\wardians\stockcapture\msedgedriver.exe might not be compatible with the detected MicrosoftEdge version (121.0.2277.83); currently, msedgedriver 121.0.2277.83 is recommended for MicrosoftEdge 121.*, so it is advised to delete the driver in PATH and retry - Line : 135
+02-Feb-24 19:06:36 : root : INFO : Getting financial data from ... https://finance.yahoo.com/quote/TOTO.JK/balance-sheet?p=TOTO.JK - Line : 206
+02-Feb-24 19:06:37 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total Assets - txt_data 3,326,617,585 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:06:38 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total Assets - txt_data 3,278,036,414 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:06:39 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total Assets - txt_data 3,445,698,373 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:06:39 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total Assets - txt_data 3,304,972,192 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:06:41 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Current Assets - txt_data 1,435,762,545 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:06:42 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Current Assets - txt_data 1,374,177,158 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:06:42 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Current Assets - txt_data 1,426,372,555 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:06:43 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Current Assets - txt_data 1,528,687,046 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:06:45 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash, Cash Equivalents & Short Term Investments - txt_data 236,999,094 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:06:46 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash, Cash Equivalents & Short Term Investments - txt_data 211,851,866 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:06:46 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash, Cash Equivalents & Short Term Investments - txt_data 257,375,600 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:06:47 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash, Cash Equivalents & Short Term Investments - txt_data 405,569,883 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:06:49 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash And Cash Equivalents - txt_data 236,999,094 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:06:49 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash And Cash Equivalents - txt_data 211,851,866 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:06:50 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash And Cash Equivalents - txt_data 257,375,600 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:06:50 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash And Cash Equivalents - txt_data 405,569,883 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:06:53 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash - txt_data 84,499,094 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:06:53 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash - txt_data 56,851,866 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:06:54 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash - txt_data 80,375,600 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:06:54 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash - txt_data 249,838,883 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:06:56 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash Equivalents - txt_data 152,500,000 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:06:57 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash Equivalents - txt_data 155,000,000 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:06:58 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash Equivalents - txt_data 177,000,000 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:06:58 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Cash Equivalents - txt_data 155,731,000 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:00 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventory - txt_data 663,150,967 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:01 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventory - txt_data 690,413,401 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:01 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventory - txt_data 623,763,517 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:02 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventory - txt_data 625,693,653 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:04 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Raw Materials - txt_data 150,859,410 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:05 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Raw Materials - txt_data 150,534,978 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:05 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Raw Materials - txt_data 147,196,641 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:06 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Raw Materials - txt_data 188,938,473 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:08 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Work in Process - txt_data 175,204,381 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:08 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Work in Process - txt_data 184,231,921 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:09 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Work in Process - txt_data 164,729,416 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:10 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Work in Process - txt_data 170,201,755 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:12 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Finished Goods - txt_data 310,798,815 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:12 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Finished Goods - txt_data 317,470,784 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:13 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Finished Goods - txt_data 273,176,052 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:13 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Finished Goods - txt_data 241,705,232 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:16 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Inventories - txt_data 69,175,608 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:16 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Inventories - txt_data 72,924,038 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:17 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Inventories - txt_data 73,817,208 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:17 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Inventories - txt_data 24,848,194 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:19 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventories Adjustments Allowances - txt_data -42,887,246 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:20 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventories Adjustments Allowances - txt_data -34,748,320 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:20 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventories Adjustments Allowances - txt_data -35,155,800 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:21 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Inventories Adjustments Allowances - txt_data - - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:23 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Prepaid Assets - txt_data 20,911,504 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:24 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Prepaid Assets - txt_data 21,281,304 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:24 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Prepaid Assets - txt_data 26,941,239 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:25 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Prepaid Assets - txt_data 17,293,663 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:27 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total non-current assets - txt_data 1,890,855,041 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:27 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total non-current assets - txt_data 1,903,859,257 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:28 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total non-current assets - txt_data 2,019,325,818 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:29 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Total non-current assets - txt_data 1,776,285,146 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:31 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Net PPE - txt_data 919,345,709 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:31 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Net PPE - txt_data 937,384,637 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:32 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Net PPE - txt_data 1,051,302,964 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:32 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Net PPE - txt_data 962,868,975 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:35 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Gross PPE - txt_data 2,199,134,539 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:35 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Gross PPE - txt_data 2,199,067,990 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:36 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Gross PPE - txt_data 2,302,984,594 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:36 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Gross PPE - txt_data 2,187,655,380 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:38 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Properties - txt_data 0 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:39 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Properties - txt_data 0 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:39 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Properties - txt_data 0 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:40 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Properties - txt_data 0 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:42 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Land And Improvements - txt_data 20,827,965 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:43 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Land And Improvements - txt_data 20,827,965 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:43 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Land And Improvements - txt_data 20,827,965 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:44 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Land And Improvements - txt_data 20,827,965 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:46 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Buildings And Improvements - txt_data 838,495,759 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:47 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Buildings And Improvements - txt_data 846,412,533 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:47 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Buildings And Improvements - txt_data 862,404,080 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:48 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Buildings And Improvements - txt_data 815,001,190 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:50 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 1,162,058,029 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:50 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 1,158,142,310 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:51 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 1,159,350,841 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:52 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 945,965,918 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
