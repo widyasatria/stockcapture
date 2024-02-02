@@ -86,3 +86,7 @@
 02-Feb-24 19:07:50 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 1,158,142,310 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
 02-Feb-24 19:07:51 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 1,159,350,841 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
 02-Feb-24 19:07:52 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Machinery Furniture Equipment - txt_data 945,965,918 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
+02-Feb-24 19:07:54 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Properties - txt_data 167,372,839 - header 9/29/2023 - counter 5 - colheader 1 - colheader 2 - Line : 240
+02-Feb-24 19:07:54 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Properties - txt_data 166,175,749 - header 6/29/2023 - counter 6 - colheader 2 - colheader 3 - Line : 240
+02-Feb-24 19:07:55 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Properties - txt_data 165,685,457 - header 3/30/2023 - counter 7 - colheader 3 - colheader 4 - Line : 240
+02-Feb-24 19:07:55 : root : INFO : == txt_tickers : TOTO - txt_breakdown: - Other Properties - txt_data 154,593,767 - header 12/30/2022 - counter 8 - colheader 4 - colheader 5 - Line : 240
