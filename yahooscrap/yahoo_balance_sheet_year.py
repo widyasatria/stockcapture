@@ -15,7 +15,7 @@ from configparser import ConfigParser
 import mysql.connector
 import logging
 from logging.handlers import TimedRotatingFileHandler
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 
 # for wait
@@ -30,7 +30,17 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 debug = True
 
+def rotate_log_file(log_name,log_file_path,log_file_name):
+    curr_date = datetime.now()
+    log_file_prev_date = curr_date - timedelta(days = 1)
 
+    fname_prev_log_file= log_name+log_file_prev_date.strftime("_%d-%m-%Y")+".log"
+    prev_log_file= os.path.join(log_file_path,fname_prev_log_file)
+  
+    if not os.path.exists(prev_log_file) and os.path.exists(log_file_name) :
+        os.rename(log_file_name,prev_log_file)
+        
+        
 def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     strtxt = v_ticker + "-" + v_finance_key 
     recalculate_result = "=== RECALCULATING TTM for : "+ strtxt
@@ -115,6 +125,7 @@ def balance_sheet_annual():
         
     log_path = os.path.join(up_onefolder,"log")
     log_file = os.path.join(log_path,"yahoo_balance_sheet_year.log")
+    rotate_log_file("yahoo_balance_sheet_year",log_path,log_file)
     
     #Log Level DEBUG INFO  WARNING ERROR CRITICAL
     # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
@@ -122,10 +133,6 @@ def balance_sheet_annual():
     logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
     logger = logging.getLogger('yahoo_balance_sheet_year')
 
-    handler = TimedRotatingFileHandler(log_file,when="midnight", backupCount=30)
-    handler.suffix = "%Y%m%d"
-    logger.addHandler(handler)
-    
     config = ConfigParser()
     config.read(conf_file)
 
@@ -149,7 +156,7 @@ def balance_sheet_annual():
             for x in result:
                 txt_ticker = x[0]
                 print('=== Populating Yearly Balance Sheet for '+ txt_ticker)
-                logging.info('=== Populating Yearly Balance Sheet for '+ txt_ticker)
+                logger.info('=== Populating Yearly Balance Sheet for '+ txt_ticker)
                 if debug == True :
                     print('https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK')
             
@@ -219,7 +226,7 @@ def balance_sheet_annual():
                         driver.implicitly_wait(4)
                         if debug==True:
                             print("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
-                            logging.info("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
+                            logger.info("=== ROW ke "+ str(k) + " Panjang div row data "+ str(len(row_datas)) )
                         time.sleep(0.5)
                        
                         cnt=1
@@ -238,7 +245,7 @@ def balance_sheet_annual():
                             if cnt >=5 and cnt <(5+col_length-1):
                                 if debug == True:
                                     print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
-                                    logging.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
+                                    logger.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader+1 "+ str(col_header+1) ) 
                                 #cleansing data
                                 if txt_data.text.find("k")>0:
                                     txt_value = txt_data.text
@@ -276,15 +283,15 @@ def balance_sheet_annual():
     except mysql.connector.Error as ex:
         try:
             print(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
-            logging.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logger.error(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
             print (f"MySQL Error: %s",str(ex))
-            logging.error(f"MySQL Error: %s",str(ex))
+            logger.error(f"MySQL Error: %s",str(ex))
             return None
     except Exception as ex:
         print(f"MySQL Error: %s",str(ex))
-        logging.error(f"MySQL Error: %s",str(ex))
+        logger.error(f"MySQL Error: %s",str(ex))
         return None
     
     finally:

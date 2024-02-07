@@ -16,7 +16,7 @@ import mysql.connector
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -30,7 +30,16 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 debug = True
 
+def rotate_log_file(log_name,log_file_path,log_file_name):
+    curr_date = datetime.now()
+    log_file_prev_date = curr_date - timedelta(days = 1)
 
+    fname_prev_log_file= log_name+log_file_prev_date.strftime("_%d-%m-%Y")+".log"
+    prev_log_file= os.path.join(log_file_path,fname_prev_log_file)
+  
+    if not os.path.exists(prev_log_file) and os.path.exists(log_file_name) :
+        os.rename(log_file_name,prev_log_file)
+        
 def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     strtxt = v_ticker + "-" + v_finance_key 
     recalculate_result = "=== RECALCULATING TTM for : "+ strtxt
@@ -114,6 +123,8 @@ def cash_flow_quarter():
     
     log_path = os.path.join(up_onefolder,"log")
     log_file = os.path.join(log_path,"yahoo_cash_flow_quarter.log")
+    rotate_log_file("yahoo_cash_flow_quarter",log_path,log_file)
+    
     
     #Log Level DEBUG INFO  WARNING ERROR CRITICAL
     # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
@@ -121,9 +132,7 @@ def cash_flow_quarter():
     logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
     logger = logging.getLogger('yahoo_cash_flow_quarter')
 
-    handler = TimedRotatingFileHandler(log_file,when="midnight", backupCount=30)
-    handler.suffix = "%Y%m%d"
-    logger.addHandler(handler)
+  
     
     config = ConfigParser()
     config.read(conf_file)
@@ -179,7 +188,7 @@ def cash_flow_quarter():
                     txt_tblheaders = driver.find_elements(By.XPATH,txt_headers_xpath)
                    
                     if debug == True:
-                        print('panjang headers ', len(txt_tblheaders))
+                        print('Panjang headers ', len(txt_tblheaders))
                     
                     col_length = len(txt_tblheaders)
                     
@@ -193,7 +202,7 @@ def cash_flow_quarter():
                 txt_all_data_css = 'rw-expnded'
                 all_datas = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, txt_all_data_css))) 
                 
-                print("getting financial data from ... "+ url)
+                print("Getting financial data from ... "+ url)
                 
                 if all_datas is not None:
                     driver.implicitly_wait(4)
@@ -225,8 +234,9 @@ def cash_flow_quarter():
                             
                            
                             if cnt >=5 and cnt<=(5+(col_length-2)):
-                                print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
-                                   
+                                if debug==True:
+                                    print("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1) ) 
+                                    logger.info("== txt_tickers : "+ txt_ticker +" - txt_breakdown: - "+ txt_breakdown + " - txt_data "+ txt_data.text + " - header " + txt_tblheaders[col_header].text + " - counter "+ str(cnt) + " - colheader "+ str(col_header) + " - colheader "+ str(col_header+1)) 
                                 
                                 #cleansing data
                                 if txt_data.text.find("k")>0:
@@ -270,13 +280,16 @@ def cash_flow_quarter():
     
     except mysql.connector.Error as ex:
         try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            print(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logger.info(f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            print (f"MySQL Error: %s" + str(ex))
+            logger.info(f"MySQL Error: %s" + str(ex))
             return None
     except Exception as ex:
-        print (f"MySQL Exception : %s",str(ex))
+        print (f"MySQL Exception : %s" + str(ex))
+        logger.info(f"MySQL Exception : %s" + str(ex))
         return None
     
     finally:
