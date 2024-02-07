@@ -13,7 +13,7 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
 import mysql.connector
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 # for wait
 from selenium.common.exceptions import NoSuchElementException
@@ -32,6 +32,15 @@ from logging.handlers import TimedRotatingFileHandler
 
 debug = True
 
+def rotate_log_file(log_name,log_file_path,log_file_name):
+    curr_date = datetime.now()
+    log_file_prev_date = curr_date - timedelta(days = 1)
+    
+    fname_prev_log_file= log_name+log_file_prev_date.strftime("_%d-%m-%Y")+".log"
+    prev_log_file= os.path.join(log_file_path,fname_prev_log_file)
+   
+    if not os.path.exists(prev_log_file) and os.path.exists(log_file_name) :
+        os.rename(log_file_name,prev_log_file)
 
 def upd_stock_last_modify(conn,txt_ticker):
     cursor = conn.cursor()
@@ -77,17 +86,15 @@ def main():
 
     log_path = os.path.join(up_onefolder,"log")
     log_file = os.path.join(log_path,"yahoo_inc_stat_year.log")
+
+    rotate_log_file("yahoo_inc_stat_year",log_path,log_file)
     
     #Log Level DEBUG INFO  WARNING ERROR CRITICAL
     # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
     my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
     logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
     logger = logging.getLogger('yahoo_inc_stat_year')
-
-    handler = TimedRotatingFileHandler(log_file, when="midnight", backupCount=30)
-    handler.suffix = "%Y%m%d"
-    logger.addHandler(handler)
-
+    
     logger.info('=================START SCRIPT yahoo_inc_stat_year ================= ')
     
     
@@ -111,8 +118,8 @@ def main():
                 print('=== Populating Yearly income statement for '+ txt_ticker)
                 print('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
                 
-                logger.info('=== Populating Yearly income statement for '+ txt_ticker)
-                logger.info('=== Start getting data from https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK')
+                logger.info('=== Populating Yearly income statement for '+ str(txt_ticker))
+                logger.info('=== Start getting data from https://finance.yahoo.com/quote/'+ str(x[0]) +'.JK/financials?p='+ str(x[0]) +'.JK')
                 
                 stime = datetime.now()
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials?p='+x[0]+'.JK'
@@ -191,7 +198,7 @@ def main():
                                         
                                 if debug==True:
                                     print(" Panjang rw-expanded ", len(txt_tbody))
-                                    logger.info(" Panjang rw-expanded ", len(txt_tbody))
+                                    logger.info(" Panjang rw-expanded "+ str(len(txt_tbody)) )
                                 k=1
                                 for txt_labels in txt_tbody:
                                     time.sleep(1)

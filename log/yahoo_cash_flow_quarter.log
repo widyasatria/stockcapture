@@ -1,7 +1,0 @@
-02-Feb-24 18:52:48 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
-02-Feb-24 18:52:48 : mysql.connector : INFO : plugin_name: mysql_native_password - Line : 152
-02-Feb-24 18:52:48 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin - Line : 156
-02-Feb-24 18:52:48 : mysql.connector : INFO : package: mysql.connector.plugins - Line : 151
-02-Feb-24 18:52:48 : mysql.connector : INFO : plugin_name: caching_sha2_password - Line : 152
-02-Feb-24 18:52:48 : mysql.connector : INFO : AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin - Line : 156
-02-Feb-24 18:52:49 : selenium.webdriver.common.selenium_manager : WARNING : The msedgedriver version (120.0.2210.121) detected in PATH at C:\Users\wardians\stockcapture\msedgedriver.exe might not be compatible with the detected MicrosoftEdge version (121.0.2277.83); currently, msedgedriver 121.0.2277.83 is recommended for MicrosoftEdge 121.*, so it is advised to delete the driver in PATH and retry - Line : 135

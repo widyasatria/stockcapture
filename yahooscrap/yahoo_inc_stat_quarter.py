@@ -14,7 +14,7 @@ from selenium.webdriver.edge.options import Options
 from pathlib import Path
 
 import mysql.connector
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 
 # for wait
@@ -31,6 +31,18 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 
 debug = True
+
+def rotate_log_file(log_name,log_file_path,log_file_name):
+    curr_date = datetime.now()
+    log_file_prev_date = curr_date - timedelta(days = 1)
+    
+    fname_prev_log_file= log_name+log_file_prev_date.strftime("_%d-%m-%Y")+".log"
+    prev_log_file= os.path.join(log_file_path,fname_prev_log_file)
+   
+    if not os.path.exists(prev_log_file) and os.path.exists(log_file_name) :
+        os.rename(log_file_name,prev_log_file)
+
+
 
 def recalculate_ttm(v_cursor, v_ticker, v_finance_key):
     strtxt = v_ticker + "-" + v_finance_key 
@@ -113,26 +125,23 @@ def main():
     log_path = os.path.join(up_onefolder,"log")
     log_file = os.path.join(log_path,"yahoo_inc_stat_quarter.log")
     
+    rotate_log_file("yahoo_inc_stat_quarter",log_path,log_file)
+    
     #Log Level DEBUG INFO  WARNING ERROR CRITICAL
     # jika kita set info, maka warning error critical keluar, jika kita set warning : hanya warning error critical yang keluar
     my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
     logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
     logger = logging.getLogger('yahoo_inc_stat_quarter')
 
-    handler = TimedRotatingFileHandler(log_file, when="midnight", backupCount=30)
-    handler.suffix = "%Y%m%d"
-    logger.addHandler(handler)
+        
+  
 
     logger.info('=================START SCRIPT yahoo_inc_start_quarter================= ')
-    
-    
-    
     options = Options()
     options.use_chromium=True
     options.add_argument("headless")
     options.add_argument("log-level=2")
     service = Service(verbose = False)
-    
     
     
     config = ConfigParser()
