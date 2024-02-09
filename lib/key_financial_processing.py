@@ -1,12 +1,12 @@
 
 #requires  pip install --upgrade holidays, python-mysql
 # holidays https://pypi.org/project/holidays/
-import MySQLdb
+import mysql.connector
 from datetime import datetime, timedelta, date
 from decimal import Decimal
 import holidays, requests
 from pathlib import Path
-import os
+import os,time
 from configparser import ConfigParser
 
 debug = True
@@ -51,10 +51,8 @@ def get_ticker_price_by_date(cursor,txt_ticker,the_date):
             print( str(txt_ticker) + " Price at  : "+ str(rows[1]) + " : " + str(rows[0]) )
         return rows[0]
     else:
-        if debug is True:
-            print("No data set price to 0")
-        
-        print( str(txt_ticker) + " val_finance_date "+ str(the_date) + "  Price = 0 ")
+        # if debug is True:
+        #     print( "No data set price to 0 " + str(txt_ticker) + " val_finance_date "+ str(the_date) + "  Price = 0 ")
         cl_price = 0
         return cl_price 
     
@@ -64,7 +62,6 @@ def get_last_price(conn,txt_ticker,val_finance_date):
     bool_max_date = is_max_finance_date(conn,txt_ticker,val_finance_date)
     if debug == True:
         print("============== GET LAST PRICE ==================")
-       
         print(" Is max_finance date " + str(val_finance_date) + " : " + str(bool_max_date) )
    
     if bool_max_date == True:
@@ -72,15 +69,18 @@ def get_last_price(conn,txt_ticker,val_finance_date):
         id_holidays = holidays.country_holidays('ID') 
         dt_today = date.today()
         dt_yesterday = dt_today - timedelta(days=1)
-        print("tanggal kemarin: " + str(dt_yesterday) )
         
-        while dt_yesterday.weekday() ==5 or dt_yesterday.weekday() ==6 or val_finance_date in id_holidays:
+        # if debug == True:
+        #     print("tanggal kemarin: " + str(dt_yesterday) )
+        
+        while dt_yesterday.weekday() ==5 or dt_yesterday.weekday() ==6 or val_finance_date in id_holidays or get_ticker_price_by_date(cursor,txt_ticker,dt_yesterday) == 0:
             dt_yesterday =  dt_yesterday - timedelta(days=1)
         
         the_price = get_ticker_price_by_date(cursor,txt_ticker,dt_yesterday)
         if debug is True:    
             print("Date After Busines Working Day : " + str(dt_yesterday) + " the price  : "+ str(the_price))
             print("============== END OF GET LAST PRICE ==================")
+            
     else:
         #estimasi rata2 tanggal release laporan keuangan
         val_finance_date = val_finance_date + timedelta(days=35)
@@ -91,7 +91,7 @@ def get_last_price(conn,txt_ticker,val_finance_date):
         if debug is True:
             print("Date Before : " + str(val_finance_date) )
        
-        while val_finance_date.weekday() ==5 or val_finance_date.weekday() ==6 or val_finance_date in id_holidays:
+        while val_finance_date.weekday() ==5 or val_finance_date.weekday() ==6 or val_finance_date in id_holidays or get_ticker_price_by_date(cursor,txt_ticker,val_finance_date) == 0:
             val_finance_date =  val_finance_date + timedelta(days=1)
         
      
@@ -104,10 +104,10 @@ def get_last_price(conn,txt_ticker,val_finance_date):
             
  
 def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_key):
-    
+    print("=== START GET FINANCE VALUE FOR : " + str(finance_key) + "================")
     if table_name == 'stock_fin_inc_stat_quarter':  
        
-        qry = "select max(DATE_FORMAT(finance_date,'%%Y')) from stock_fin_inc_stat_quarter "
+        qry = "select max(DATE_FORMAT(finance_date,'%Y')) from stock_fin_inc_stat_quarter "
         qry = qry + "where ticker = %s and txt_header <> 'TTM' "
         qry = qry + "and finance_key = %s "  #'Net Income Common Stockholders'
         
@@ -121,8 +121,8 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
         if int(val_finance_date[0]) == int(max_year):
             qry = "select sum(finance_value) from stock_fin_inc_stat_quarter "
             qry = qry + " where ticker = %s and txt_header <> 'TTM' "
-            qry = qry + " and DATE_FORMAT(finance_date,'%%Y-%%m') <= DATE_FORMAT(%s,'%%Y-%%m') "  
-            qry = qry + " and DATE_FORMAT(finance_date,'%%Y') = %s " #max_year
+            qry = qry + " and DATE_FORMAT(finance_date,'%Y-%m') <= DATE_FORMAT(%s,'%Y-%m') "  
+            qry = qry + " and DATE_FORMAT(finance_date,'%Y') = %s " #max_year
             qry = qry + " and finance_key = %s " #'Net Income Common Stockholders'
             cursor.execute(qry,(txt_ticker,txt_finance_date,max_year,finance_key))
             rows = cursor.fetchone() 
@@ -162,8 +162,8 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
                 
                 qry = "select sum(finance_value) from stock_fin_inc_stat_quarter "
                 qry = qry + " where ticker = %s and txt_header <> 'TTM' "
-                qry = qry + " and DATE_FORMAT(finance_date,'%%Y-%%m') <= DATE_FORMAT(%s,'%%Y-%%m') "  
-                qry = qry + " and DATE_FORMAT(finance_date,'%%Y') = %s " #max_year-1
+                qry = qry + " and DATE_FORMAT(finance_date,'%Y-%m') <= DATE_FORMAT(%s,'%Y-%m') "  
+                qry = qry + " and DATE_FORMAT(finance_date,'%Y') = %s " #max_year-1
                 qry = qry + " and finance_key = %s " #'Net Income Common Stockholders'
                 cursor.execute(qry,(txt_ticker,txt_finance_date,int(max_year)-1,finance_key))
                 rows = cursor.fetchone() 
@@ -175,14 +175,16 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
     else:
         
         qry = "select finance_value from "+ table_name +" where finance_key = %s and finance_date = %s and ticker = %s limit 1"
-        if debug == True:
-            print(finance_key + " finance_date : "+ str(txt_finance_date) + "txt ticker : " + txt_ticker + " query " + qry )
+        # if debug == True:
+        #     print(finance_key + " finance_date : "+ str(txt_finance_date) + "txt ticker : " + txt_ticker + " query " + qry )
         cursor.execute(qry,(finance_key,txt_finance_date, txt_ticker))
         rows = cursor.fetchone() 
         if cursor.rowcount > 0:
             txt_finance_value = rows[0]
         else:
             txt_finance_value = 0
+    
+    print("=== END GET FINANCE VALUE FOR : " + str(finance_key) + "================")
     return txt_finance_value
 
 def calculate_ttm(txt_ticker,txt_finance_date, txt_net_income_stakeholder):
@@ -305,9 +307,6 @@ def update_key_financial_records(conn,val_ticker,val_finance_date,txt_currency, 
     txt_der = round(txt_total_liabilities/txt_stockholders_equity,2)
     txt_cash_equiv = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Cash And Cash Equivalents')
     
-    # if val_ticker == 'MEDC' or val_ticker =='KLBF':
-    #     print( "val_ticker : "+ val_ticker +" txt_net_income_stakeholders "+ str(txt_net_income_stakeholders) + " val_finance_date : " + str(val_finance_date) )
-    
     txt_eps = calculate_eps(txt_net_income_ttm,txt_share_issued,txt_currency, txt_unit_of_number, txt_rate)
     
     txt_avg_book_value, txt_per_avg, txt_roe_avg  = average_values(cursor,val_ticker,val_finance_date)
@@ -366,7 +365,7 @@ def key_financial_processing():
     config.read(conf_file)
  
     
-    conn = MySQLdb.connect(
+    conn = mysql.connector.connect(
         host=config.get('db_connection', 'host'),
         user=config.get('db_connection', 'user'),
         password=config.get('db_connection', 'pwd'),
@@ -410,8 +409,7 @@ def key_financial_processing():
                         qry = " select count(*) rowexist from key_financials where ticker= %s and finance_date = %s and total_assets is not null" 
                         cursor.execute(qry,(bs_ticker,bs_finance_date))
                         numrow = cursor.fetchone()  
-                        if debug == True:
-                            print("numrow ", numrow[0])
+                  
                         #if norecord
                         if numrow[0]== 0:
                             if debug == True:
@@ -458,33 +456,28 @@ def key_financial_processing():
                                 print("Jumlah Row : " + str(numrow[0])  + " UPDATE " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key)+ " " + str(bs_finance_value) )
                             # jika total_assets sudah ada di update
                             update_key_financial_records(conn,bs_ticker,bs_finance_date,txt_currency, txt_unit_of_number,txt_rate) 
-                # if bs_ticker=='ITMG':
-                #     break
-                        
+                       
                     
                         
  
-    except MySQLdb.Error as ex:
+    except mysql.connector.Error as ex:
+        print('Mysql Generic Error caught on: ' + str(ex))
+        # logger.error('Mysql Generic error caught on: ' + str(ex))
         try:
-            print  (f"MySQL Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            print(f"MySQL Generic Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            # logger.error(f"MySQL Generic Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
-            print (f"MySQL Error: %s",str(ex))
+            print (f"MySQL Index Error: %s",str(ex))
+            # logger.error(f"MySQL Index Error: %s",str(ex))
             return None
-    except MySQLdb.OperationalError as ex:
-        print(ex)
-        return None
-    except TypeError as ex:
-        print(ex)
-        return None
-    except ValueError as ex:
-        print(ex)
-        return None
     except Exception as ex:
-        print('Generic Error caught on: '+ txt_ticker +' : ' + str(ex) )
+        print('Exception Error caught on: ' + str(ex) )
+        # logger.error('Exception Error caught on: ' + str(ex) )
         return None
     finally:
         conn.close
+        # driver.quit()
 
 def main():
     key_financial_processing()
