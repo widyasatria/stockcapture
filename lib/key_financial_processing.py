@@ -8,10 +8,23 @@ import holidays, requests
 from pathlib import Path
 import os,time
 from configparser import ConfigParser
+import logging
 
 debug = True
 
 api_limit = 980
+
+def rotate_log_file(log_name,log_file_path,log_file_name):
+    curr_date = datetime.now()
+    log_file_prev_date = curr_date - timedelta(days = 1)
+    
+    fname_prev_log_file= log_name+log_file_prev_date.strftime("_%d-%m-%Y")+".log"
+    prev_log_file= os.path.join(log_file_path,fname_prev_log_file)
+   
+    if not os.path.exists(prev_log_file) and os.path.exists(log_file_name) :
+        os.rename(log_file_name,prev_log_file)
+
+
 
 def get_iso_ticker(cursor,txt_ticker):
      
@@ -216,9 +229,9 @@ def calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_eq
         txt_book_value = round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) )*txt_rate,2)
         if debug==True:
             print("============= CALCULATE BOOK VALUE ======")
-            print (" txt_stockholders_equity*txt_unit_of_number : " + str(txt_stockholders_equity*txt_unit_of_number))
-            print("txt_share_issued*txt_unit_of_number : " + str(txt_share_issued*txt_unit_of_number))
-            print("round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) ) )*txt_rate,2 : " + str(txt_book_value) )
+            print (" txt_stockholders_equity * txt_unit_of_number : " + str(txt_stockholders_equity*txt_unit_of_number))
+            print(" txt_share_issued * txt_unit_of_number : " + str(txt_share_issued*txt_unit_of_number))
+            print(" round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) ) )* txt_rate,2 : " + str(txt_book_value) )
             print("============= END OF CALCULATE BOOK VALUE =====")
         
         
@@ -274,7 +287,7 @@ def calculate_eps(txt_net_income_ttm,txt_share_issued,txt_currency, txt_unit_of_
         val_per = round(( (txt_net_income_ttm* txt_unit_of_number *txt_rate) / (txt_share_issued*txt_unit_of_number) ),2)
     return val_per
 
-def update_key_financial_records(conn,val_ticker,val_finance_date,txt_currency, txt_unit_of_number,txt_rate):
+def update_key_financial_records(conn,val_ticker,val_finance_date,txt_currency, txt_unit_of_number,txt_rate,logger):
     
     cursor = conn.cursor()
     txt_share_issued = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Share Issued')
@@ -313,7 +326,8 @@ def update_key_financial_records(conn,val_ticker,val_finance_date,txt_currency, 
     
     if debug == 'True':
         print(' txt_eps '+ str(txt_eps) +' txt_per : '+ str(txt_per)+ 'txt_book_value : ' + str(txt_book_value) + 'txt_avg_book_value : ' + str(txt_avg_book_value) + " : " + str(txt_price_to_book_value) )
- 
+        logger.info(' txt_eps '+ str(txt_eps) +' txt_per : '+ str(txt_per)+ 'txt_book_value : ' + str(txt_book_value) + 'txt_avg_book_value : ' + str(txt_avg_book_value) + " : " + str(txt_price_to_book_value) )
+    
     # if debug == 'True':        
         # print("txt_last_price " + str(txt_last_price) + " txt_book_value "  + str(txt_book_value) + " round((txt_last_price/txt_book_value),2) : " + str(round((txt_last_price/txt_book_value),2)) )
         # print(" txt_share_issued: " + str(txt_share_issued) + " txt_last_price  :" + str(txt_last_price) + " txt_stockholders equyity  :" + str(txt_stockholders_equity) + " txt_total_liabilities   :" + str(txt_total_liabilities))
@@ -360,10 +374,13 @@ def key_financial_processing():
     up_onefolder = path.parent.absolute().parent
     config_path = os.path.join(up_onefolder,"conf")
     conf_file = os.path.join(config_path,"config.ini")
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"key_financial_processing.log")
+    
+    rotate_log_file("key_financial_processing",log_path,log_file)
     
     config = ConfigParser()
     config.read(conf_file)
- 
     
     conn = mysql.connector.connect(
         host=config.get('db_connection', 'host'),
@@ -374,6 +391,15 @@ def key_financial_processing():
         )
     
     cursor = conn.cursor()
+    
+    
+    my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('key_financial_processing')
+
+    logger.info('=================START SCRIPT key_financial_processing ================= ')
+
+
     try:
         #cursor.execute("SELECT ticker,exchange, currency, unit_of_number FROM stocks")
         cursor.execute("select  s.ticker, s.exchange, s.currency,  s.unit_of_number, cx.rate from stocks s, currency_fx cx where s.currency = cx.currency")
@@ -386,7 +412,7 @@ def key_financial_processing():
                 txt_currency = x[2]
                 txt_unit_of_number = x[3]
                 txt_rate = x[4]
-                # txt_ticker = 'ABMM'
+          
                
                 
                 qry = " select bs.ticker, bs.finance_key,finance_value, finance_date,txt_header from stock_fin_bal_sheet_quarter bs "
@@ -413,8 +439,8 @@ def key_financial_processing():
                         #if norecord
                         if numrow[0]== 0:
                             if debug == True:
-                                print("Jumlah Row : " + str(numrow[0])  + " INSERT " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key))
-                            
+                                print("Belum ada di DB - Jumlah Row : " + str(numrow[0])  + " INSERT " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key))
+                                logger.info("Belum ada di DB - Jumlah Row : " + str(numrow[0])  + " INSERT " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key))
                             qry = "INSERT INTO key_financials(ticker, "
                             qry = qry + " total_assets, "
                             qry = qry + " finance_date, "
@@ -448,36 +474,37 @@ def key_financial_processing():
                             cursor.execute(qry,(bs_ticker,bs_finance_value,bs_finance_date,bs_txt_header))
                             conn.commit()    
 
-                            update_key_financial_records(conn,bs_ticker,bs_finance_date,txt_currency, txt_unit_of_number,txt_rate)
+                            update_key_financial_records(conn,bs_ticker,bs_finance_date,txt_currency, txt_unit_of_number,txt_rate,logger)
                            
                         
                         if numrow[0] == 1:
                             if debug == True:
-                                print("Jumlah Row : " + str(numrow[0])  + " UPDATE " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key)+ " " + str(bs_finance_value) )
+                                print(" Sudah ada di DB - Jumlah Row : " + str(numrow[0])  + " UPDATE " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key)+ " " + str(bs_finance_value) )
+                                logger.info(" Sudah ada di DB - Jumlah Row : " + str(numrow[0])  + " UPDATE " + bs_ticker + " " + str(bs_finance_date)+ " " + str(bs_finance_key)+ " " + str(bs_finance_value) )
                             # jika total_assets sudah ada di update
-                            update_key_financial_records(conn,bs_ticker,bs_finance_date,txt_currency, txt_unit_of_number,txt_rate) 
+                            update_key_financial_records(conn,bs_ticker,bs_finance_date,txt_currency, txt_unit_of_number,txt_rate,logger) 
                        
-                    
+        logger.info('=================END SCRIPT key_financial_processing ================= ')              
                         
  
     except mysql.connector.Error as ex:
         print('Mysql Generic Error caught on: ' + str(ex))
-        # logger.error('Mysql Generic error caught on: ' + str(ex))
+        logger.error('Mysql Generic error caught on: ' + str(ex))
         try:
             print(f"MySQL Generic Error [%d]: %s %s",(ex.args[0], ex.args[1]))
-            # logger.error(f"MySQL Generic Error [%d]: %s %s",(ex.args[0], ex.args[1]))
+            logger.error(f"MySQL Generic Error [%d]: %s %s",(ex.args[0], ex.args[1]))
             return None
         except IndexError:
             print (f"MySQL Index Error: %s",str(ex))
-            # logger.error(f"MySQL Index Error: %s",str(ex))
+            logger.error(f"MySQL Index Error: %s",str(ex))
             return None
     except Exception as ex:
         print('Exception Error caught on: ' + str(ex) )
-        # logger.error('Exception Error caught on: ' + str(ex) )
+        logger.error('Exception Error caught on: ' + str(ex) )
         return None
     finally:
         conn.close
-        # driver.quit()
+        
 
 def main():
     key_financial_processing()

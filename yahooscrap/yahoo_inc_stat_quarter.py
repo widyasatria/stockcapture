@@ -28,7 +28,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from configparser import ConfigParser
 import logging
-from logging.handlers import TimedRotatingFileHandler
+
 
 debug = True
 
