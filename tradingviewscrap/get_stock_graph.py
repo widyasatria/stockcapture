@@ -125,7 +125,8 @@ def get_stock_graph():
                 # Save the cropped image
                 time_create = strftime("%Y-%m-%d_%H%M%S", gmtime())
                 fname = txt_ticker + "_" + time_create + ".png"
-                print(fname)
+                print( " Filename Created : " + str(fname))
+                logging.info( " Filename Created : " + str(fname))
                 screenshotfile = os.path.join(screenshotfolder, fname)
                 cropped_screenshot.save(screenshotfile)
                 
