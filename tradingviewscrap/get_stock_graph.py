@@ -91,13 +91,14 @@ def get_stock_graph():
     
         if result is not None:   
             app=Application(backend="uia").start(cmd_line=u'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',wait_for_idle=False)
-            app.connect(title=u'New tab - Work - Microsoft​ Edge',found_index=0) #supaya windows bisa dikenali pastikan copy title dari UI Spy
+            #app.connect(title=u'New tab - Work - Microsoft​ Edge',found_index=0) #supaya windows bisa dikenali pastikan copy title dari UI Spy
+            app.connect(title=u'New tab - Personal - Microsoft​ Edge',found_index=0) #supaya windows bisa dikenali pastikan copy title dari UI Spy
             window = app.top_window()   
             AppBar = window.child_window(title=u'App bar', auto_id="view_1000", control_type="ToolBar")
             
             AppBar.print_control_identifiers()
             #jika ada error cek menggunakan UI Spy di hover di search_address kadang auto_id / automationID berubah pastikan sama dengan yang ada di UISpy
-            search_address = AppBar.child_window(auto_id="view_1022", control_type="Edit")
+            search_address = AppBar.child_window(auto_id="view_1021", control_type="Edit")
             
             for x in result:
                 if debug == True :
