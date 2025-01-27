@@ -1,7 +1,7 @@
 #https://stackoverflow.com/questions/50692358/how-to-work-with-a-specific-version-of-chromedriver-while-chrome-browser-gets-up
 #https://stackoverflow.com/questions/63529124/how-to-open-up-microsoft-edge-using-selenium-and-python
 
-# FILE INI SUDAH TIDAK BISA DI RUN LANGSUNG HARUS DIPANGGIL OLEH ../yahoo_data_scheduler.py
+# FILE INI SUDAH TIDAK BISA DI RUN LANGSUNG HARUS DIPANGGIL OLEH ../stockplus_scheduler.py
 
 import os, time
 from selenium import webdriver
