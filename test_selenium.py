@@ -19,7 +19,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 options = Options()
 options.use_chromium=True
-options.add_argument("headless")
+#options.add_argument("headless")
 service = Service(verbose = False)
 
 url='https://finance.yahoo.com/quote/UNTR.JK/financials?p=UNTR.JK'
@@ -28,9 +28,12 @@ url='https://finance.yahoo.com/quote/UNTR.JK/financials?p=UNTR.JK'
 debug=True                
 driver = webdriver.Edge(service = service, options = options)
 driver.get(url)
-link_stock_header = driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[2]/div[1]/div[1]/h1')
+#link_stock_header = driver.find_element(By.XPATH,'//*[@id="quote-header-info"]/div[2]/div[1]/div[1]/h1') not working
+#link_stock_header = driver.find_element(By.XPATH,'//*[@id="nimbus-app"]/section/section/section/article/section[1]/div[1]/div/div/section/h1') #working
+link_stock_header = driver.find_element(By.XPATH,'/html/body/div[2]/main/section/section/section/article/section[1]/div[1]/div/div/section/h1') # also working
 if link_stock_header is not None:
   if debug == True :
      print("Stock Name :", link_stock_header.text)
     
-    
+#//*[@id="nimbus-app"]/section/section/section/article/section[1]/div[1]/div/div/section/h1 // copy path
+#/html/body/div[2]/main/section/section/section/article/section[1]/div[1]/div/div/section/h1 // copy full path
