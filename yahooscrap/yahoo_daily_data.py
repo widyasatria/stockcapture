@@ -11,7 +11,7 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 
 import mysql.connector
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 import csv
 # for wait
@@ -19,8 +19,20 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import logging
 
 debug = True
+
+def rotate_log_file(log_name,log_file_path,log_file_name):
+    curr_date = datetime.now()
+    log_file_prev_date = curr_date - timedelta(days = 1)
+    #print('prevdate :',log_file_prev_date.strftime("%d-%m-%Y"))
+    fname_prev_log_file= log_name+log_file_prev_date.strftime("_%d-%m-%Y")+".log"
+    prev_log_file= os.path.join(log_file_path,fname_prev_log_file)
+    #print(prev_log_file)
+  
+    if not os.path.exists(prev_log_file) and os.path.exists(log_file_name) :
+        os.rename(log_file_name,prev_log_file)
 
 def isnull(val):
     if val is None or val == 'null':
@@ -39,10 +51,32 @@ def update_daily_stock_price():
     # driver = webdriver.Edge(executable_path=r'C:\Users\wardians\stockcapture\msedgedriver.exe')
     # references : https://learn.microsoft.com/en-us/microsoft-edge/webdriver-chromium/ie-mode?tabs=python
     
+    start_time = datetime.now()
+    
+    path = Path(__file__)
+    up_onefolder = path.parent.absolute().parent
+      
+  
+    log_path = os.path.join(up_onefolder,"log")
+    log_file = os.path.join(log_path,"yahoo_get_earning_calendar.log")
+    
+    rotate_log_file("yahoo_get_earning_calendar",log_path,log_file)
+    
+    #DEBUG
+    #INFO
+    #WARNING
+    #ERROR
+    #CRITICAL
+    my_log_format= '%(asctime)s : %(name)s : %(levelname)s : %(message)s - Line : %(lineno)d'
+    logging.basicConfig(filename=log_file,level=logging.INFO, format=my_log_format, datefmt='%d-%b-%y %H:%M:%S')
+    logger = logging.getLogger('yahoo_daily_data')
+    logger.info('=================START SCRIPT yahoo_daily_data ================= ')
+    
     options = Options()
     options.use_chromium=True
-    options.add_argument("headless")
+    #options.add_argument("headless")
     options.add_argument("log-level=2")
+    options.add_argument("--start-maximized")
     
     path = Path(__file__)
     up_onefolder = path.parent.absolute().parent
@@ -68,7 +102,7 @@ def update_daily_stock_price():
     auth_plugin=config.get('db_connection', 'auth')
     )
     
-    download_xpath = '//*[@id="Col1-1-HistoricalDataTable-Proxy"]/section/div[1]/div[2]/span[2]/a/span'
+
     
     cursor = conn.cursor()
     try:
@@ -94,16 +128,47 @@ def update_daily_stock_price():
                 driver.get(url)
 
                 time.sleep(1)
-                #Default Annual are openned
-                #Quarterly clickable, Expandall clickable
-              
-                driver.implicitly_wait(4)
-                download_xpath = '//*[@id="Col1-1-HistoricalDataTable-Proxy"]/section/div[1]/div[2]/span[2]/a'
-                driver.find_element(By.XPATH,download_xpath).click()
-                
-                fname = os.path.join(tmpfile_path,txt_ticker+'.JK.csv')
-                time.sleep(4)
                
+                ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
+                
+                tbl_hist_data_xpath = '//*[@id="nimbus-app"]/section/section/section/article/div[1]/div[3]/table'
+                tbl_hist_data_xpath = '//*[@id="nimbus-app"]/section/section/section/article/div[1]/div[3]/table'
+                try:
+                    tbl_hist_data = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, tbl_hist_data_xpath))) 
+                    if tbl_hist_data is not None:
+                        print("table ketemu")
+                        # th_datas = tbl_hist_data.find_elements(By.TAG_NAME,"th")
+                        # print(th_datas[0].text)
+                        # print(th_datas[1].text)
+                        # print(th_datas[2].text)
+                        # print(th_datas[3].text)
+                        # print(th_datas[4].text)
+                        # print(th_datas[5].text)
+                        # print(th_datas[6].text)
+                        # print("jumlah header " + str(len(th_datas)))  
+                        
+                        tr_datas = tbl_hist_data.find_elements(By.TAG_NAME,"tr")
+                        print("jumlah row " + str(len(tr_datas)))    
+                        for tr_data in tr_datas:
+                            td_datas = tr_data.find_elements(By.TAG_NAME,"td")
+                            if debug==True:
+                                print("jumlah td " + str(len(td_datas)))   
+                            
+                            for td_data in td_datas:
+                                print(td_data.text) 
+                            
+                            
+                        time.sleep(30)
+           
+                                
+                except Exception as ex:
+                    print('Error on getting ' + txt_ticker + ' data caught on: ' + str(ex) ) 
+                    logger.error('Error on getting ' + txt_ticker + ' data caught on: ' + str(ex) )  
+                      
+                    pass
+                
+                
+
                 #get existing record from db
                 query = """ select ticker, date_format(now(),'%Y-%m-%d') as today_date,  date_format(date,'%Y-%m-%d') as existing_lastdate, datediff(now(),date) as selisih, """
                 query = query + """ date_format(date_sub(now(), INTERVAL 1 day),'%Y-%m-%d') as today_minus1,  """
@@ -121,40 +186,37 @@ def update_daily_stock_price():
                         today_minus1 = row[4]
                         lastday_plus1 = row[5]
                             
-                with open(fname, newline='') as csvfile:
-                    stockprices = csv.reader(csvfile, delimiter=',', quotechar='|')
-                    t=1
-                    bool_format = False
-                    for row in stockprices:
-                        if t==1:
-                            if str(row[0]) =='Date' and str(row[1])=='Open' and str(row[2])=='High' and str(row[3])=='Low' and str(row[4])=='Close' and str(row[5])=='Adj Close' and str(row[6])=='Volume':
-                                bool_format = True    
-                            else :
-                                bool_format = False
-                                print (" CSV Format is not match stopping operation")
-                                break
-                        if t>=2 and bool_format == True :
-                            # print(str(t) + " " + str(row))
+                # with open(fname, newline='') as csvfile:
+                #     stockprices = csv.reader(csvfile, delimiter=',', quotechar='|')
+                #     t=1
+                #     bool_format = False
+                #     for row in stockprices:
+                #         if t==1:
+                #             if str(row[0]) =='Date' and str(row[1])=='Open' and str(row[2])=='High' and str(row[3])=='Low' and str(row[4])=='Close' and str(row[5])=='Adj Close' and str(row[6])=='Volume':
+                #                 bool_format = True    
+                #             else :
+                #                 bool_format = False
+                #                 print (" CSV Format is not match stopping operation")
+                #                 break
+                #         if t>=2 and bool_format == True :
+                #             # print(str(t) + " " + str(row))
                          
                             
-                            #di update terus sampe hari ini jika ada
-                            if (row[0] > existing_lastdate):
-                               print("jika row 0 > dari existing last date", row[0] > existing_lastdate )
-                               print("row 0 : " + str(row[0]) + " existing last date : " + str(existing_lastdate))     
+                #             #di update terus sampe hari ini jika ada
+                #             if (row[0] > existing_lastdate):
+                #                print("jika row 0 > dari existing last date", row[0] > existing_lastdate )
+                #                print("row 0 : " + str(row[0]) + " existing last date : " + str(existing_lastdate))     
                                
-                               qry = """INSERT INTO stock_daily (ticker,open,high,low,close,volume,adj_high,adj_low,adj_close,adj_open,adj_volume,split_factor,dividend,exchange,date,updated_at,created_at)"""
-                               qry = qry + """ VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),now()) """
+                #                qry = """INSERT INTO stock_daily (ticker,open,high,low,close,volume,adj_high,adj_low,adj_close,adj_open,adj_volume,split_factor,dividend,exchange,date,updated_at,created_at)"""
+                #                qry = qry + """ VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),now()) """
                               
-                               res= cursor.execute(qry,(ticker_xidx,isnull(row[1]),isnull(row[2]),isnull(row[3]),isnull(row[4]),isnull(row[6]),0,0,isnull(row[5]),0,0,1,0,'XIDX',row[0], ))
+                #                res= cursor.execute(qry,(ticker_xidx,isnull(row[1]),isnull(row[2]),isnull(row[3]),isnull(row[4]),isnull(row[6]),0,0,isnull(row[5]),0,0,1,0,'XIDX',row[0], ))
                                
-                               conn.commit()
+                #                conn.commit()
                                
                         t=t+1
                         
-                #delete file after processing
-                if (os.path.exists(fname)):
-                    os.remove(fname)
-               
+           
                 
                 #break
     

@@ -1,2 +1,3 @@
 conf/config.ini
 DEV*.py
+stockcapture_env/*

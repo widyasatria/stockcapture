@@ -141,7 +141,7 @@ def main():
     options = Options()
     options.use_chromium=True
     #options.add_argument("headless")
-    #options.add_argument("log-level=2")
+    options.add_argument("log-level=2")
     options.add_argument("--start-maximized")
     service = Service(verbose = False)
     #service = Service(verbose = True)

@@ -12,11 +12,11 @@ import time
 # hal ini dimungkinkan karena didalam folder yahooscrap ada file baru __init__.py
 from yahooscrap.yahoo_get_latest_price import get_latest_price
 from yahooscrap.yahoo_inc_stat_quarter import inc_stat_quarter
-from yahooscrap.yahoo_inc_stat_year import inc_stat_annual
+from yahooscrap.yahoo_inc_stat_year_old import inc_stat_annual
 from yahooscrap.yahoo_balance_sheet_year import balance_sheet_annual 
 from yahooscrap.yahoo_balance_sheet_quarter import balance_sheet_quarter 
 
-from yahooscrap.yahoo_cash_flow_year import cash_flow_annual 
+from yahooscrap.yahoo_cash_flow_year_old import cash_flow_annual 
 from yahooscrap.yahoo_cash_flow_quarter import cash_flow_quarter
 
 from lib.archive.market_data_feed import get_daily_market_data

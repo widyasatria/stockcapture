@@ -148,13 +148,14 @@ def main():
                 driver.implicitly_wait(4)
                 ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
                 # to get the headers
-                txt_table_xpath = '//*[@id="cal-res-table"]/div[1]/table/tbody'         
-               
+                       
+                txt_table_xpath = '//*[@id="nimbus-app"]/section/section/section/article/main/main/main/div/table/tbody'
                 try:
                     table_earnings = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, txt_table_xpath))) 
 
                 
                     if table_earnings is not None:
+                        print("table ketemu")
                         time.sleep(0.5)
                         driver.implicitly_wait(4)
                         tbl_earnings = driver.find_elements(By.XPATH,txt_table_xpath)
