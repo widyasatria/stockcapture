@@ -12,6 +12,7 @@ from selenium.webdriver.edge.options import Options
 
 import mysql.connector
 from datetime import datetime, timedelta
+from dateutil import parser
 from decimal import Decimal
 import csv
 # for wait
@@ -38,6 +39,11 @@ def isnull(val):
     if val is None or val == 'null':
         val = Decimal(0)
     return val
+
+def cleansing_data(val):
+    if (val.find(",")>-1 or val.find(".")>-1) and val.find("k")==-1 :
+        txt_value = str(val.replace(",","").strip())
+    return txt_value
 
 def update_daily_stock_price():
     start_time = datetime.now()
@@ -113,14 +119,16 @@ def update_daily_stock_price():
         if result is not None:      
             for x in result:
                 ticker_xidx = x[0]+"."+x[1]
-                
                 txt_ticker = x[0]
+                
+                # ticker_xidx = 'PANI.XIDX'
+                # txt_ticker = 'PANI'
                 print('=== Populating Daily Stock Price for '+ txt_ticker)
                 if debug == True :
-                    print('https://finance.yahoo.com/quote/'+x[0]+'.JK/history?p='+x[0]+'.JK')
+                    print('https://finance.yahoo.com/quote/'+ txt_ticker +'.JK/history?p='+ txt_ticker +'.JK')
           
             
-                url='https://finance.yahoo.com/quote/'+x[0]+'.JK/history?p='+x[0]+'.JK'
+                url='https://finance.yahoo.com/quote/'+ txt_ticker +'.JK/history?p='+ txt_ticker + '.JK'
                 
                 # ticker_xidx ='BELI.XIDX'
                 # txt_ticker = 'BELI'
@@ -147,18 +155,90 @@ def update_daily_stock_price():
                         # print(th_datas[6].text)
                         # print("jumlah header " + str(len(th_datas)))  
                         
-                        tr_datas = tbl_hist_data.find_elements(By.TAG_NAME,"tr")
-                        print("jumlah row " + str(len(tr_datas)))    
-                        for tr_data in tr_datas:
-                            td_datas = tr_data.find_elements(By.TAG_NAME,"td")
-                            if debug==True:
-                                print("jumlah td " + str(len(td_datas)))   
-                            
-                            for td_data in td_datas:
-                                print(td_data.text) 
-                            
-                            
-                        time.sleep(30)
+                           #get existing record from db
+                        query = """ select ticker, date_format(now(),'%Y-%m-%d') as today_date,  date_format(date,'%Y-%m-%d') as existing_lastdate, datediff(now(),date) as selisih, """
+                        query = query + """ date_format(date_sub(now(), INTERVAL 1 day),'%Y-%m-%d') as today_minus1,  """
+                        query = query + """ date_format(date_add(date, INTERVAL 1 day),'%Y-%m-%d') as lastday_plus1 from stock_daily where ticker = %s order by date desc limit 1 """
+                        
+                        cursor.execute(query,(ticker_xidx,))
+                        result = cursor.fetchall()
+                        rc = cursor.rowcount
+                        if rc>0:
+                            for res in result:
+                                ticker_dt = res[0]
+                                today_date = res[1]
+                                existing_lastdate = res[2]
+                                selisih = res[3]
+                                today_minus1 = res[4]
+                                lastday_plus1 = res[5]
+  
+                            tr_datas = tbl_hist_data.find_elements(By.TAG_NAME,"tr")
+                            print("jumlah row ", str(len(tr_datas)))    
+                            for tr_data in tr_datas:
+                                td_datas = []
+                                td_datas = tr_data.find_elements(By.TAG_NAME,"td")
+                                print("jumlah td " + str(len(td_datas)))  
+                                if len(td_datas) > 2:
+                                    print(td_datas[0].text)
+                                    fmt_date = parser.parse(td_datas[0].text)
+                                    print(fmt_date)
+                                    
+                                    dt_open = cleansing_data(td_datas[1].text)
+                                    dt_high = cleansing_data(td_datas[2].text)
+                                    dt_low = cleansing_data(td_datas[3].text)
+                                    dt_close = cleansing_data(td_datas[4].text)
+                                    dt_adj_close = cleansing_data(td_datas[5].text)
+                                    dt_vol =  cleansing_data(td_datas[6].text)
+                                    
+                                    print(dt_open)
+                                    print(dt_high)
+                                    print(dt_low)
+                                    print(dt_close)
+                                    print(dt_adj_close)
+                                    print(dt_vol)
+
+                                    if fmt_date > parser.parse(existing_lastdate):
+                                        qry = """INSERT INTO stock_daily (ticker,open,high,low,close,adj_close,volume, exchange,date,updated_at,created_at)"""
+                                        qry = qry + """ VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),now()) """
+                                        print(qry)
+                                        res= cursor.execute(qry,(ticker_xidx,dt_open,dt_high,dt_low,dt_close,dt_adj_close,dt_vol,'XIDX', fmt_date))
+                                        conn.commit()
+                                    else:
+                                        break
+                        else:
+                            tr_datas = tbl_hist_data.find_elements(By.TAG_NAME,"tr")
+                            print("jumlah row ", str(len(tr_datas)))    
+                            for tr_data in tr_datas:
+                                td_datas = []
+                                td_datas = tr_data.find_elements(By.TAG_NAME,"td")
+                                print("jumlah td " + str(len(td_datas)))  
+                                if len(td_datas) > 2:
+                                    print(td_datas[0].text)
+                                    fmt_date = parser.parse(td_datas[0].text)
+                                    print(fmt_date)
+                                    
+                                    dt_open = cleansing_data(td_datas[1].text)
+                                    dt_high = cleansing_data(td_datas[2].text)
+                                    dt_low = cleansing_data(td_datas[3].text)
+                                    dt_close = cleansing_data(td_datas[4].text)
+                                    dt_adj_close = cleansing_data(td_datas[5].text)
+                                    dt_vol =  cleansing_data(td_datas[6].text)
+                                    
+                                    print(dt_open)
+                                    print(dt_high)
+                                    print(dt_low)
+                                    print(dt_close)
+                                    print(dt_adj_close)
+                                    print(dt_vol)
+
+                                    
+                                    qry = """INSERT INTO stock_daily (ticker,open,high,low,close,adj_close,volume, exchange,date,updated_at,created_at)"""
+                                    qry = qry + """ VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),now()) """
+                                    print(qry)
+                                    res= cursor.execute(qry,(ticker_xidx,dt_open,dt_high,dt_low,dt_close,dt_adj_close,dt_vol,'XIDX', fmt_date))
+                                    conn.commit()
+                                
+                        #time.sleep(30)
            
                                 
                 except Exception as ex:
@@ -169,56 +249,9 @@ def update_daily_stock_price():
                 
                 
 
-                #get existing record from db
-                query = """ select ticker, date_format(now(),'%Y-%m-%d') as today_date,  date_format(date,'%Y-%m-%d') as existing_lastdate, datediff(now(),date) as selisih, """
-                query = query + """ date_format(date_sub(now(), INTERVAL 1 day),'%Y-%m-%d') as today_minus1,  """
-                query = query + """ date_format(date_add(date, INTERVAL 1 day),'%Y-%m-%d') as lastday_plus1 from stock_daily where ticker = %s order by date desc limit 1 """
-                
-                cursor.execute(query,(ticker_xidx,))
-                result = cursor.fetchall()
-                rc = cursor.rowcount
-                if rc>0:
-                    for row in result:
-                        ticker_dt = row[0]
-                        today_date = row[1]
-                        existing_lastdate = row[2]
-                        selisih = row[3]
-                        today_minus1 = row[4]
-                        lastday_plus1 = row[5]
+             
                             
-                # with open(fname, newline='') as csvfile:
-                #     stockprices = csv.reader(csvfile, delimiter=',', quotechar='|')
-                #     t=1
-                #     bool_format = False
-                #     for row in stockprices:
-                #         if t==1:
-                #             if str(row[0]) =='Date' and str(row[1])=='Open' and str(row[2])=='High' and str(row[3])=='Low' and str(row[4])=='Close' and str(row[5])=='Adj Close' and str(row[6])=='Volume':
-                #                 bool_format = True    
-                #             else :
-                #                 bool_format = False
-                #                 print (" CSV Format is not match stopping operation")
-                #                 break
-                #         if t>=2 and bool_format == True :
-                #             # print(str(t) + " " + str(row))
-                         
-                            
-                #             #di update terus sampe hari ini jika ada
-                #             if (row[0] > existing_lastdate):
-                #                print("jika row 0 > dari existing last date", row[0] > existing_lastdate )
-                #                print("row 0 : " + str(row[0]) + " existing last date : " + str(existing_lastdate))     
-                               
-                #                qry = """INSERT INTO stock_daily (ticker,open,high,low,close,volume,adj_high,adj_low,adj_close,adj_open,adj_volume,split_factor,dividend,exchange,date,updated_at,created_at)"""
-                #                qry = qry + """ VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),now()) """
-                              
-                #                res= cursor.execute(qry,(ticker_xidx,isnull(row[1]),isnull(row[2]),isnull(row[3]),isnull(row[4]),isnull(row[6]),0,0,isnull(row[5]),0,0,1,0,'XIDX',row[0], ))
-                               
-                #                conn.commit()
-                               
-                        t=t+1
-                        
-           
                 
-                #break
     
     except mysql.connector.Error as ex:
         print('Mysql Generic Error caught on: ' + str(ex))
