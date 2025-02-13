@@ -29,7 +29,7 @@ def upd_stock_last_modify(conn,txt_ticker):
     conn.commit()
 
 def insert_stock_price(vals,conn):
-    # insert to databases'
+    # insert to databaseszadasa '
     cmd = 'insert into stock_intraday(ticker, url, last_price, price_change,price_percent_change, txt_last_update_in_site, inter_val,updated_at)'
     cmd = cmd + 'values ( %s, %s, %s, %s, %s,%s, 15, now() ) '
     val= (vals[0],vals[1],vals[2],vals[3],vals[4],vals[5])
