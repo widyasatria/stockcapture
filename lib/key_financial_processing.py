@@ -116,8 +116,15 @@ def get_last_price(conn,txt_ticker,val_finance_date):
     return the_price
             
  
-def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_key):
-    print("=== START GET FINANCE VALUE FOR : " + str(finance_key) + "================")
+def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_key, logger):
+    
+    print("")
+    print("=== START GET FINANCE VALUE FOR : " + str(finance_key) + " txt_finance_date "+ str(txt_finance_date) +"================")
+    print("table name : " + table_name)
+    logger.info("")
+    logger.info("=== START GET FINANCE VALUE FOR : " + str(finance_key) + " txt_finance_date "+ str(txt_finance_date) +"================")
+    logger.info("table name : " + table_name)
+    
     if table_name == 'stock_fin_inc_stat_quarter':  
        
         qry = "select max(DATE_FORMAT(finance_date,'%Y')) from stock_fin_inc_stat_quarter "
@@ -130,8 +137,10 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
         max_year = rows[0]
     
         val_finance_date = str(txt_finance_date).split('-')
- 
-        if int(val_finance_date[0]) == int(max_year):
+        
+        if int(val_finance_date[0]) == int(max_year): # jika finance_date  sama dengan max year
+            
+            
             qry = "select sum(finance_value) from stock_fin_inc_stat_quarter "
             qry = qry + " where ticker = %s and txt_header <> 'TTM' "
             qry = qry + " and DATE_FORMAT(finance_date,'%Y-%m') <= DATE_FORMAT(%s,'%Y-%m') "  
@@ -141,15 +150,17 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
             rows = cursor.fetchone() 
             if cursor.rowcount > 0:
                 txt_finance_value = rows[0]
-                
+                print("txt_finance_value: " + str(txt_finance_value)) 
             else:
                 txt_finance_value = 0
         
       
-        if int(val_finance_date[0]) == int(max_year)-1: 
-            #print(" Tablename " + table_name+" val_finance_date[1] : "+ val_finance_date[1])
+        if int(val_finance_date[0]) < int(max_year): 
+            print(" Tablename " + table_name+" val_finance_date[1] : "+ val_finance_date[1])
            
             if int(val_finance_date[1]) == 12:
+                # print(" DECEMBER MASUK SINI: " + str(finance_key) + " txt_finance_date "+ str(txt_finance_date) +"================")
+                # logger.info(" DECEMBER MASUK SINI: " + str(finance_key) + " txt_finance_date "+ str(txt_finance_date) +"================")
                 
                 #print(" INI YANG 12 isi int(val_finance_date[1]) : " + str(val_finance_date[1]))
                 
@@ -160,7 +171,8 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
                 
                 if debug == True:
                     print(" Cek di table stock_fin_inc_stat_year untuk isi year end net income: " + " ticker : "+ txt_ticker + " finance key : "  + str(finance_key) + " txt_finance_date " + str(txt_finance_date))
-                
+                    logger.info(" Cek di table stock_fin_inc_stat_year untuk isi year end net income: " + " ticker : "+ txt_ticker + " finance key : "  + str(finance_key) + " txt_finance_date " + str(txt_finance_date))
+                    
                 cursor.execute(qry,(txt_ticker,finance_key, txt_finance_date))
                 rows = cursor.fetchone() 
                 if cursor.rowcount > 0:
@@ -171,7 +183,8 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
                 
             if int(val_finance_date[1]) == 9 or int(val_finance_date[1]) == 3:
                 
-                #print(" INI YANG 9 or 3 Masuk sini isi int(val_finance_date[1]) : " + str(val_finance_date[1]))
+                print(" INI YANG month = 9 or 3 Masuk sini isi int(val_finance_date[1]) : " + str(val_finance_date[1]))
+                logger.info(" INI YANG month = 9 or 3 Masuk sini isi int(val_finance_date[1]) : " + str(val_finance_date[1]))
                 
                 qry = "select sum(finance_value) from stock_fin_inc_stat_quarter "
                 qry = qry + " where ticker = %s and txt_header <> 'TTM' "
@@ -187,20 +200,31 @@ def get_finance_value(cursor, table_name, txt_ticker, txt_finance_date, finance_
                     
     else:
         
+       
+            
+        
         qry = "select finance_value from "+ table_name +" where finance_key = %s and finance_date = %s and ticker = %s limit 1"
-        # if debug == True:
-        #     print(finance_key + " finance_date : "+ str(txt_finance_date) + "txt ticker : " + txt_ticker + " query " + qry )
+        
+        if debug == True:
+            print("finance key " + finance_key + " finance_date : "+ str(txt_finance_date) + "txt ticker : " + txt_ticker )
+            print("qry :"+ "select finance_value from "+ table_name +" where finance_key = "+ finance_key +" and finance_date = "+ str(txt_finance_date) +" and ticker = " + txt_ticker + " limit 1")
         cursor.execute(qry,(finance_key,txt_finance_date, txt_ticker))
         rows = cursor.fetchone() 
         if cursor.rowcount > 0:
             txt_finance_value = rows[0]
         else:
             txt_finance_value = 0
-    
+   
+    print("\n txt finance value FOR : " + str(finance_key) + " is "+ str(txt_finance_value) + "")
     print("=== END GET FINANCE VALUE FOR : " + str(finance_key) + "================")
     return txt_finance_value
 
 def calculate_ttm(txt_ticker,txt_finance_date, txt_net_income_stakeholder):
+    
+    print("")
+    print("=== START CALCULATE TTM based on Net Income Common Stockholders VALUE of : " + str(txt_net_income_stakeholder) + "================")
+    print("ticker : "+ txt_ticker + " txt_finance_date " + str(txt_finance_date))
+    
     val_finance_date = str(txt_finance_date).split('-')
     month = int(val_finance_date[1])
     if month == 12:
@@ -212,10 +236,14 @@ def calculate_ttm(txt_ticker,txt_finance_date, txt_net_income_stakeholder):
     if month == 3:
         ttm_value = (txt_net_income_stakeholder)*4
     
+    print(" TTM Value : ",ttm_value )
+    print("=== END OF CALCULATE TTM based on Net Income Common Stockholders VALUE of : " + str(txt_net_income_stakeholder) + "================")
     return ttm_value
 
 def calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_equity,txt_share_issued):  
-    
+      
+    print("")
+    print("=== START CALCULATE BOOK VALUE based on txt_shared_issued of : " + str(txt_share_issued) + "================")
     qry = " select cx.rate, s.unit_of_number,s.currency, s.ticker from stocks s, currency_fx cx "
     qry = qry + " where s.currency = cx.currency "  
     qry = qry + " and ticker = %s "
@@ -229,14 +257,15 @@ def calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_eq
         txt_book_value = round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) )*txt_rate,2)
         if debug==True:
             print("============= CALCULATE BOOK VALUE ======")
-            print (" txt_stockholders_equity * txt_unit_of_number : " + str(txt_stockholders_equity*txt_unit_of_number))
+            print (" txt_stockholders_equity "+  str(txt_stockholders_equity) + " txt_unit_of_number " + str(txt_unit_of_number))
             print(" txt_share_issued * txt_unit_of_number : " + str(txt_share_issued*txt_unit_of_number))
-            print(" round(( (txt_stockholders_equity*txt_unit_of_number)/(txt_share_issued*txt_unit_of_number) ) )* txt_rate,2 : " + str(txt_book_value) )
+            print(" round(( ("+ str(txt_stockholders_equity) +"*"+ str(txt_unit_of_number)+")/("+ str(txt_share_issued)+ "*" + str(txt_unit_of_number) + " ) ) )* " + str(txt_rate)+",2  = hasil nya " + str(txt_book_value) )
             print("============= END OF CALCULATE BOOK VALUE =====")
         
         
     else:
         txt_book_value = 0
+    print("============= END OF CALCULATE BOOK VALUE =====")
     return txt_book_value
 
 def average_values(cursor,val_ticker,val_finance_date):
@@ -266,12 +295,12 @@ def average_values(cursor,val_ticker,val_finance_date):
 def calculate_per(txt_last_price, txt_net_income_ttm,txt_share_issued,txt_currency, txt_unit_of_number, txt_rate):
     if txt_currency == 'IDR' :
         if debug == True:
-            print('txt_last_price '+ str(txt_last_price) +' txt_net_income_ttm : '+ str(txt_net_income_ttm) + " txt_unit_of_number : " + str(txt_unit_of_number) + "txt_share_issued : " +str(txt_share_issued) )
+            print(' Currency '+ txt_currency +' txt_last_price '+ str(txt_last_price) +' txt_net_income_ttm : '+ str(txt_net_income_ttm) + " txt_unit_of_number : " + str(txt_unit_of_number) + "txt_share_issued : " +str(txt_share_issued) )
        
         val_per = round(txt_last_price/( (txt_net_income_ttm* txt_unit_of_number) / (txt_share_issued*txt_unit_of_number)),2)
     if txt_currency == 'USD' :
         if debug == True:
-            print('txt_last_price '+ str(txt_last_price) +' txt_net_income_ttm : '+ str(txt_net_income_ttm) + " txt_unit_of_number : " + str(txt_unit_of_number) + "txt_share_issued : " +str(txt_share_issued) )
+            print(' Currency '+ txt_currency +' txt_last_price '+ str(txt_last_price) +' txt_net_income_ttm : '+ str(txt_net_income_ttm) + " txt_unit_of_number : " + str(txt_unit_of_number) + "txt_share_issued : " +str(txt_share_issued) )
         
         val_per = round(txt_last_price/(((txt_net_income_ttm* txt_unit_of_number)*txt_rate) / (txt_share_issued*txt_unit_of_number)),2)
     return val_per
@@ -290,44 +319,48 @@ def calculate_eps(txt_net_income_ttm,txt_share_issued,txt_currency, txt_unit_of_
 def update_key_financial_records(conn,val_ticker,val_finance_date,txt_currency, txt_unit_of_number,txt_rate,logger):
     
     cursor = conn.cursor()
-    txt_share_issued = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Share Issued')
+    txt_share_issued = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Share Issued', logger)
     #txt last price ini kalau bisa ambil pada saat tanggal yang ditentukan
     txt_last_price = get_last_price(conn,val_ticker, val_finance_date)
-    txt_stockholders_equity = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Stockholders\' Equity')
-    
-    txt_total_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Liabilities Net Minority Interest')
-    txt_current_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Current Liabilities')
-    txt_non_current_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Non Current Liabilities Net minority interest')
-    
-    txt_non_current_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total non-current assets')
-    
-    txt_current_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Current Assets')
-    txt_total_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Assets')
-    txt_net_income_stakeholders = get_finance_value(cursor,'stock_fin_inc_stat_quarter',val_ticker,val_finance_date,'Net Income Common Stockholders')
-    
-   
+    txt_stockholders_equity = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Stockholders\' Equity', logger)
+    txt_total_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Liabilities Net Minority Interest', logger)
+    txt_current_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Current Liabilities', logger)
+    txt_non_current_liabilities = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Non Current Liabilities Net minority interest', logger)
+    txt_non_current_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total non-current assets', logger)
+    txt_current_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Current Assets', logger)
+    txt_total_assets = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Total Assets', logger)
+    #sampe sini belum beres bawah ini
+    txt_net_income_stakeholders = get_finance_value(cursor,'stock_fin_inc_stat_quarter',val_ticker,val_finance_date,'Net Income Common Stockholders', logger)
+
     txt_net_income_ttm = calculate_ttm(val_ticker,val_finance_date,txt_net_income_stakeholders)
     
     txt_book_value = calculate_book_value(cursor, val_ticker,val_finance_date,txt_stockholders_equity,txt_share_issued)
-  
+    
+    
     txt_price_to_book_value = round((txt_last_price/txt_book_value),2)
     
-  
-    
+    if debug == 'True':
+        print("Price to book value for " + val_ticker + " with price of : "+ str(txt_last_price)+" is : "+ str(txt_price_to_book_value))
+   
     txt_per = calculate_per(txt_last_price, txt_net_income_ttm,txt_share_issued,txt_currency, txt_unit_of_number, txt_rate)
+    if debug == 'True':
+        print("Price to Earning Ratio  value for " + val_ticker + " with price of : "+ str(txt_last_price)+" txt net income : "+ str(txt_net_income_ttm))
+
     
     txt_roe = round((txt_net_income_ttm/txt_stockholders_equity)*100,2)
     txt_der = round(txt_total_liabilities/txt_stockholders_equity,2)
-    txt_cash_equiv = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Cash And Cash Equivalents')
+    txt_cash_equiv = get_finance_value(cursor,'stock_fin_bal_sheet_quarter',val_ticker,val_finance_date,'Cash And Cash Equivalents', logger)
     
     txt_eps = calculate_eps(txt_net_income_ttm,txt_share_issued,txt_currency, txt_unit_of_number, txt_rate)
     
     txt_avg_book_value, txt_per_avg, txt_roe_avg  = average_values(cursor,val_ticker,val_finance_date)
-    
+   
     if debug == 'True':
         print(' txt_eps '+ str(txt_eps) +' txt_per : '+ str(txt_per)+ 'txt_book_value : ' + str(txt_book_value) + 'txt_avg_book_value : ' + str(txt_avg_book_value) + " : " + str(txt_price_to_book_value) )
         logger.info(' txt_eps '+ str(txt_eps) +' txt_per : '+ str(txt_per)+ 'txt_book_value : ' + str(txt_book_value) + 'txt_avg_book_value : ' + str(txt_avg_book_value) + " : " + str(txt_price_to_book_value) )
     
+    
+   
     # if debug == 'True':        
         # print("txt_last_price " + str(txt_last_price) + " txt_book_value "  + str(txt_book_value) + " round((txt_last_price/txt_book_value),2) : " + str(round((txt_last_price/txt_book_value),2)) )
         # print(" txt_share_issued: " + str(txt_share_issued) + " txt_last_price  :" + str(txt_last_price) + " txt_stockholders equyity  :" + str(txt_stockholders_equity) + " txt_total_liabilities   :" + str(txt_total_liabilities))
@@ -419,7 +452,7 @@ def key_financial_processing():
                 qry = qry + " where bs.ticker= %s "
                 qry = qry + " and bs.txt_header <> 'TTM' "
                 qry = qry + " and bs.finance_key = 'Total Assets' "
-                qry = qry + " order by bs.id "
+                qry = qry + " order by finance_date desc "
                 
                 cursor.execute(qry,(txt_ticker,))
                 fin_bal_sheet = cursor.fetchall() 

@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 
 # for wait
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
@@ -105,7 +105,46 @@ def upd_stock_last_modify(conn,txt_ticker):
     cursor.execute(qry,(txt_ticker,))
     conn.commit()
     
+def convert_to_decimal(value):
+    """
+    Convert negative numbers or strings containing minus signs to Decimal format.
     
+    Args:
+        value: Input value (can be string, int, float)
+    Returns:
+        Decimal: Converted decimal value
+    """
+    from decimal import Decimal
+    
+    try:
+        # Handle empty or None values
+        if value is None or value == '':
+            return Decimal('0')
+            
+        # Convert to string and clean up
+        str_value = str(value).strip()
+        
+        # Handle special cases
+        if str_value in ['-', '--', '-0','0']:
+            return Decimal('0')
+            
+        # Remove commas if present
+        str_value = str_value.replace(',', '')
+        
+        # Handle 'k' suffix (thousands)
+        if 'k' in str_value.lower():
+            str_value = str_value.lower().replace('k', '')
+            return Decimal(str_value) * 1000
+        
+        if (str_value.find(",")>-1 or str_value.find(".")>-1) and str_value.find("k")==-1 :
+            str_value = str(str_value.replace(",","").strip())
+         
+        # Convert to Decimal
+        return Decimal(str_value)
+        
+    except Exception as e:
+        print(f"Error converting value '{value}': {str(e)}")
+        return Decimal('0')   
 
 def main():
     #requirement selenium versi 4.13.0
@@ -176,9 +215,9 @@ def main():
                 url='https://finance.yahoo.com/quote/'+x[0]+'.JK/balance-sheet?p='+x[0]+'.JK'
                 #url='https://finance.yahoo.com/quote/'+x[0]+'.JK/financials/'
                 
-                # For Testing
-                # txt_ticker='INDF'
-                # url='https://finance.yahoo.com/quote/INDF.JK/financials?p=INDF.JK'
+                #For Testing
+                # txt_ticker='TPIA'
+                # url='https://finance.yahoo.com/quote/TPIA.JK/balance-sheet?p=TPIA.JK'
                 
                 stime = datetime.now()
           
@@ -190,14 +229,14 @@ def main():
                 #Default Annual are openned
                 #Quarterly clickable, Expandall clickable
                 
-                driver.implicitly_wait(4)
+                # driver.implicitly_wait(4)
                 #click balancesheet
                
-                element = driver.find_element(By.XPATH,'/html/body/div[2]/main/section/section/section/article/article/div/div[1]/nav/ul/li[2]/a')
-                driver.execute_script("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",element)
-                element.click()
-                # now check the onclick attribute
-                print("Balance Sheet Clicked?  : " + element.get_attribute("automationTrack"))
+                # element = driver.find_element(By.XPATH,'/html/body/div[2]/main/section/section/section/article/article/div/div[1]/nav/ul/li[2]/a')
+                # driver.execute_script("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",element)
+                # element.click()
+                # # now check the onclick attribute
+                # print("Balance Sheet Clicked?  : " + element.get_attribute("automationTrack"))
                 
                 driver.implicitly_wait(4)
                 
@@ -223,146 +262,157 @@ def main():
                 
                 
                                      
-              
-                col_headers = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, txt_headers_xpath))) 
+                try:
+                    col_headers = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.XPATH, txt_headers_xpath))) 
                 
-                if col_headers is not None:
-                    time.sleep(0.5)
-                    driver.implicitly_wait(4)
-                    txt_tblheaders = driver.find_elements(By.XPATH,txt_headers_xpath)
-                   
-                    if debug == True:
-                        print('panjang headers ', len(txt_tblheaders))
-                        logger.info('panjang headers ' + str(len(txt_tblheaders)))
-
-                    for txt_header in txt_tblheaders:
+                    if col_headers is not None:
+                        time.sleep(0.5)
+                        driver.implicitly_wait(4)
+                        txt_tblheaders = driver.find_elements(By.XPATH,txt_headers_xpath)
+                    
                         if debug == True:
-                            print(' ISI txt_header : ' + txt_header.text)
-                            print (' Jumlah Kolom : ' + str(len(txt_header.text.split())) )
-                            col_length = len(txt_header.text.split())
-                            logger.info('txt_header : ' + txt_header.text)
-                            logger.info('Jumlah Kolom : ' + str(len(txt_header.text.split())) )
-                            header_value = txt_header.text.split()
-                            
-                    # Jika jumlah kolom < 2 then pasti ga komplit
-                    if col_length >2 :
-                            # cari jumlah row
-                            driver.implicitly_wait(4)
+                            print('panjang headers ', len(txt_tblheaders))
+                            logger.info('panjang headers ' + str(len(txt_tblheaders)))
 
-                            tbl_body_xpath = '//*[@id="nimbus-app"]/section/section/section/article/article/section/div/div/div[2]'
-                            tbl_body_css = 'rowTitle'
-                            tbl_body_element = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, tbl_body_css))) 
-                            if tbl_body_element is not None:
-                                time.sleep(0.5)
-                                driver.implicitly_wait(4)
-                                tbl_body_rows = driver.find_elements(By.CLASS_NAME,tbl_body_css)
-                                    
+                        for txt_header in txt_tblheaders:
                             if debug == True:
-                                print('Num Rows ', len(tbl_body_rows))
-                                logger.info('NumRows ' + str(len(tbl_body_rows)))
-
-                            for tbl_body_row in tbl_body_rows:
-                                if debug == True:
-                                    print("")
-                                    print("")
-                                    print("Row Title", tbl_body_row.text)
-                                    logger.info('Row Title ' + str(tbl_body_row.text))
-
-                                row_parent = tbl_body_row.find_element(By.XPATH,'../..') # naik ke parent element dari class rowTitle
-                                # print("tag name :", row_parent.tag_name)
-                                # print("tag name :", row_parent.text) # akan nge print semua nya
-                                col_values = row_parent.find_elements(By.CLASS_NAME,'column') 
+                                print(' ISI txt_header : ' + txt_header.text)
+                                print (' Jumlah Kolom : ' + str(len(txt_header.text.split())) )
+                                col_length = len(txt_header.text.split())
+                                logger.info('txt_header : ' + txt_header.text)
+                                logger.info('Jumlah Kolom : ' + str(len(txt_header.text.split())) )
+                                header_value = txt_header.text.split()
                                 
-                                ctr=0
-                                for col_value in col_values:
+                        # Jika jumlah kolom < 2 then pasti ga komplit
+                        if col_length >2 :
+                                # cari jumlah row
+                                driver.implicitly_wait(4)
+
+                                tbl_body_xpath = '//*[@id="nimbus-app"]/section/section/section/article/article/section/div/div/div[2]'
+                                tbl_body_css = 'rowTitle'
+                                tbl_body_element = WebDriverWait(driver,5,1,ignored_exceptions=ignored_exceptions).until(expected_conditions.presence_of_element_located((By.CLASS_NAME, tbl_body_css))) 
+                                
+                                if tbl_body_element is not None:
+                                    time.sleep(0.5)
+                                    driver.implicitly_wait(4)
+                                    tbl_body_rows = driver.find_elements(By.CLASS_NAME,tbl_body_css)
+                                        
+                                if debug == True:
+                                    print('Num Rows ', len(tbl_body_rows))
+                                    logger.info('NumRows ' + str(len(tbl_body_rows)))
+
+                                for tbl_body_row in tbl_body_rows:
                                     if debug == True:
-                                        print ("Header :", header_value[ctr])
-                                        logger.info("Header " + str(header_value[ctr]))
-                                        print ("Before Cleansing Column Value: ", col_value.text)
-                                        logger.info("Before Cleansing Value: " + str(col_value.text))
+                                        print("")
+                                        print("")
+                                        print("Row Title", tbl_body_row.text)
+                                        logger.info('Row Title ' + str(tbl_body_row.text))
+
+                                    row_parent = tbl_body_row.find_element(By.XPATH,'../..') # naik ke parent element dari class rowTitle
+                                    # print("tag name :", row_parent.tag_name)
+                                    # print("tag name :", row_parent.text) # akan nge print semua nya
+                                    col_values = row_parent.find_elements(By.CLASS_NAME,'column') 
                                     
-                                    if ctr>0:    
+                                    ctr=0
+                                    for col_value in col_values:
+                                        if debug == True:
+                                            print ("Header :", header_value[ctr])
+                                            logger.info("Header " + str(header_value[ctr]))
+                                            print ("Before Cleansing Column Value: ", col_value.text)
+                                            logger.info("Before Cleansing Value: " + str(col_value.text))
                                         
-                                        #cleansing data
-                                    
-                                        if col_value.text.find("k")>-1 and col_value.text.find(".")>-1:
-                                            txt_value = str(col_value.text)
-                                            txt_value = txt_value.replace("k","")
-                                            print (" txt_value SEBLUM DIKALI: " + txt_value )
-                                            txt_value = Decimal(txt_value) * 1000 
-                                            print (" txt_value SEETELAH DIKALI: " + str(txt_value)) 
-                                            #untuk nyetop sementara troubleshooting
-                                            #time.sleep(2)
-                                        elif col_value.text.isdigit() : #to check if unsigned integer is in a text
-                                            print("#integer masuk sini")
-                                            txt_value = Decimal(col_value.text)
-
-                                        if (col_value.text.find(",")>-1 or col_value.text.find(".")>-1) and col_value.text.find("k")==-1 :
-                                            txt_value = str(col_value.text.replace(",","").strip())
-                                            txt_value = Decimal(txt_value)
-                                      
-
-                                        if col_value.text == '-' or col_value.text == '--' or col_value.text=="" or col_value.text == '0':
-                                            txt_value = 0
-                                        
-                                        
-                          
-                                        #                                         
-                                        if header_value[ctr] != 'TTM' and header_value[ctr] != 'Breakdown':
-                                            arr_header = header_value[ctr].split("/")
-                                            if len(arr_header)>2 :
-                                                lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
-                                        else:
-                                            lbl_header = '1999-12-01'
-
-                                        
-                                        if debug == True:     
-                                            print ("After Cleansing Column Value: ", str(txt_value))
-                                            logger.info("After Cleansing Value: "+ str(txt_value))    
-                                            print("=== ROW ke "+ str(ctr) + " jumlah kolom "+ str(col_length-1))
-                                            print(" Entry db Ticker : "+ txt_ticker + " -- txt_breakdown :" + txt_breakdown +" -- txt_value : "+ str(txt_value) + " -- lbl_header :" + lbl_header + " -- txt_header : "+ header_value[ctr] + " -- header index : " + str(ctr))
+                                        if ctr>0:    
                                             
-                                            # if txt_breakdown == 'Basic EPS':
-                                            #     time.sleep(2)
-                                            print("")
-                                            print("")
-                                        
-                                        print("Insert ke database")
-                                        arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, header_value[ctr] , str(ctr)]
-                                        cursor.callproc('stock_fin_bal_sheet_quarter_upsert',arg1)
+                                            #cleansing data
+                                            txt_value = convert_to_decimal(col_value.text)
+                                            # if col_value.text.find("k")>-1 and col_value.text.find(".")>-1:
+                                            #     txt_value = str(col_value.text)
+                                            #     txt_value = txt_value.replace("k","")
+                                            #     print (" txt_value SEBLUM DIKALI: " + txt_value )
+                                            #     txt_value = Decimal(txt_value) * 1000 
+                                            #     print (" txt_value SEETELAH DIKALI: " + str(txt_value)) 
+                                            #     #untuk nyetop sementara troubleshooting
+                                            #     #time.sleep(2)
+                                            # elif col_value.text.isdigit() : #to check if unsigned integer is in a text
+                                            #     print("#integer masuk sini")
+                                            #     txt_value = Decimal(col_value.text)
+                                          
+
+                                            # if (col_value.text.find(",")>-1 or col_value.text.find(".")>-1) and col_value.text.find("k")==-1 :
+                                            #     txt_value = str(col_value.text.replace(",","").strip())
+                                            #     txt_value = Decimal(txt_value)
+
+
+                                            # if col_value.text == '-' or col_value.text == '--' or col_value.text=="" or col_value.text == '0' or col_value.text == '-0':
+                                            #     txt_value = 0
                                             
-                                    
-                                    elif ctr==0: # kolom pertama selalu key value nya
-                                        txt_value = str(col_value.text)
-                                        txt_breakdown= str(col_value.text)
-                                        lbl_header=""
-
-
-
-                                    if debug == True:
-                                        print("counter ", str(ctr))
-                                    ctr+=1
-                               
-                                # Recalculate TTM hanya dilakukan pada Net income * dan minoity interests selain dua record tsb itu tidak perlu dilakukan untuk perhitungan PER
-
-                                if txt_breakdown.find("Net Income") >-1 or txt_breakdown.find("Minority Interests") > -1: 
-                                    print("calculate TTM : " + txt_ticker + " breakdown txt : "+ txt_breakdown)
-                                    r_ticker, r_finance_key, r_ttm_val = recalculate_ttm(cursor, txt_ticker, txt_breakdown)
-                                    print("Hasil TTM : " + str(r_ttm_val) + " Ticker txt : "+ str(r_ticker) + "finance key : "+ str(r_finance_key))
-
-                                    arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-01','TTM',1]
-                                    cursor.callproc('stock_fin_bal_sheet_quarter_upsert',arg_recalc_ttm)
-                                    
-                                    #untuk nyetop sementara troubleshooting
-                                    #time.sleep(25)
-
-                            etime = datetime.now()
-                            print('Duration for this url {}'.format(etime - stime))     
-                            logger.info('Duration for this url {}'.format(etime - stime))   
-                            upd_stock_last_modify(conn,txt_ticker)       
+                                            
+                                            
                             
-                            #untuk nyetop sementara troubleshooting
-                            #time.sleep(25)
+                                            #                                         
+                                            if header_value[ctr] != 'TTM' and header_value[ctr] != 'Breakdown':
+                                                arr_header = header_value[ctr].split("/")
+                                                if len(arr_header)>2 :
+                                                    lbl_header = arr_header[2]+"-"+arr_header[0]+"-"+arr_header[1]
+                                            else:
+                                                lbl_header = '1999-12-01'
+
+                                            
+                                            if debug == True:     
+                                                print ("After Cleansing Column Value: ", str(txt_value))
+                                                logger.info("After Cleansing Value: "+ str(txt_value))    
+                                                print("=== ROW ke "+ str(ctr) + " jumlah kolom "+ str(col_length-1))
+                                                print(" Entry db Ticker : "+ txt_ticker + " -- txt_breakdown :" + txt_breakdown +" -- txt_value : "+ str(txt_value) + " -- lbl_header :" + lbl_header + " -- txt_header : "+ header_value[ctr] + " -- header index : " + str(ctr))
+                                                
+                                                # if txt_breakdown == 'Basic EPS':
+                                                #     time.sleep(2)
+                                                print("")
+                                                print("")
+                                            
+                                            print("Insert ke database")
+                                            arg1 = [txt_ticker, txt_breakdown, txt_value ,lbl_header, header_value[ctr] , str(ctr)]
+                                            cursor.callproc('stock_fin_bal_sheet_quarter_upsert',arg1)
+                                                
+                                        
+                                        elif ctr==0: # kolom pertama selalu key value nya
+                                            txt_value = str(col_value.text)
+                                            txt_breakdown= str(col_value.text)
+                                            lbl_header=""
+
+
+
+                                        if debug == True:
+                                            print("counter ", str(ctr))
+                                        ctr+=1
+                                
+                                    # Recalculate TTM hanya dilakukan pada Net income * dan minoity interests selain dua record tsb itu tidak perlu dilakukan untuk perhitungan PER
+
+                                    if txt_breakdown.find("Net Income") >-1 or txt_breakdown.find("Minority Interests") > -1: 
+                                        print("calculate TTM : " + txt_ticker + " breakdown txt : "+ txt_breakdown)
+                                        r_ticker, r_finance_key, r_ttm_val = recalculate_ttm(cursor, txt_ticker, txt_breakdown)
+                                        print("Hasil TTM : " + str(r_ttm_val) + " Ticker txt : "+ str(r_ticker) + "finance key : "+ str(r_finance_key))
+
+                                        arg_recalc_ttm = [r_ticker, r_finance_key,r_ttm_val,'1999-12-01','TTM',1]
+                                        cursor.callproc('stock_fin_bal_sheet_quarter_upsert',arg_recalc_ttm)
+                                        
+                                        #untuk nyetop sementara troubleshooting
+                                        #time.sleep(25)
+
+                                etime = datetime.now()
+                                print('Duration for this url {}'.format(etime - stime))     
+                                logger.info('Duration for this url {}'.format(etime - stime))   
+                                upd_stock_last_modify(conn,txt_ticker)       
+                                
+                                #untuk nyetop sementara troubleshooting
+                                #time.sleep(25)
+                except TimeoutException:
+                    print("TimeoutException caught on: " + str(url))
+                    logger.error("TimeoutException caught on: " + str(url))
+                    pass
+                except NoSuchElementException:
+                    print("NoSuchElementException caught on: " + str(url))
+                    logger.error("NoSuchElementException caught on: " + str(url))
+                    pass
 
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))    
